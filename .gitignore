@@ -1,0 +1,31 @@
+results/
+429h/
+439h/
+*.o
+*.d
+*.out
+*.diff
+*.result
+*.time
+*.err
+*.run
+*.raw
+*.cycles
+*.vcd
+*.sig
+build/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# OS files
+.DS_Store
+
+# Editor/IDE
+*.swp
+*.swo
+*~
+.vscode/
+.idea/

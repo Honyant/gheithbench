@@ -1,0 +1,53 @@
+@0
+//first we test some basic operations (no hazards)
+8610	//prints a (movl r0, 97)
+80a0	// prints new line (movl r0, 10)
+
+//padding instructions to avoid data hazard
+86b7	
+80a8	
+8055	
+8055	
+
+0780	//prints a (movl r0, 97)
+80a0	// prints new line (movl r0, 10)
+
+80a1	// loads r1 reg for print later (movl r1, 10)
+820c	//loading jump location (movl r12, 32)
+
+8055	//padding instruction for reg to update for following jump
+
+//let's check that we can read the value of a register which contains jump location
+ec1c	// making the jump (jnz r12, r12)
+
+//padding instructions
+8055	
+8055	
+8055	
+8055	
+8055	
+
+//prints a if correctly jumped:
+8610	// (movl r0, 97)
+
+80a0	// prints new line (movl r0, 10)
+
+//now we begin hazard testing
+86b2	//this creates a hazard since sub needs this result (movl r2, 107)
+0210	//prints a (sub r0, r2, r1)
+
+//this jump instruction also checks that r0 always returns 0 when read from
+8347	//jump instruction (jz r7, r0)
+e007	//instructions below that we should skip
+86b0	
+86b0	
+86b0	
+86a0	// prints j (the following use movl into r0 to print)
+8750	// prints u
+86d0	// prints m
+8700	// prints p
+8210	// prints !
+80a0	// prints new line
+
+
+ffff

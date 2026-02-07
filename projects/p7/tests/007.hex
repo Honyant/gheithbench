@@ -1,0 +1,116 @@
+// st can be a tricky instruction
+// let's see if your pipeline is
+// worthy of the bagel
+//
+// note that this case involves
+// self-modifying code
+
+// place at location 0
+@0
+
+// PT 1: GHEITH BAGEL
+
+// set up store addresses
+8c83  // movl r3, #200
+8ca4  // movl r4, #202
+8cc5  // movl r5, #204
+8ce6  // movl r6, #208
+8d07  // movl r7, #208
+8d28  // movl r8, #210
+
+// store letters for 'gheith '
+8679  // movl r9, #103
+868a  // movl r10, #104
+865b  // movl r11, #101
+869c  // movl r12, #105
+874d  // movl r13, #116
+820e  // movl r14, #32
+
+// store letters in addresses
+f319  // st r9, r3
+f41a  // st r10, r4
+f51b  // st r11, r5
+f61c  // st r12, r6
+f71d  // st r13, r7
+f81e  // st r14, r8
+
+// print 'gheith '
+f300  // ld r0, r3
+f400  // ld r0, r4
+f500  // ld r0, r5
+f600  // ld r0, r6
+f700  // ld r0, r7
+f400  // ld r0, r4
+f800  // ld r0, r8
+
+// set up more store addresses
+8d63  // movl r3, #214
+8d84  // movl r4, #216
+8da5  // movl r5, #218
+8dc6  // movl r6, #220
+8de7  // movl r7, #222
+8e08  // movl r8, #214
+
+// store letters for 'bagel.'
+8629  // movl r9, #98
+861a  // movl r10, #97
+867b  // movl r11, #103
+865c  // movl r12, #101
+86cd  // movl r13, #108
+82ee  // movl r14, #46
+
+// store letters in addresses
+f319  // st r9, r3
+f41a  // st r10, r4
+f51b  // st r11, r5
+f61c  // st r12, r6
+f71d  // st r13, r7
+f81e  // st r14, r8
+
+// print 'bagel.'
+f300  // ld r0, r3
+f400  // ld r0, r4
+f500  // ld r0, r5
+f600  // ld r0, r6
+f700  // ld r0, r7
+f800  // ld r0, r8
+
+// newline for next test
+80a0
+
+// PT 2: GENETICALLY MODIFIED BAGELS
+
+// print boilerplate
+8630  // movl r0, #99
+8680  // movl r0, #104
+8720  // movl r0, #114
+8690  // movl r0, #105
+86c0  // movl r0, #108
+86c0  // movl r0, #108
+8200  // movl r0, #32
+8620  // movl r0, #98
+8610  // movl r0, #97
+8670  // movl r0, #103
+8650  // movl r0, #101
+86c0  // movl r0, #108
+
+// modified things
+8101  // movl r1, #16
+9821  // movh r1, #131
+      // [r1 will now have 0x8210]
+      //
+8862  // movl r2, #134
+9002  // movh r2, #0
+      // [r2 will now have 0d134 (0x86)]
+      //
+f211  // st r1, r2
+      // [modify instruction at PC 0x86]
+      // [(the one below this one)]
+      // [sus]
+      //
+83f0  // movl r0, #63
+      // print '?'
+      // or will it?
+
+// test over
+ffff

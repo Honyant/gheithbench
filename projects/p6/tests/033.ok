@@ -1,0 +1,20 @@
+Main counter: 0
+Main counter: 1
+Main counter: 2
+Main counter: 3
+Main successfully sent value 45 to f2 and became unblocked.
+Main successfully received value 35 from f1 and became unblocked.
+Again counter: 0
+Again counter: 1
+Again counter: 2
+Again counter: 3
+Again counter: 4
+Again counter: 5
+Again counter: 6
+Again counter: 7
+Again counter: 8
+Again counter: 9
+Value received after again: 60000
+Loop 0: receiving value should be the same as above: 60000
+Loop 1: receiving value should be the same as above: 60000
+Loop 2: receiving value should be the same as above: 60000

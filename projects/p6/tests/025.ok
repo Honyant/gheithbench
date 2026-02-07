@@ -1,0 +1,16 @@
+This line and the next 5 lines should be printed twice
+1
+x: 2
+y: 3
+z: 4
+t2: 5
+This line and the next 5 lines should be printed twice
+1
+x: 2
+y: 3
+z: 4
+t2: 5
+argc: 2
+argv[0]: hello
+10 9 8 7 6 5 4 3 2 1 ...
+Liftoff!

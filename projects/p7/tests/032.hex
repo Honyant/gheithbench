@@ -1,0 +1,42 @@
+@0
+//this test case thoroughly tests forwarding
+//set up registers
+80e1 // movl  r1, 14 -- 14 is the instruction at line 13
+8542 // movl  r2, 84 -- random num that isn't 0
+8413 // movl  r3, 65 -- put 'A' in r3
+// greedy forward test
+//if your forward doesn't ensure that wb is enabled, then this will forward
+//from an invalid instruction
+e211 // jnz   r1, r2 -- should jump to instruction at line 13
+8373 // mov   r3, 55 -- put '7' in r3 (skipped)
+8383 // movl  r3, 56 -- put '8' in r3 (skipped)
+8393 // movl  r3, 56 -- put '9' in r3 (skipped)
+0300 // sub   r0, r3, r0 -- r3 should be 65, so print 'A'
+//forward r0 test (you shouldn't because it's always 0)
+8854 // movl  r4, 133 -- 'A' + 'D' = 65 + 68 = 133
+8420 // movl  r0, 66 -- print 'B'
+8430 // movl  r0, 67 -- print 'C'
+0404 // sub   r4, r4, r0 -- subtract 0 unless you forward 'B' or 'C'
+0303 // sub   r3, r3, r0 -- same as previous
+0433 // sub   r3, r4, r3 -- 133 - 65 = 68 = 'D'
+0300 // sub   r0, r3, r0 -- print r3 which is 'D'
+//general forwarding test
+8054 // movl  r4, 5
+8633 // movl  r3, 99
+8192 // movl  r2, 25
+0323 // sub   r3, r3, r2 -- must forward from both prev instructions
+0340 // sub   r0, r3, r4 -- 99 - 25 - 5 = 69 = 'E'. needs to forward from sub
+//ld forwarding test
+87d4 // movl  r4, 125 -- to subtract from r6
+8fa5 // movl  r5, 250 -- our address
+8c36 // movl  r6, 195 -- our data
+f516 // st    r6, r5 -- store 195 at position 250 (decimal)
+//next four instructions test mov forwarding for jnz and also prevent issues with st->ld hazard
+80e2 // address of instruction at line 14
+84d8 // movl  r8, 77 -- to be overwritten
+8008 // movl  r8, 0 -- for jnz
+e812 // jnz   r2, r8 -- should not happen because r8 should be forwarded
+//time to check forwarding for load
+f507 // ld    r7, r5 -- load the value 195 from [r5] into r7
+0740 // sub   r0, r7, r4 -- 195 - 125 = 70 = 'F'. needs to forward previous ld
+ffff // halt

@@ -1,0 +1,83 @@
+@0
+//basic movl and printing
+8590    // movl r0, #89 //print 'y'
+8410    // movl r0, #65 //'a'
+8590    // movl r0, #89 //'y'
+80a0    // movl r0, #10 //newline
+
+//test all jumps
+8141    // movl r1, #20
+e001    // jz r1, r0 //should jump to @20
+801f    // movl r15, #1 //no-ops
+801f    // movl r15, #1
+801f    // movl r15, #1
+ffff    // halt
+8420    // movl r0, #66 @20 //print 'b'
+8032    // movl r2, #3
+8243    // movl r3, #36
+e213    // jnz r3, r2 //should jump to @36
+801f    // movl r15, #1
+801f    // movl r15, #1
+801f    // movl r15, #1
+ffff    // halt
+84f0    // movl r0, #79 @36 //print 'o'
+82c4    // movl r4, #44
+e224    // js r4, r2 //should not jump directly to @44
+84f0    // movl r0, #79 //print 'o'
+8210    // movl r0, #33 @44 //print '!'
+83a5    // movl r5, #58
+e235    // jns r5, r2 //should jump to @58
+801f    // movl r15, #1
+801f    // movl r15, #1
+801f    // movl r15, #1
+ffff    // halt
+83f0    // movl r0, #63 @58 //print '?'
+80a0    // movl r0, #10 //print newline
+
+//test control hazards (flush after jumping)
+8466    // movl r6, #70
+e006    // jz r6, r0 //should jump to @70
+83a0    // movl r0, #58 //print ':', should not be run
+8280    // movl r0, #40 //print '(', should not be run
+83b0    // movl r0, #59 @70 //print ';'
+8290    // movl r0, #41 //print ')'
+80a0    // movl r0, #10 //print newline
+
+//test ld and st
+85c7    // movl r7, #92 // '\'
+8288    // movl r8, #40 // '('
+82a9    // movl r9, #42 // '*'
+877a    // movl r10, #118 // 'v'
+829b    // movl r11, #41 // ')'
+82fc    // movl r12, #47 // '/'
+8c81    // movl r1, #200 //memory addresses for store
+8ca2    // movl r2, #202
+8cc3    // movl r3, #204
+8ce4    // movl r4, #206
+8d05    // movl r5, #208
+8d26    // movl r6, #210
+f117    // st r7, r1
+f218    // st r8, r2
+f319    // st r9, r3
+f41a    // st r10, r4
+f51b    // st r11, r5
+f61c    // st r12, r6
+801f    // movl r15, #1 //no-ops to prevent data hazards for now
+801f    // movl r15, #1
+801f    // movl r15, #1
+801f    // movl r15, #1
+801f    // movl r15, #1
+801f    // movl r15, #1
+801f    // movl r15, #1
+801f    // movl r15, #1
+801f    // movl r15, #1
+801f    // movl r15, #1
+f100    // ld r0, r1 //print r7-r12
+f200    // ld r0, r2
+f300    // ld r0, r3
+f400    // ld r0, r4
+f300    // ld r0, r3
+f500    // ld r0, r5
+f600    // ld r0, r6
+
+ffff    // halt

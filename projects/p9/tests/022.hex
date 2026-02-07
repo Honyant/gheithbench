@@ -1,0 +1,58 @@
+@0
+//this test case tests history based branch predictors with different frequencies
+//however, the number of iterations that would need to be stored (up to 10) is too high for most implementations
+//this way, your CPI should scale linearly with the length of your history if you use that kind of branch predictor.
+//in cases where modNum > history length, a saturated counter will be just as effective as it will only miss 1/modNum times
+//because loops are relatively short in this case, branch predictor solutions will have a particularly huge advantage
+//this test case also just tests the baseline that you forward instead of stalling/flushing for simple cases.
+
+//outer outer loop header:
+8031    // movl r1, #3      -- for repeating the entire case 3 times
+804d    // movl r13, !outer_outer=0x4 -- for looping the whole case
+
+// [PC: 0x4] <!outer_outer>:
+8fff    // movl r15, #255   -- for adding 1
+801e    // movl r14, #1     -- for subtracting 1
+8ff7    // movl r7, #255    -- inner loop (pre-indexed to 0)
+8f08    // movl r8, #240    -- middle loop
+8f89    // movl r9, #248    -- outer loop
+8023    // movl r3, #2      -- initial mod num
+8414    // movl r4, 'A'     -- for offsetting with r7 and showing inner loops
+80a5    // movl r5, '\n'    -- for dividing between outer outer_outer (whole test case) loop iterations
+8206    // movl r6, ' '     -- for dividing between middle loop iterations
+0044    // sub  r4, r0, r4  -- r4 = 0 - 'A'. To add 'A' to numbers
+82ca    // movl r10, !modIsZero=0x2c
+81eb    // movl r11, !loopMod=0x1e
+83cc    // movl r12, !dontChangeMod=0x3c
+
+//inner loop:
+// [PC: 0x1e] <!loopMod>:
+07f7    // sub  r7, r7, r15 -- ++r1
+0732    // sub  r2, r7, r3  -- subtract mod num (initially 2)
+0740    // sub  r0, r7, r4  -- write 'A' plus inner loop number (initially pre-indexed to 0)
+e20a    // jz   r10, r2     -- jumps to !modIsZero if the iterator is equal to the mod number
+02e2    // sub  r2, r2, r14 -- subtract 1
+02f2    // sub  r2, r2, r15 -- add 1 (don't skip/repeat after stalling)
+e21b    // jnz  r11, r2     -- jump back to loopMode unless r2 is zero, where we'll already have branched. this always branches.
+
+//middle loop:
+// [PC: 0x2c] <!modIsZero>:
+08f8    // sub r8, r8, r15  -- increment middle loop
+0600    // sub  r0, r6, r0  -- write space
+8ff7    // movl r7, #255    -- restore inner loop
+e81c    // jnz  r12, r8     -- skip past changing mod (outer loop) unless we finished an iteration of outer
+//outer loop (changes mod num, newline):
+0500    // sub  r0, r5, r0  -- write newline
+03f3    // sub  r3, r3, r15 -- increase mod by 1
+8f08    // movl r8, #240    -- restore middle loop
+09f9    // sub  r9, r9, r15 -- increment outer loop
+// [PC: 0x3c] <!dontChangeMod>:
+//return to inner loop
+e91b    // jnz  r11, r9     -- jumps back to inner loop
+
+//outer outer loop footer
+01e1    // sub  r1, r1, r14 -- decrements outer outer loop
+0500    // sub  r0, r5, r0  -- write '\n'
+0500    // sub  r0, r5, r0  -- write '\n'
+e11d    // jnz  r13, r1     -- jump back to beginning of outer_outer loop (0x4)
+ffff

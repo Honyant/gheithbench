@@ -1,0 +1,147 @@
+@0
+// i test branching a lot
+// i test branching if in loops in various multiples of primes
+// 2, 3, 5, 7
+// this will help test the recognizable patterns but at different intervals making sure we have
+// a good broad branch predictor
+
+// test printing
+8500    // movl r0, #80 // print 'p'
+8520    // movl r0, #82 // print 'r'
+8690    // movl r0, #105 // print 'i'
+84e0    // movl r0, #78 // print 'n'
+8540    // movl r0, #84 // print 't'
+8490    // movl r0, #73 // print 'i'
+84e0    // movl r0, #78 // print 'n'
+8470    // movl r0, #71 // print 'g'
+80a0    // movl r0, #10 // print '\n'
+
+// start branching test in multiples of 2
+// pc = 18
+87f1    // movl r1, #127 // r1 = 10
+8012    // movl r2, #1 // r2 = 1
+81c3    // movl r3, #28 // r3 = 28
+8024    // movl r4, #2 // r4 = 2
+82e7    // movl r7, #46 // r7 = 46
+
+// pc = 28
+0121    // sub r1, r1, r2 // r1 = r1 - r2
+86c0    // movl r0, #108 // print 'l'
+86f0    // movl r0, #111 // print 'o'
+86f0    // movl r0, #111 // print 'o'
+8700    // movl r0, #112 // print 'p'
+
+// pc = 38
+0424    // sub r4, r4, r2 // r4 = r4 - r2
+e417    // jnz r7, r4 // if r4 != 0 jmp to r7
+8024    // movl r4, #2 // r4 = 2
+8320    // movl r0, #50 // print '2'
+
+// pc = 46
+8210    // movl r0, #33 // print '!'
+80a0    // movl r0, #10 // print '\n'
+e113    // jnz r3, r1 // if r1 != 0, jmp to r3
+
+// pc = 52
+80a0    // movl r0, #10 // print '\n'
+80a0    // movl r0, #10 // print '\n'
+
+// start branching test in multiples of 3
+// pc = 56
+87f1    // movl r1, #127
+8422    // movl r2, #66
+8013    // movl r3, #1
+8034    // movl r4, #3
+8545    // movl r5, #84
+
+// pc = 66
+0131    // sub r1, r1, r3
+86c0    // movl r0, #108 // print 'l'
+86f0    // movl r0, #111 // print 'o'
+86f0    // movl r0, #111 // print 'o'
+8700    // movl r0, #112 // print 'p'
+
+// pc = 76
+0434    // sub r4, r4, r3 // r4 = r4 - r3
+e415    // jnz r5, r4 // if r4 != 0 jmp to r5
+8034    // movl r4, #3 // r4 = 3
+8330    // movl r0, #51 // print '3'
+
+// pc = 84
+8210    // movl r0, #33 // print '!'
+80a0    // movl r0, #10 // print '\n'
+e112    // jnz r2, r1 // if r1 != 0, jmp to r2
+
+// pc = 90
+80a0    // movl r0, #10 // print '\n'
+80a0    // movl r0, #10 // print '\n'
+
+// start branching test in multiples of 5
+// pc = 94
+87f1    // movl r1, #127
+8682    // movl r2, #104
+8013    // movl r3, #1
+8054    // movl r4, #5
+87a5    // movl r5, #122
+
+// pc = 104
+0131    // sub r1, r1, r3
+86c0    // movl r0, #108 // print 'l'
+86f0    // movl r0, #111 // print 'o'
+86f0    // movl r0, #111 // print 'o'
+8700    // movl r0, #112 // print 'p'
+
+// pc = 114
+0434    // sub r4, r4, r3 // r4 = r4 - r3
+e415    // jnz r5, r4 // if r4 != 0 jmp to r5
+8054    // movl r4, #5 // r4 = 3
+8350    // movl r0, #53 // print '5'
+
+// pc = 122
+8210    // movl r0, #33 // print '!'
+80a0    // movl r0, #10 // print '\n'
+e112    // jnz r2, r1 // if r1 != 0, jmp to r2
+
+// pc = 128
+80a0    // movl r0, #10 // print '\n'
+80a0    // movl r0, #10 // print '\n'
+
+// start branching test in multiples of 7
+// pc = 132
+87f1    // movl r1, #127
+8922    // movl r2, #146
+9002    // movh r2, #0
+8013    // movl r3, #1
+8074    // movl r4, #7
+8a45    // movl r5, #164
+9005    // movh r5, #0
+
+// pc = 146
+0131    // sub r1, r1, r3
+86c0    // movl r0, #108 // print 'l'
+86f0    // movl r0, #111 // print 'o'
+86f0    // movl r0, #111 // print 'o'
+8700    // movl r0, #112 // print 'p'
+
+// pc = 156
+0434    // sub r4, r4, r3 // r4 = r4 - r3
+e415    // jnz r5, r4 // if r4 != 0 jmp to r5
+8074    // movl r4, #7 // r4 = 3
+8370    // movl r0, #55 // print '7'
+
+// pc = 164
+8210    // movl r0, #33 // print '!'
+80a0    // movl r0, #10 // print '\n'
+e112    // jnz r2, r1 // if r1 != 0, jmp to r2
+8470    // movl r0, #71 // print 'g'
+84f0    // movl r0, #79 // print 'o'
+84f0    // movl r0, #79 // print 'o'
+8440    // movl r0, #68 // print 'd'
+8210    // movl r0, #33 // print '!'
+80a0    // movl r0, #10 // print '\n'
+8450    // movl r0, #69 // print 'e'
+84e0    // movl r0, #78 // print 'n'
+8440    // movl r0, #68 // print 'd'
+80a0    // movl r0, #10 // print '\n'
+
+ffff

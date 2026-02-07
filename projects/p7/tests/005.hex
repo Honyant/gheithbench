@@ -1,0 +1,85 @@
+@0
+
+// This tests confirms:
+//      - When you branch, you flush invalid instructions
+//          - If you don't, the wrong letters (A/B) will be printed
+//      - You correctly check jump conditions
+//          - If you don't, the wrong numbers will be printed. e.g. 12345 instead of 012345, or 789 if you implemented JS wrong.
+//      - You correctly handle read after write data hazards.
+//          - If you don't, you could be correctly checking the jump conditions, but using outdated/undefined values.
+//          - This requires you to have implemented register forwarding so that r4 is guaranteed to store 0.
+//      - You correctly handle load after store data hazards.
+//          - If you don't, you could be correctly checking the jump conditions, but using outdated/undefined values.
+//          - This requires you to have implemented memory forwarding so that r7 is guaranteed to be positive so the js jump condition fails.
+
+// Register Forwarding Data Hazard
+80f1	// ADDR 0 - movl r1, #15
+8142	// ADDR 2 - movl r2, #20
+0213	// ADDR 4 - sub r3, r2, r1 --- r3 = r2 - r1 = 20 - 15 = 5. You need to forward both r1 and r2's values.
+8055	// ADDR 6 - movl r5, #5
+0354	// ADDR 8 - sub r4, r3, r5 --- r4 = r3 - r5 = 5 - 5 = 0. You need to forward both r3 and r5's values.
+// Now, r4 should always store 0, so we can use r4 instead of r0 to compare with 0.
+
+// Memory Forwarding Data Hazard
+8646	// ADDR 10 - movl r6, #100
+8647	// ADDR 12 - movl r7, #100
+8208	// ADDR 14 - movl r8, #32
+f618	// ADDR 16 - st r8, r6 - mem[100] = 32
+f707	// ADDR 18 - ld r7, r7 - r7 = mem[100] = 32
+
+800f	// ADDR 20 - movl r15, #0 - NO-OP
+
+// Locations to Jump To
+
+834a	// ADDR 22 - movl r10, #52
+85cb	// ADDR 24 - movl r10, #92
+84ec	// ADDR 26 - movl r10, #78
+85ed	// ADDR 28 - movl r10, #94
+
+// Test JZ
+
+e40a	// ADDR 30 - jz r0, r4 - You should jump to r10 = #52 here.
+8410	// ADDR 32 - movl r0, #65 - Prints A if you fail this jz test.
+8410	// ADDR 34 - movl r0, #65 - Prints A if you fail this jz test.
+8410	// ADDR 36 - movl r0, #65 - Prints A if you fail this jz test.
+8410	// ADDR 38 - movl r0, #65 - Prints A if you fail this jz test.
+8410	// ADDR 40 - movl r0, #65 - Prints A if you fail this jz test.
+8410	// ADDR 42 - movl r0, #65 - Prints A if you fail this jz test.
+8410	// ADDR 44 - movl r0, #65 - Prints A if you fail this jz test.
+8410	// ADDR 46 - movl r0, #65 - Prints A if you fail this jz test.
+8410	// ADDR 48 - movl r0, #65 - Prints A if you fail this jz test.
+8410	// ADDR 50 - movl r0, #65 - Prints A if you fail this jz test.
+
+// Test JNZ / JS / JNS
+
+e41b	// ADDR 52 - jnz r11, r4 - You should not jump to r11 = 92 here.
+e72d	// ADDR 54 - js r13, r7 - You should not jump to r13 = 94 here.
+e43c	// ADDR 56 - jns r12, r4 - You should jump to r12 = 78 here.
+8420	// ADDR 58 - movl r0, #66 - Prints B if you fail this jns test.
+8420	// ADDR 60 - movl r0, #66 - Prints B if you fail this jns test.
+8420	// ADDR 62 - movl r0, #66 - Prints B if you fail this jns test.
+8420	// ADDR 64 - movl r0, #66 - Prints B if you fail this jns test.
+8420	// ADDR 66 - movl r0, #66 - Prints B if you fail this jns test.
+8420	// ADDR 68 - movl r0, #66 - Prints B if you fail this jns test.
+8420	// ADDR 70 - movl r0, #66 - Prints B if you fail this jns test.
+8420	// ADDR 72 - movl r0, #66 - Prints B if you fail this jns test.
+8420	// ADDR 74 - movl r0, #66 - Prints B if you fail this jns test.
+8420	// ADDR 76 - movl r0, #66 - Prints B if you fail this jns test.
+
+// Print successful sequence of numbers 0 through 5 now
+
+8300	// ADDR 78 - movl r0, #48 - Print 0
+8310	// ADDR 80 - movl r0, #49 - Print 1
+8320	// ADDR 82 - movl r0, #50 - Print 2
+8330	// ADDR 84 - movl r0, #51 - Print 3
+8340	// ADDR 86 - movl r0, #52 - Print 4
+8350	// ADDR 88 - movl r0, #53 - Print 5
+ffff
+
+// Print unsucessful sequence of numbers 6 to 9 for jumping for r11 = #ADDR2
+
+8360	// ADDR 92 - movl r0, #54 - Print 6
+8370	// ADDR 94 - movl r0, #55 - Print 7 - If the JS is broken, you will only print 7 through 9
+8380	// ADDR 96 - movl r0, #56 - Print 8
+8390	// ADDR 98 - movl r0, #57 - Print 9
+ffff

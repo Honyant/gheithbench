@@ -1,0 +1,10 @@
+Test 1: Overflow Mallocation Test
+Test 1 Passed!
+Test 2: Zero Mallocation Test
+Test 2 Passed!
+Test 3: Left Merge Frees
+Test 3 passed!
+Test 4: Right Merge Frees
+Test 4 passed!
+Test 5: Left/Right Merge Frees
+Test 5 passed!

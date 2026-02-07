@@ -1,0 +1,94 @@
+// This test tests that r0 is read as '0' when used as the comparison address of jz, jnz, js, and jns.
+// Each test corresponds to a register (r1, r2, r3, or r4).
+// If a test fails, its corresponding number is printed.
+
+// You shouldn't jump to r1 or r2.
+// You SHOULD jump to r3 and r4.
+
+// This does not test hazards.
+
+@0
+8730    // print 's' for start
+
+// Move addresses into appropriate registers.
+85e1    // movl r1, #94   // Jumping to r1 prints '1' and halts.
+8762    // movl r2, #118  // Jumping to r2 prints '2' and halts.
+8443    // movl r3, #68   // Failing to jump to r3 prints '3' and continues to the next test.
+85c4    // movl r4, #92   // Failing to jump to r4 prints '4' and halts.
+
+// movl r15, #1 is essentially a no-op for avoiding hazards
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+
+// Should not jump here.
+// r1 links to the second to last block of instructions.
+e011    // jnz r1, r0
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+
+// Should not jump here
+// r2 links to the last block of instructions.
+e022    // js r2, r0
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+
+// Should jump here (to the jns line)
+e003    // jz r3, r0
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+8330    // movl r0, #51   // print '3'
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+
+// Should jump here (to the halt instruction at the end of this block)
+e034    // jns r4, r0
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+8340    // movl r0, #52   // print '4'
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+ffff    // halt
+
+// Would have jumped here upon failing r1 test
+8310    // movl r0, #49   // print '1'
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+ffff    // halt
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+
+// Would have jumped here upon failing r2 test
+8320    // movl r0, #50   // print '2'
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+8015    // movl r15, #1
+ffff    // halt

@@ -1,0 +1,25 @@
+Objective:
+~~~~~~~~~~
+
+- Become better at working with memory and pointers in C
+
+Assignment:
+~~~~~~~~~~~
+
+- Implement your own malloc/free
+
+Rules:
+~~~~~~
+
+- heap/heap.h declares 4 important variables:
+
+   - heap_size, contains the total heap size in bytes, defined by the test
+   - the_heap, the memory for the heap, defined by the test
+   - mCount, number of times malloc is called, defined and updated by heap.c
+   - fCount, number of times free is called, defined and updated by heap.c
+
+- Your implementation should only use the memory defined by "the_heap" to
+  implement the heap.
+
+
+

@@ -1,0 +1,114 @@
+// This test case is a quine. It outputs a copy of its instructions in hexadecimal form.
+// The intention is to simulate natural code with typical control flow (if-else blocks and loops).
+// As such, it exposes the processor to a variety of instruction patterns and hazards.
+// The path length is around 16000 instructions, so this test is not a stress test for CPI.
+
+// PSEUDOCODE
+//////////////////////////////////////////////////////
+// #define CODE_SIZE 174                            //
+//                                                  //
+// printf("%c", '@');                               //
+// printf("%c", '0');                               //
+// printf("%c", '\n');                              //
+// for (uint16_t* i = 0; i < CODE_SIZE; i++) {      //
+//	uint16_t word = *i;                         //
+//	d1 = word[15:12];                           //
+//	printf("%h", d1);                           //
+//	d2 = word[11:8];                            //
+//	printf("%h", d2);                           //
+//	d3 = word[7:4];                             //
+//	printf("%h", d3);                           //
+//	d4 = word[3:0];                             //
+//	printf("%h", d4);                           //
+//	printf("%c", '\n');                         //
+// }                                                //
+//////////////////////////////////////////////////////
+
+@0
+8001 // movl r1, 0
+8ae2 // movl r2, 174 [code size]
+9002 // movh r2, 0 [prevent overflow]
+8ff3 // movl r3, -1
+80af // movl r15, 10
+89fe // movl r14, -'a'
+8d0d // movl r13, -'0'
+8400 // movl r0, '@' [print address] 
+8300 // movl r0, '0'
+80a0 // movl r0, 10 [print newline]
+f104 // ld r4, r1 [top of main loop]
+800b // movl r11, 0 [BITS 15:12]
+910b // movh r11, 16
+8ff5 // movl r5, -1
+8206 // movl r6, 32
+0407 // sub r7, r4, r0
+0704 // sub r4, r7, r0 [top of loop]
+04b7 // sub r7, r4, r11
+0535 // sub r5, r5, r3
+e426 // js r6, r4
+e736 // jns r6, r7
+05fc // sub r12, r5, r15 [test if letter or digit]
+8366 // movl r6, 54
+ec26 // js r6, r12
+0ce0 // sub r0, r12, r14 [print letter]
+8386 // movl r6, 56
+e006 // jz r6, r0
+05d0 // sub r0, r5, r13 [print digit]
+800b // movl r11, 0 [BITS 11:8]
+901b // movh r11, 1
+8ff5 // movl r5, -1
+8426 // movl r6, 66
+0407 // sub r7, r4, r0
+0704 // sub r4, r7, r0 [top of loop]
+04b7 // sub r7, r4, r11
+0535 // sub r5, r5, r3
+e426 // js r6, r4
+e736 // jns r6, r7
+05fc // sub r12, r5, r15 [test if letter or digit]
+8586 // movl r6, 88
+ec26 // js r6, r12
+0ce0 // sub r0, r12, r14 [print letter]
+85a6 // movl r6, 90
+e006 // jz r6, r0
+05d0 // sub r0, r5, r13 [print digit]
+810b // movl r11, 16 [BITS 7:4]
+8ff5 // movl r5, -1
+8626 // movl r6, 98
+0407 // sub r7, r4, r0
+0704 // sub r4, r7, r0 [top of loop]
+04b7 // sub r7, r4, r11
+0535 // sub r5, r5, r3
+e426 // js r6, r4
+e736 // jns r6, r7
+05fc // sub r12, r5, r15 [test if letter or digit]
+8786 // movl r6, 120 
+ec26 // js r6, r12
+0ce0 // sub r0, r12, r14 [print letter]
+87a6 // movl r6, 122
+e006 // jz r6, r0
+05d0 // sub r0, r5, r13 [print digit]
+801b // movl r11, 1 [BITS 4:0]
+8ff5 // movl r5, -1
+8846 // movl r6, 132
+9006 // movh r6, 0 [prevent overflow]
+0407 // sub r7, r4, r0
+0704 // sub r4, r7, r0 [top of loop]
+04b7 // sub r7, r4, r11
+0535 // sub r5, r5, r3
+e426 // js r6, r4
+e736 // jns r6, r7
+05fc // sub r12, r5, r15 [test if letter or digit]
+89e6 // movl r6, 158
+9006 // movh r6, 0 [prevent overflow]
+ec26 // js r6, r12
+0ce0 // sub r0, r12, r14 [print letter]
+8a06 // movl r6, 160
+9006 // movh r6, 0 [prevent overflow]
+e006 // jz r6, r0
+05d0 // sub r0, r5, r13 [print digit]
+80a0 // movl r0, 10 [print newline]
+0131 // sub r1, r1, r3 [bottom of main loop]
+0131 // sub r1, r1, r3 [increment index twice]
+0127 // sub r7, r1, r2 [check condition]
+8146 // movl r6, 20 [target: top of main loop]
+e726 // js r6, r7
+ffff // ill

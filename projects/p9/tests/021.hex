@@ -1,0 +1,28 @@
+@0
+// aligned store followed by misaligned load
+8fa1 // movl r1, 250
+8fb2 // movl r2, 251
+8fc5 // movl r5, 252
+8213 // movl r3, 33
+9663 // movh r3, 102
+f113 // st r3, r1
+84f4 // movl r4, 79
+9584 // movh r4, 88
+f514 // st r4, r5
+9683 // movh r3, 104
+f113 // st r3, r1
+f200 // ld r0, r2
+
+// misaligned store followed by misaligned load
+8213 // movl r3, 33
+9663 // movh r3, 102
+f113 // st r3, r1
+84f4 // movl r4, 79
+9584 // movh r4, 88
+f514 // st r4, r5
+8613 // movl r3, 97
+92d3 // movh r3, 45
+f213 // st r3, r2
+f200 // ld r0, r2
+
+1000 // end

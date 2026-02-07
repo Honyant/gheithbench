@@ -1,0 +1,4 @@
+different byte sizes freed/malloced
+memory reused
+pointer allocation aligned
+different merge types tested

@@ -1,0 +1,86 @@
+@0
+//TEST 0: print start
+
+8680 //movl r0, "h" //start
+8690 //movl r0, "i"
+
+//CPI? TEST: branch back LOC2-->HEAD, branch back LOC3-->HEAD, repeat
+//take y/n behaviour ends up being: (we begin with an early jumpback) YYYNY (x1000 times)
+//DOES NOT DO ANYTHING ABOUT ST/LD
+
+//r1=the overall loop counter
+//r2=the next jump-to location
+//r3=whether you should branch back to the head of the loop from LOC2 or not (switches between 0 & 1 everytime you arrive at LOC 1)
+
+//r4=holds the value -1
+//r5=# of times you arrived at LOC1
+//r6=# of times you arrived at LOC2
+//r7=# of times you arrived at LOC3
+//r8=holds the value 1
+
+8D01 //movl r1, ???  //move 2,000 into register.
+9071 //movh r1, ??? //^^continued
+//r2 assigned in-loop
+8013 //movl r3, #1
+8004 //movl r4, #0          //<---- pc=10
+8018 //movl r8, #1
+0484 //sub r4, r4, r8
+8005 //movl r5, #0
+8006 //movl r6, #0
+8007 //movl r7, #0          //<---- pc=20
+//====SETUP DONE
+80A0 //movl r0, "\n"
+
+
+0181 //sub r1, r1, r8 //HEAD OF LOOP HERE. subtract 1 from loop counter //-- pc=24
+83E2 //movl r2, #62 //62=exit of loop
+E102 //jz r2, r1 //EXIT LOOP UPON FINISH
+
+0833 //sub r3, r8, r3 //flip "early jump?" flag //<---- pc=30
+
+0545 //sub r5, r5, r4 //LOCATION 1 //increment tracker
+
+8282 //movl r2, #40 //40=loc after skip
+E002 //jz r2, r0 //should always skip over the halt <---------------- !!
+FFFF   
+
+0646 //sub r6, r6, r4 //LOCATION 2    //<---- pc=40
+
+82F2 //movl r2, #47 //47=start of misaligned section
+E002 //branch to misaligned
+
+//the zone below is misaligned <---------------- !!
+82FF //-- pc(misaligned)=47
+1281
+82E3 //<---- pc=50
+0283
+FFE0
+//^^ the zone above is misaligned ^^
+//====PROPERLY ALIGNED HEX:
+//8182 //movl r2, #24 //24=addr of loop head
+//E312 //jnz r2, r3 //<---- pc=50 //if early branch flag=1, branch back to head
+//8382 //movl r2, #56 //56=addr of LOC3; exit misaligned section
+//E002 //jz r2, r0
+//====
+
+
+0747 //sub r7, r7, r4 //LOCATION 3        //-- pc=56
+8182 //movl r2, #24 //24=head of loop
+E002 //jz r2, r0 //loop back to head //<---- pc=60
+
+8001 //movl r1, ???   //move 1999+49 into register. r1 now for an offset so I can actually print legal ASCII. //LOOP EXITS HERE //-- pc=62
+9081 //movh r1, ??? //^^continued
+0150 //sub r0, r1, r5 //print all counters //should print "1"
+0141 //sub r1, r1, r4
+0160 //sub r0, r1, r6 //should print "2" //<---- pc=70
+81B1 //movl r1, ???   //move 1000+51 into register.
+9041 //movh r1, ???
+0170 //sub r0, r1, r7 //should print "3"
+80A0 //movl r0, "\n"
+
+86F0 //movl r0, "o" //<---- pc=80
+86B0 //movl r0, "k"
+8210 //movl r0, "!"
+8210 //movl r0, "!"
+80A0 //movl r0, "\n"
+FFFF                //<---- pc=90

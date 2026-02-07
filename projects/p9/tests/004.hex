@@ -1,0 +1,49 @@
+// This test measures the efficiency of your MEMORY FORWARDING implementation
+
+// The naive (and slow) implementation is to flush the pipeline when memory is being written
+// in a store that a load then tries to immediately read from.
+// You should try and make it faster by instead forwarding the memory value you are writing to the 
+// load instruction, similarly to how you should have handled register forwarding 
+
+@0
+
+// Decrement for the loop
+8011    // movl r1, #1
+
+// Setup the loop to run a lot of times so the difference in implementation is pronounced
+87f2    // movl r1, #1 
+9052    // movh r2, #5
+
+// Set jump position 
+        // for loop
+80c3    // movl r3, #12
+        // for failure
+81c9    // movl r9, #28 
+
+// Where to read/write from 
+8224    // movl r4, #34
+
+// Begin the loop 
+        // Store
+f412    // st r2, r4
+        // Load
+f405    // ld r5, r4
+
+        // Fail if incorrect
+0526    // sub r6, r5, r2
+e619    // jnz r9, r6
+
+        // Loop back around
+0212    // sub r2, r2, r1
+e213    // jnz r3, r2
+
+// succeed => print A
+8410    // movl r0, #65 
+ffff
+
+// fail => print F 
+8460    // movl r0, #70
+ffff
+
+// Extra memory to read and write from 
+ffff

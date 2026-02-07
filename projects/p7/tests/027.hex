@@ -1,0 +1,62 @@
+@0
+8680 // movl r0,104 // prints hello
+8650 // movl r0,101
+86c0 // movl r0,108
+86c0 // movl r0,108
+86f0 // movl r0,111
+80a0 // movl r0,10
+
+8c81 // movl r1, 200 // stores memory address into registers
+8ca2 // movl r2, 202
+8cc3 // movl r3, 204
+8ce4 // movl r4, 206
+8d05 // movl r5, 208
+8d26 // movl r6, 210
+
+86c7 // movl r7, 108  // stores ld/str characters into registers
+8648 // movl r8, 100
+82f9 // movl r9, 47
+873a // movl r10, 115
+874b // movl r11, 116
+872c // movl r12, 114
+
+f117 // st r7, r1  //stores characters into memory
+f218 // st r8, r2
+f319 // st r9, r3
+f41a // st r10, r4
+f51b // st r11, r5
+f61c // st r12, r6
+
+f100 // ld r0, r1  // prints out ld/str
+f200 // ld r0, r2
+f300 // ld r0, r3
+f400 // ld r0, r4
+f500 // ld r0, r5
+f600 // ld r0, r6
+
+
+804d // movl r13, 4
+804e // movl r14, 4
+0ede // sub r14, r14, r13
+850f // movl r15, 80
+
+ee0f // jz r15, r14   // should jump past the print 1 instructions
+8310 // movl r0, 49   // these all print 1, but they should never run
+8310 // movl r0, 49
+8310 // movl r0, 49
+8310 // movl r0, 49
+8310 // movl r0, 49
+
+85ef // movl r15, 94
+ee3f // jns r15, r14 // should jump past the print 2 instructions
+8320 // movl r0, 50   // these all print 2, but they should never run
+8320 // movl r0, 50
+8320 // movl r0, 50
+8320 // movl r0, 50
+8320 // movl r0, 50
+
+80a0 // movl r0,10
+8ca1 // movl r1, 202   // tests data hazard by reading from r1 right after a write, this should print out d but an incorrect implementation would print out l
+f100 // ld  r0, r1
+
+ffff

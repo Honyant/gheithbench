@@ -1,0 +1,416 @@
+// this is a self modification case
+// with some spice...
+//
+// cpi bagels are on the table.
+//
+// this test case is primarily concerned with
+// evaluating the extent to which you optimize
+// very nasty hazard combinations.
+//
+// the whole test will be conducted with a
+// misaligned program counter, and will
+// consist of many misaligned memory directives,
+// some of which modify the source code itself.
+//
+// there are three subtests, each of which will
+// iterate a number of times to properly
+// differentiate implementations.
+//
+// one aspect is certainly passing,
+// but with a week, maybe you can
+// think about ways to make these faster
+// without slowing down non-misalinged
+// cases.
+//
+// for help debugging, consult `dasm`
+// to get correct instructions,
+// as it is somewhat impractical to imbue
+// instruction comments into misaligned blocks
+// PCs are commented for your convenience.
+
+@0
+// we start by misaligning everything
+8011    // 0x0: movl r1, #0x1
+        // r1 is always 1
+        //
+8072    // 0x2: movl r2, !mis_entry_point_1
+e212    // 0x4: jnz r2, r2
+        //
+        // jump to the entry point
+
+// TEST ONE
+//
+// this is a "basic" misaligned PC case.
+// iterates 0x100 times.
+//
+// @BEGIN MISALIGNED
+// [PC: 0x7] <!mis_entry_point_1>:
+02ff    // 0x6
+1280    // 0x8
+1390    // 0xa
+0481    // 0xc
+e582    // 0xe
+// [PC: 0x11] <!mis_loop_1>:
+0483    // 0x10
+12e2    // 0x12
+d602    // 0x14
+3781    // 0x16
+1781    // 0x18
+179e    // 0x1a
+// [PC: 0x1d] <!mis_jmp_1>:
+15f6    // 0x1c
+ffe1    // 0x1e
+// @END MISALIGNED
+
+// [PC: 0x20] <exit_point_1>:
+// congrats, you get a bagel
+8630    // 0x20
+8680    // 0x22
+8720    // 0x24
+8690    // 0x26
+8730    // 0x28
+8620    // 0x2a
+8610    // 0x2c
+8670    // 0x2e
+8650    // 0x30
+86c0    // 0x32
+83c0    // 0x34
+8330    // 0x36
+80a0    // 0x38
+
+// onto the next!
+8452    // 0x3a
+e212    // 0x3c
+
+// [PC: 0x3e] <fail_point_1>:
+// f
+8660    // 0x3e
+8310    // 0x40
+ffff    // 0x42
+
+// TEST TWO
+//
+// this test is the same as the first,
+// but benefit implementations that have
+// partial flush for misaligned PC
+// self-modifying code.
+// iterates 0x200 times.
+//
+// @BEGIN MISALIGNED
+// [PC: 0x45] <!mis_entry_point_2>:
+02ff    // 0x44
+2280    // 0x46
+f390    // 0x48
+2484    // 0x4a
+2586    // 0x4c
+// [PC: 0x4f] <!mis_loop_2>:
+0488    // 0x4e
+12e2    // 0x50
+f602    // 0x52
+3785    // 0x54
+1781    // 0x56
+179e    // 0x58
+0ff6    // 0x5a
+0f80    // 0x5c
+// [PC: 0x5f] <!mis_jmp_2>:
+1580    // 0x5e
+ffe1    // 0x60
+// @END MISALIGNED
+
+// [PC: 0x62] <exit_point_2>:
+// congrats, you get a bagel
+8730    // 0x62
+8720    // 0x64
+8690    // 0x66
+8720    // 0x68
+8610    // 0x6a
+86d0    // 0x6c
+8620    // 0x6e
+8610    // 0x70
+8670    // 0x72
+8650    // 0x74
+86c0    // 0x76
+82e0    // 0x78
+80a0    // 0x7a
+
+// ... another one?
+8892    // 0x7c
+9002    // 0x7e
+e212    // 0x80
+
+// [PC: 0x82] <fail_point_2>:
+// f
+8660    // 0x82
+8320    // 0x84
+ffff    // 0x86
+
+// TEST THREE
+//
+// this test will highlight
+// how you handle stalling
+// scenarios for misaligned
+// PC.
+//
+// are you economical?
+//
+// @BEGIN MISALIGNED
+// [PC: 0x89] <!mis_entry_point_3>:
+02ff    // 0x88
+2280    // 0x8a
+d390    // 0x8c
+038a    // 0x8e
+a490    // 0x90
+048b    // 0x92
+4590    // 0x94
+058d    // 0x96
+b690    // 0x98
+068d    // 0x9a
+a790    // 0x9c
+078d    // 0x9e
+c890    // 0xa0
+088d    // 0xa2
+0990    // 0xa4
+1980    // 0xa6
+0a90    // 0xa8
+0a80    // 0xaa
+// [PC: 0xad] <!mis_loop_3>:
+0490    // 0xac
+12e2    // 0xae
+1902    // 0xb0
+0bf6    // 0xb2
+05f8    // 0xb4
+13eb    // 0xb6
+ffe1    // 0xb8
+// @END MISALIGNED
+
+// [PC: 0xba] <exit_point_3>:
+// one final check that you stored
+// misaligned data correctly
+f700    // 0xba
+
+// congrats, you get a bagel
+8680    // 0xbc
+8610    // 0xbe
+8720    // 0xc0
+8720    // 0xc2
+8790    // 0xc4
+8620    // 0xc6
+8610    // 0xc8
+8670    // 0xca
+8650    // 0xcc
+86c0    // 0xce
+8210    // 0xd0
+
+// test over
+ffff    // 0xd2
+
+// [PC: 0xd4] <fail_point_3>:
+// f
+8660    // 0xd4
+8330    // 0xd6
+ffff    // 0xd8
+
+// @BEGIN DATA
+// [PC: 0xdb] <!mis_data_test_3>:
+// [PC: 0xda] <data_test_1_3>:
+0021    // 0xda
+// [PC: 0xdc] <data_test_2_3>:
+0000    // 0xdc
+// @END DATA
+
+/*
+  @0
+  // we start by misaligning everything
+  movl r1, #0x1                  // 0x0: movl r1, #0x1
+                                // r1 is always 1
+                                //
+  movl r2, !mis_entry_point_1    // 0x2: movl r2, !mis_entry_point_1
+  jnz r2, r2                     // 0x4: jnz r2, r2
+
+  // TEST ONE
+  //
+  // this is a "basic" misaligned PC case.
+  // iterates 0x100 times.
+  //
+  // @BEGIN MISALIGNED
+  !mis_entry_point_1:
+  movl r2, #0x00
+  movh r2, #0x01
+  movl r3, !mis_loop_1
+  movl r4, exit_point_1
+  movl r5, fail_point_1
+
+  !mis_loop_1:
+  jz r4, r2
+  sub r2, r2, r1        // dec loop counter
+  movl r6, !mis_jmp_1
+  movl r7, #0x13
+  movh r7, #0xe1
+  st r7, r6             // modify instruction at !mis_jmp_1
+                        // THIS MODIFIES THE JMP
+
+  !mis_jmp_1:
+  jnz r5, r1            // this should actually jump to !mis_loop_1
+                        // NOT fail_point_1
+  // @END MISALIGNED
+
+  exit_point_1:
+  // congrats, you get a bagel
+  movl r0, 'c'
+  movl r0, 'h'
+  movl r0, 'r'
+  movl r0, 'i'
+  movl r0, 's'
+  movl r0, 'b'
+  movl r0, 'a'
+  movl r0, 'g'
+  movl r0, 'e'
+  movl r0, 'l'
+  movl r0, '<'
+  movl r0, '3'
+  movl r0, #10
+
+  // onto the next!
+  movl r2, !mis_entry_point_2
+  jnz r2, r2
+
+  fail_point_1:
+  // f
+  movl r0, 'f'
+  movl r0, '1'
+  end
+
+  // TEST TWO
+  //
+  // this test is the same as the first,
+  // but benefit implementations that have
+  // partial flush for misaligned PC
+  // self-modifying code.
+  // iterates 0x200 times.
+  //
+  // @BEGIN MISALIGNED
+  !mis_entry_point_2:
+  movl r2, #0x00
+  movh r2, #0x02
+  movl r3, !mis_loop_2
+  movl r4, exit_point_2
+  movl r5, fail_point_2
+
+  !mis_loop_2:
+  jz r4, r2
+  sub r2, r2, r1          // dec loop counter
+  movl r6, !mis_jmp_2
+  movl r7, #0x13
+  movh r7, #0xe1
+  st r7, r6               // modify instruction at !mis_jmp_2
+                          // THIS MODIFIES THE JMP
+
+  movl r15, #0
+  movl r15, #0
+
+  !mis_jmp_2:
+  jnz r5, r1              // this should jump to !mis_loop_2
+                          // NOT fail_point_2
+  // @END MISALIGNED
+
+  exit_point_2:
+  // congrats, you get a bagel
+  movl r0, 's'
+  movl r0, 'r'
+  movl r0, 'i'
+  movl r0, 'r'
+  movl r0, 'a'
+  movl r0, 'm'
+  movl r0, 'b'
+  movl r0, 'a'
+  movl r0, 'g'
+  movl r0, 'e'
+  movl r0, 'l'
+  movl r0, '.'
+  movl r0, #10
+
+  // ... another one?
+  movl r2, !mis_entry_point_3
+  movh r2, #0
+  jnz r2, r2
+
+  fail_point_2:
+  // f
+  movl r0, 'f'
+  movl r0, '2'
+  end
+
+  // TEST THREE
+  //
+  // this test will highlight
+  // how you handle stalling
+  // scenarios for misaligned
+  // PC.
+  //
+  // are you economical?
+  //
+  // @BEGIN MISALIGNED
+  !mis_entry_point_3:
+  movl r2, #0x00
+  movh r2, #0x02
+  movl r3, !mis_loop_3
+  movh r3, #0
+  movl r4, exit_point_3
+  movh r4, #0
+  movl r5, fail_point_3
+  movh r5, #0
+  movl r6, !mis_data_test_3
+  movh r6, #0
+  movl r7, data_test_1_3
+  movh r7, #0
+  movl r8, data_test_2_3
+  movh r8, #0
+  movl r9, #0x00
+  movh r9, #0x01
+  movl r10, #0x00
+  movh r10, #0x00
+
+  !mis_loop_3:
+  jz r4, r2
+  sub r2, r2, r1      // dec loop var
+  st r9, r6           // store 0x0100 into !mis_data_test_3
+  ld r11, r8          // load 0x0001 into r11
+  jz r5, r11          // fail if load not correct :(
+  jnz r3, r1          // jmp to top of loop
+  // @END MISALIGNED
+
+  exit_point_3:
+  // one final check that you stored
+  // misaligned data correctly
+  ld r0, r7
+
+  // congrats, you get a bagel
+  movl r0, 'h'
+  movl r0, 'a'
+  movl r0, 'r'
+  movl r0, 'r'
+  movl r0, 'y'
+  movl r0, 'b'
+  movl r0, 'a'
+  movl r0, 'g'
+  movl r0, 'e'
+  movl r0, 'l'
+  movl r0, '!'
+
+  // test over
+  end
+
+  fail_point_3:
+  // f
+  movl r0, 'f'
+  movl r0, '3'
+  end
+
+  // @BEGIN DATA
+  !mis_data_test_3:
+  data_test_1_3:
+  0021
+  data_test_2_3:
+  0000
+  // @END DATA
+*/

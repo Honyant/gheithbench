@@ -1,0 +1,21 @@
+// This test tests misaligned pc and branching between misaligned
+// and aligned pc
+@0
+8300 // mem  0:  sanity check - print 0
+8111 // mem  2:  mov 17 to r1 -- misaligned pc address
+8013 // mem  4:  mov 1 to r3 -- for subtraction later
+8032 // mem  6:  mov 3 to r2 -- number of times to loop
+80a6 // mem  8:  mov 10 to r6 -- jump back to top of loop
+83d0 // mem 10:  print '='
+e211 // mem 12:  jnz r1, r2 -- jumps to mem 17 (misaligned pc)
+ffff // mem 14:  end
+
+     // The folowing instructions are the misaligned version of:
+54ff // mem 16:  8354 -- mov 35 to r4 
+2583 // mem 18:  0425 -- sub r5 = r4 - r2
+0004 // mem 20:  0500 -- print number stored in r5
+3205 // mem 22:  0232 -- decrement counter (r2)
+0602 // mem 24:  e006 -- jump back to top of loop
+80e0 // mem 26:  8580 -- print X -- should never run
+ff85 // mem 28:  ffff 
+ffff // mem 30

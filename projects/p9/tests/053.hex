@@ -1,0 +1,34 @@
+//this test case tests loads after misaligned stores, which can be made faster by adding memory forwarding for misaligned
+//small test case, so that its easier to debug
+//loop is there so that misaligned forwarding makes the CPI better
+//you can remove the loop to make debugging simpler
+
+@0
+
+//setup
+8011    //movl r1, #1 
+87f2    //movl r2, #127 //loop counter
+87b3    //movl r3, #123 //misaligned mem address
+87a4    //movl r4, #122 //aligned address overlapping with r3
+
+
+8417    // movl r7, #65
+9007    //movh r7, #0 //A
+
+
+8438    //movl r8, #67 //C
+9428    //movh r8, #66 //B
+
+8129    //movl r9, #18 //branch line number
+
+
+//loop
+0212  //sub r2, r2, r1  
+f417    //st r7, r4
+f318    //st r8, r3
+f40f    //ld r15, r4
+e219    //jnz r9, r2
+
+//only prints values once at end
+0f00    //r0, r15, r0
+ffff

@@ -1,0 +1,57 @@
+@0
+// test different types of branch prediction
+80a1    // movl r1, #10
+8042    // movl r2, #4
+8013    // movl r3, #1
+8074    // movl r4, #7
+85a5    // movl r5, #90
+8146    // movl r6, #20
+80e7    // movl r7, #14
+// check if double for loop works
+0100    // sub r0, r1, r0
+0232    // sub r2, r2, r3
+80a4    // movl r4, #10
+0500    // sub r0, r5, r0
+0535    // sub r5, r5, r3
+0434    // sub r4, r4, r3
+e436    // jns r6, r4 
+e237    // jns r7, r2
+0100    // sub r0, r1, r0
+80a1    // movl r1, #10
+8602    // movl r2, #96
+8013    // movl r3, #1
+8074    // movl r4, #7
+85a5    // movl r5, #90
+8326    // movl r6, #50
+82e7    // movl r7, #46
+// greatly increase iterations to check whether branch predicting or not
+0232    // sub r2, r2, r3
+8604    // movl r4, #96
+0535    // sub r5, r5, r3
+0434    // sub r4, r4, r3
+e436    // jns r6, r4 
+e237    // jns r7, r2
+80a1    // movl r1, #10
+8042    // movl r2, #4
+8013    // movl r3, #1
+8074    // movl r4, #7
+8485    // movl r5, #72
+8486    // movl r6, #72
+80e7    // movl r7, #14
+// check if normal for loop works
+0500    // sub r0, r5, r0 // 72
+0535    // sub r5, r5, r3
+0434    // sub r4, r4, r3
+e436    // jns r6, r4 
+80a1    // movl r1, #10
+8042    // movl r2, #4
+8013    // movl r3, #1
+8624    // movl r4, #98
+8485    // movl r5, #72
+85e6    // movl r6, #94
+80e7    // movl r7, #14
+// greatly increase iterations
+0535    // sub r5, r5, r3
+0434    // sub r4, r4, r3
+e436    // jns r6, r4 
+ffff    // hal

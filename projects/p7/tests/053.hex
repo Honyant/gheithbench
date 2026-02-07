@@ -1,0 +1,23 @@
+@0
+
+8610 // movl r0, #97 // print 'a'
+8631 // movl r1, #99
+8142 // movl r2, #22
+8003 // movl r3, #0 // move min
+8FF4 // movl r4, #255 // move max
+0120 // sub r0, r1, r2 // print 'O'
+8643 // movl r3, #100 // put mem address in reg 
+86D4 // movl r4, #109 // move 'm' into r4
+8005 // movl r5, #0
+8006 // movl r6, #0
+F314 // st r4, r3 // store 109 in mem address 100 
+8005 // movl r5, #0
+8006 // movl r6, #0
+F300 // ld r0, r3 // print 'm'
+
+// line your pipes!
+
+8633 // movl r3, #99
+0320 // sub r0, r3, r2 // print 'O'
+
+ffff

@@ -1,0 +1,50 @@
+
+// This is a branch prediction test, intended for CPI comparison
+// The outer loop decrements from 10 to 1, representing an interval length
+// The inner loop runs 50 times, not branching for the 'if' statement every 'interval length' times
+// Effectively (neglecting details), the code looks like this:
+
+// for i from 10 to 1:
+//     for j from 0 to 49:
+//          if(j % i == 0) print('a')
+
+
+// place at memory location 0
+@0
+
+8611    // <movl r1, #97> - lowercase 'a'
+8012    // <movl r2, #1> - for decrementing
+
+80e4    // <movl r4, start_outer_loop>
+8126    // <movl r6, start_inner_loop>
+81e7    // <movl r7, end_inner_loop>
+818c    // <movl r12, end_if>
+
+80a8    // <movl r8, #10> - stores the interval length
+
+// [PC: 0xe] <start_outer_loop>:
+8329    // <movl r9, #50> - the number of times running the inner loop
+080a    // <sub r10, r8, r0> - put r8 into r10
+
+// [PC: 0x12] <start_inner_loop>:
+
+// if statement checking for r10
+ea1c    // <jnz r12, r10> - check if counter has reached 0
+
+// [PC: 0x14] <start_if>:
+080a    // <sub r10, r8, r0> - reset counter
+8610    // <movl r0, #97> - print 'a'
+
+// [PC: 0x18] <end_if>:
+
+0929    // <sub r9, r9, r2> - decrement r9
+0a2a    // <sub r10, r10, r2> - decrement r10
+e916    // <jnz r6, r9> - branch for inner loop
+
+// [PC: 0x1e] <end_inner_loop>:
+
+80a0    // <movl r0, #10> - print '\n'
+0828    // <sub r8, r8, r2> - decrement the interval
+e814    // <jnz r4, r8> - branch for outer loop
+
+ffff    

@@ -1,0 +1,10 @@
+0
+17998
+Coroutine returns work as expected!
+f3 just sent a message to f2!
+This should print after the message was sent!
+testing again() ...
+test
+test
+test
+f4 done!

@@ -1,0 +1,58 @@
+// This test case is designed as a CPI benchmark for dependent loads.
+// The test iterates through a (dataless) linked list; every load's index depends on the last loaded value.
+// Real compilers (and people) may generate such sequences of dependent loads for multiple indirection (double/triple pointers).
+// Handling dependent loads efficiently requires stalling for 1 cycle per pair of dependent loads.
+// This test case avoids other hazards and loops; neither branch prediction nor other hazard handling should affect CPI here.
+// Therefore, small differences in CPI are relevant, since they would scale linearly in larger programs with loops.
+
+@0 // code at word address 0
+87e1 // movl r1, 126 : linked-list head (0x7E)
+800f // movl r15, 0 : no-op to avoid irrelevant hazard
+// 17 straight dependent loads
+f101 // ld r1, r1
+f101 // ld r1, r1
+f101 // ld r1, r1
+f101 // ld r1, r1
+f101 // ld r1, r1
+f101 // ld r1, r1
+f101 // ld r1, r1
+f101 // ld r1, r1
+f101 // ld r1, r1
+f101 // ld r1, r1
+f101 // ld r1, r1
+f101 // ld r1, r1
+f101 // ld r1, r1
+f101 // ld r1, r1
+f101 // ld r1, r1
+f101 // ld r1, r1
+f101 // ld r1, r1
+// r1 should be FF00 now (referencing @7F80 block)
+f100 // ld r0, r1 : print 'l'
+8fe2 // movl r2, 254 : -2; for adding 2 to r1
+0121 // sub r1, r1, r2 : go to next address
+800f // movl r15, 0 : no-op 
+f100 // ld r0, r1 : print 'd'
+f020 // end
+
+@3F
+0080
+0082
+0084
+0086
+0088
+008A
+008C
+008E
+0090
+0092
+0094
+0096
+0098
+009A
+009C
+009E
+FF00
+
+@7F80
+006C
+0064

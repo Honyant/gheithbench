@@ -1,0 +1,7 @@
+{
+  "project": "p8",
+  "docker_image": "gheithbench-verilog:latest",
+  "starter_commit": "5bb2e6d",
+  "repo": "cs429h_s24_p8_anthonyw",
+  "test_layout": "tests_dir"
+}

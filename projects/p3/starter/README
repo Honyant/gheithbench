@@ -1,0 +1,87 @@
+Objectives:
+~~~~~~~~~~~
+
+    - Become familiar with emulators and AArch64
+
+Assignment:
+~~~~~~~~~~~
+
+    - Implement an emulator for a small subset of the AArch64 ISA
+
+Instructions to emulate:
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+   - cbnz             (x011 0101 xxxx xxxx xxxx xxxx xxxx xxxx)
+
+   - adrp             (1xx1 0000 xxxx xxxx xxxx xxxx xxxx xxxx)
+
+   - addi             (x001 0001 0xxx xxxx xxxx xxxx xxxx xxxx)
+
+   - ldr (immediate)  (1x11 1000 010x xxxx xxxx 01xx xxxx xxxx)
+                      (1x11 1000 010x xxxx xxxx 11xx xxxx xxxx)
+                      (1x11 1001 01xx xxxx xxxx xxxx xxxx xxxx)
+
+   - ldrb (immediate) (0011 1000 010x xxxx xxxx 01xx xxxx xxxx)
+                      (0011 1000 010x xxxx xxxx 11xx xxxx xxxx)
+                      (0011 1001 01xx xxxx xxxx xxxx xxxx xxxx)
+
+   - movz             (x101 0010 1xxx xxxx xxxx xxxx xxxx xxxx)
+
+   - orr (immediate)  (x011 0010 0xxx xxxx xxxx xxxx xxxx xxxx)
+
+   - strb (immediate) (0011 1000 000x xxxx xxxx 01xx xxxx xxxx)
+                      (0011 1000 000x xxxx xxxx 11xx xxxx xxxx)
+                      (0011 1001 00xx xxxx xxxx xxxx xxxx xxxx)
+
+
+Emulator behavior:
+~~~~~~~~~~~~~~~~~~
+
+   - It takes a single command line argument (file name for AArch64 executable)
+   - All memory is initialized to 0 and all registers are initialized to 0
+   - It calls loadElf giving the executable name as an argument
+   - loadElf loads the executable program in memory and returns its entry point
+   - The emulators runs instructions starting at the entry point
+   - Any attempt to write to a byte to memory address 0xFFFFFFFFFFFFFFFF causes
+     the emulator to interpret the byte as an ASCII code and print the
+     corresponding character
+   - Any attempt to decode an unknown instructions (outside the set above)
+     causes the emulator to print an appropriate error message and dump
+     the contents of all 32 registers (see t0.ok for exact format)
+
+Important files:
+~~~~~~~~~~~~~~~~
+
+    *.cxx   C++ files
+    *.c     C files, feel free to add them, remove them, edit them, etc.
+    *.h     header files, feel free to add them, remove them, edit them, etc.
+
+Generated files:
+~~~~~~~~~~~~~~~~
+
+    for each test:
+
+        <test>.out    output from running the test
+        <test>.diff   differences between the actual and expected output
+        <test>.result pass/fail
+
+To run tests:
+~~~~~~~~~~~~~
+
+    make test
+
+To make the output less noisy:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    make -s test
+
+To run one test
+~~~~~~~~~~~~~~~
+
+    make -s t0.test
+
+To run by hand
+~~~~~~~~~~~~~~
+
+    ./build/arm t0.arm
+

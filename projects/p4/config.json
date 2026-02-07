@@ -1,0 +1,7 @@
+{
+  "project": "p4",
+  "docker_image": "gheithbench-p4:latest",
+  "starter_commit": "e0f0ae4",
+  "repo": "cs429h_s24_p4_anthonyw",
+  "test_layout": "tests_dir"
+}

@@ -1,0 +1,44 @@
+// this case tests basic functionality 
+// with some speed tests that target edge cases 
+
+@0   
+// print test yay
+8610 // 0: movl r0, 'a'
+80a0 // 2: print endl
+
+// simple data hazard 
+8641 // 4: movl r1, 'd'
+8012 // 6: movl r2, 1
+0120 // 8: sub r0, r1, r2
+0121 // 10: sub r1, r1, r2
+0121 // 12: sub r1, r1, r2 (data hazard here)
+0120 // 14: sub r0, r1, r2
+80a0 // 16: print endl
+
+// speed test for ld and st (loop) 
+8656 // 18: movl r6, 'e'
+81e5 // 20: movl r5, top of loop
+8404 // 22: movl r4, num iterations
+8013 // 24: movl r3, 1
+8ee2 // 26: movl high num, r2
+8641 // 28: movl r1, 'd'
+f216 // 30: st r6, r2
+f200 // 32: ld r0, r2  
+0434 // 34: sub r4, r4, r3
+e415 // 36: jnz r5, r4
+80a0 // 38: print endl
+
+// speed test for unaligned ld and st (loop) 
+8656 // 40: movl r6, 'e'
+8345 // 42: movl r5, top of loop
+8404 // 44: movl r4, num iterations
+8013 // 46: movl r3, 1
+8df2 // 48: movl high num, r2
+8641 // 50: movl r1, 'd'
+f216 // 52: st r6, r2
+f200 // 54: ld r0, r2
+0434 // 56: sub r4, r4, r3
+e415 // 58: jnz r5, r4
+80a0 // 60: print endl
+
+ffff

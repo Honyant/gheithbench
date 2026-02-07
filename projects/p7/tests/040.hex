@@ -1,0 +1,30 @@
+@0
+//testing raw... use sub instruction to create dependency
+//here print is one instr after the final move
+8191    // movl r1, #25
+8392    // movl r2, #57
+8432    // movl r2, #67
+0210    // sub r0, r2, r1
+//here, both r2 and r1 need to be computed correctly most recenly before sub is done and outputted
+
+//load after store dependency. loaing from a memory address means that if a store is before the load, it needs to be processed fully before loading
+//load is right after store instr (one inst after)
+8533    // movl r3, #83
+//load a memory address into r4
+8fb4    // movl r4, #-5
+//move -5 to a spare register
+8fb5     // movl r5, #-5
+//moves 10 to mem loc -5
+f413    // st r3, r4
+//now load
+f506    // ld r6, r5
+//should print ascii of 83, not 0. prints S
+0600    // sub r0, r6, #0
+
+b79a    // invalid instr to halt
+
+//more valid instructions below which should not run
+8010    // movl r0, #1
+8020    // movl r0, #2
+8030    // movl r0, #3
+ffff    // actual halt

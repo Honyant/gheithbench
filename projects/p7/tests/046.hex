@@ -1,0 +1,54 @@
+//This test case tests branching and handling read-after-write hazards well
+//the line under (//print r3, r4, r5) moves an negative immediate value into a register, which some dissassemblers might accidentally interpret as a positive value.
+@0
+8142	
+8073	
+8044	
+80c5	
+
+0535	//r5 = 12 - 7 = 5
+0544	//r4 = 5 - 4 = 1
+0343	//r3 = 7 - 1 = 6
+0332	//r2 = 6 - 6 = 0
+
+//branching
+81c6	
+e206	
+
+//print bad
+8420	
+8410	
+8440	
+80a0	
+
+//print r3, r4, r5
+8d09	
+0390	
+0490	
+0590	
+80a0	
+
+//str and ldr
+87e5	
+87ca	
+821b	
+fa1b	//str #33 into mem addr 124
+f51a	//str #124 into mem addr 126
+f50b	//load val from mem addr 126 (124) into r11
+fb00	//load val from mem addr 124 (33) into r0
+80a0	
+
+
+//loop: prints 543210
+8011	
+83c3	
+8352	
+0200	
+0212	
+8304	
+0244	
+e433	
+80a0	
+ffff
+
+

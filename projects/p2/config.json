@@ -1,0 +1,7 @@
+{
+  "project": "p2",
+  "docker_image": "gheithbench-base:latest",
+  "starter_commit": "a8287cc",
+  "repo": "cs429h_s24_p2_anthonyw",
+  "test_layout": "tests_dir"
+}

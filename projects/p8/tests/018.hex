@@ -1,0 +1,103 @@
+@0
+// this tests cpi for basic hazards (stalling for double and triple ld dependencies, forwarding for read after write registers and memory)
+// no misalignment or branching :)
+// see below for asm
+
+// test ld ld stall
+8731    
+8e82    
+8e03    
+f211    
+f312    
+f304    
+f400    // this prints s
+
+// tests register forwarding
+8761    
+8022    
+0120    // this prints t
+
+// tests memory forwarding
+8721    
+8602    
+f211    
+f200    // this prints r
+
+// test ld ld ld stall
+8611    
+8e82    
+8e03    
+8e25    
+f211    
+f513    
+f312    
+f504    
+f406    
+f600    // print a
+
+8770    // w
+8620    // b
+8650    // e
+8720    // r
+8720    // r
+8790    // y
+8200    
+86d0    //m
+8610    // a
+8740    // t
+8630    // c
+8680    // h
+8610    // a
+ffff
+
+// asm
+//@0
+// this tests cpi for basic hazards (stalling for double and triple ld dependencies, forwarding for read after write),
+// it also tests misaligned pc branch
+
+// test ld ld stall
+//movl r1, #115 
+//movl r2, #232 
+//movl r3, #224
+//st r1, r2 
+//st r2, r3 
+//ld r4, r3 
+//ld r0, r4 // this prints s
+
+// tests register forwarding
+//movl r1, #118
+//movl r2, #2
+//sub r0, r1, r2 // this prints t
+
+// tests memory forwarding
+//movl r1, #114
+//movl r2, #96
+//st r1, r2 
+//ld r0, r2 // this prints r
+
+// test ld ld ld stall
+//movl r1, #97 
+//movl r2, #232 
+//movl r3, #224
+//movl r5, #226
+//st r1, r2 // mem[232] = 97
+//st r3, r5 // mem[226] = 224
+//st r2, r3 // mem[224] = 232
+//ld r4, r5 // load 224 into r4
+//ld r6, r4 // load 232 into r6
+//ld r0, r6 // print a
+ 
+//movl r0, #119  // w
+//movl r0, #98 // b
+//movl r0, #101 // e
+//movl r0, #114 // r
+//movl r0, #114 // r
+//movl r0, #121 // y
+//movl r0, #32
+//movl r0, #109 //m
+//movl r0, #97 // a
+//movl r0, #116 // t
+//movl r0, #99 // c
+//movl r0, #104 // h
+//movl r0, #97 // a
+//end

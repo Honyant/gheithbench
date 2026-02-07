@@ -1,0 +1,63 @@
+@0
+// part 1: Misaligned load/store tests (includes forwarding cases with aligned/misaligned combinations as well)
+800f    // movl r15, #0; r15 will always be 0
+
+8781    // movl r1, #120
+8702    // movl r2, #112
+8763    // movl r3, #118
+8624    // movl r4, #98
+
+8775    // movl r5, #119
+86f6    // movl r6, #111
+8737    // movl r7, #115
+
+f311    // st r1, r3; mem[118] = 120
+f512    // st r2, r5; (r5 - 1 = r3; so mem[119] = 112)..needs forwarding from aligned address to misaligned one
+f416    // st r6, r4; mem[98] = 111
+f714    // st r3, r7; mem[115] = 98
+
+f309    // ld r9, r3; r9's lower 8 bits should store 120
+f50a    // ld r10, r5; r10 should store 112
+f61a    // st r10, r6;  mem[111] = 112
+f60d    // ld r13, r6;  r13 should store 112 (misaligned store to misaligned load forwarding)
+f70b    // ld r11, r7; r11 should store 98
+fb0c    // ld r12, r11; r12 should store 111 (misaligned load -> aligned load forwarding might be necessary)
+
+0900    // sub r0, r9, r0; should print out x
+0a00    // sub r0, r10, r0; should print out p
+0b00    // sub r0, r11, r0; should print out b
+0c00    // sub r0, r12, r0; should print out o
+0d00    // sub r0, r13, r0; should print out p
+
+
+// Part 2: Branch Predictor Test: Predictors that mostly just predict taken/not taken alternately
+// will not perform as well as more complex ones
+
+83cd    // movl r13, #60; the outer loop will run 60 times
+830e    // movl r14, #48; start of outer loop
+83ba    // movl r10, #59; inner loop counter
+8014    // movl r4, #1; r4 will always be 1
+83ac    // movl r12, #58; moves the start of inner loop to r12
+8488    // movl r8, #72; end of branch if it is taken
+0ad1    // sub r1, r10, r13; start of inner loop (PC: #58)
+
+e128    // js r8, r1; taken if inner loop counter < outer loop counter
+805b    
+805b    // movl r11, #5
+805b    // no-ops to ensure incorrrect penalty is ~length of pipeline (even with partial flushing)
+805b    
+805b    
+
+0a4a    // sub r10, r10, r4
+ea3c    // jns r12, r10; end of inner loop once not taken
+
+0d4d    // sub r13, r13, r4 
+ed1e    // jnz r14, r13; goes to start of outer loop
+
+80a0    // movl r0, #10
+8640    // movl r0, #100; prints out "done" if all the branching worked properly
+86f0    // movl r0, #111
+86e0    // movl r0, #110
+8650    // movl r0, #101
+
+ffff

@@ -1,0 +1,831 @@
+@0
+/*
+    TEST CASE DECODING:
+
+    CASE:
+    - the case is split into three parts
+    - each part is completely self contained
+    - the before each part explains what that part is testing for
+    
+    COMMENTS:
+    [code] //explanation //@line number of that code
+    a line with a line number usually means it's a jump destination
+
+*/
+
+
+//PART 1 : constantly changing jump location
+//branch prediction will help if you have done the extra optimization
+//of checking if the jump loc is in the pipeline and not entirely flushing if so
+//not a stress test, just supposed to be good for comparing CPIs
+//.ok for this part is the saturn ascii art (with a newline)
+//what it does: loops 289 times
+//each loop jumps to a location that should be 0x200 + loop iteration
+//each jump does a print and then jumps back into the loop at 0x12
+//after that, there's some loop control arithmetic and a jump back to 0x10 
+
+
+//289 loops
+8211 //@0
+9011 //move 289 into r1
+8002
+9022 //move 0x200 into r2
+8013 //put 1 in r3
+8fc4 //put -4 in r4
+8105 //loop address in r5
+8126 //return address in r6
+
+//loop start
+e002 //jump (if r0=0) to r2 //@0x10
+//return address
+0242 //add 4 to r2 //@0x12
+0131 //sub 1 from r1
+e115 //jump to r5 if r1 != 0
+//ascii art credit : https://www.asciiart.eu/space/planets 
+
+//PART 2
+//loops with a jump taken every other time
+//can you make a better branch predictor (not always taken/always previous)
+//doesn't print any output currently (so no verification)
+//not rly a stress test, entire case takes me ~3 seconds
+//with no branch predictor or optimizations
+//loops a whole lot of times
+//inside there is basically an if-else where a different one is
+//taken each time
+80a0 //print newline
+8ff1
+90f1 //move 0x0fff into r1 (loop #)
+8012 //move 1 into r2 (loop decrement)
+8013 //move 1 into r3 (jump decider) (@0x20)
+8264 //loop location in r4
+82e5 //in-loop jump if nonzero loc in r5
+//loop start
+e315 //jump to r5 if r3 != 0 (@0x26)
+8013 //r3 = 1 (if it was 0)
+0121 //r1 = r1 - r2 (decrement by 1)
+e114 //jump to loop start if r1 != 0
+//in-loop jump for nonzero
+8003 //r3 = 0 (@0x2e)
+0121 //r1 = r1 - r2 (decrement by 1) (@0x30)
+e114 //jump to loop start if r1 != 0
+//loop is over
+
+//should continue here when r1 == 0
+
+//PART 3 : misaligned loop
+//does your branch predictor break your misaligned jumping?
+//if you hijacked 2nd readport you now can't be certain
+//can fix by stalling once and sending in first raddr
+//and then using same instruction forwarding as non-jump misalignment
+//loops 25 times, each loop contains 4 loads
+//plus some loop control math and a jump back to the start
+
+8a01 //(@0x34)
+9061 //r1 = 0x6a0 (mem address of asciis)
+8192 //r2 = 0x19 (loop iterations) (decimal 25)
+//will print 100 characters, each loop has four prints
+8013 //r3 = 1 (loop decrement)
+8454 //r4 = 45 (loop 3 start location)
+8fe5 //r5 = -2 (to increment r1)
+85c6 //r6 = aligned location after loop (@0x40)
+e004 //jump to r4
+//loop 3 start (and misalignment start)
+00ff //@0x44 (so code at 0x45)
+51f1
+0001
+51f1
+0001
+51f1
+0001 //@0x50
+51f1
+3201
+1402
+06e2
+ffe0 //@0x5a
+
+//aligned code (for readability)
+/*
+    //have marked all misaligned addresses for clarity
+    f100 //load from r1 to r0 (print) //@0x45
+    0151 //r1 = r1 - r5 (add 2) //@0x47
+    f100 //load from r1 to r0 (print) //@0x49
+    0151 //r1 = r1 - r5 (add 2) //@0x4b
+    f100 //load from r1 to r0 (print) //@0x4d
+    0151 //r1 = r1 - r5 (add 2) //@0x4f
+    f100 //load from r1 to r0 (print) //@x051
+    0151 //r1 = r1 - r5 (add 2) //@0x53
+    0232 //r2 = r2 - r3 (minus 1) //@0x55
+    e214 //jnz to r4, r2 //@0x57
+    e006 //jump back to aligned code //@0x59
+*/
+
+//aligned location to jump back to (@0x5c)
+//print "done (:"
+8640
+86F0
+86E0
+8650
+8200
+8280
+83A0
+
+ffff
+
+@350 //memory address 0x6a0
+//jump location for part 3
+//basically a data section (not misaligned)
+//scroll past this to find the jump location of the loop in part 1
+//or ctrl+F @100
+000a
+0020
+0020
+0020
+002f
+003d
+003d
+003d
+003d
+003d
+003d
+003d
+003d
+003d
+003d
+005c
+000a
+0020
+002f
+002f
+0020
+0020
+0020
+0020
+0020
+0020
+0020
+0020
+0020
+0020
+0020
+0020
+005c
+005c
+000a
+002f
+002f
+0020
+0020
+0020
+0020
+0020
+0020
+0020
+0020
+0020
+0020
+0020
+0020
+0020
+0020
+005c
+005c
+000a
+0020
+0020
+0020
+0020
+007c
+007c
+0020
+0020
+0020
+0020
+0020
+0020
+007c
+007c
+000a
+0020
+0020
+0020
+0020
+007c
+007c
+0020
+0020
+0020
+0020
+0020
+0020
+007c
+007c
+000a
+0020
+0020
+0020
+0020
+007c
+007c
+0020
+0020
+0020
+0020
+0020
+0020
+007c
+007c
+000a
+000a
+
+//just a whole bunch of movls to print followed by jumps back into the loop
+//jump location for part 1
+@100 //memory address 0x200
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+82A0
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+82B0
+e006
+80A0
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8270
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+87C0
+e006
+80A0
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8280
+e006
+8290
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+82E0
+e006
+82D0
+e006
+82E0
+e006
+82C0
+e006
+83D0
+e006
+8220
+e006
+8600
+e006
+8600
+e006
+8220
+e006
+83D0
+e006
+82E0
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+82D0
+e006
+8200
+e006
+86F0
+e006
+8200
+e006
+82D0
+e006
+80A0
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8270
+e006
+83D0
+e006
+82F0
+e006
+85F0
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+85C0
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+87C0
+e006
+80A0
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+82A0
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+87C0
+e006
+8200
+e006
+8200
+e006
+8270
+e006
+83D0
+e006
+82E0
+e006
+85F0
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+87C0
+e006
+80A0
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+85C0
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8600
+e006
+83D0
+e006
+82E0
+e006
+82F0
+e006
+8600
+e006
+82C0
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8270
+e006
+80A0
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+82E0
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8270
+e006
+83D0
+e006
+82E0
+e006
+85F0
+e006
+85F0
+e006
+82E0
+e006
+83D0
+e006
+8270
+e006
+8200
+e006
+8600
+e006
+83D0
+e006
+8270
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+82A0
+e006
+80A0
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+82B0
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+82B0
+e006
+80A0
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+84F0
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+82A0
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8270
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+8200
+e006
+82E0
+e006
+
+
+//prints oops if you go past the correct jumps
+80A0
+86F0
+86F0
+8700
+8730
+80A0
+
+ffff

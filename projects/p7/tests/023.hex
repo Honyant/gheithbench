@@ -1,0 +1,33 @@
+@0
+// tests jump buffer / read after write
+8011    // movl r1, #1
+8082    // movl r2, #8
+e132    // jns r2, r1
+8210    // movl r0, #33 //this should not print
+86c0    // movl r0, #108 //this should print l
+
+// tests read after write for sub
+8631    // movl r1, #99
+8022    // movl r2, #2
+0120    // sub r0, r1, r2 // this prints a
+
+// tests read after write to memory
+8761    // movl r1, #118
+8602    // movl r2, #96
+f211    // st r1, r2 
+f200    // ld r0, r2 // this prints v
+
+//printing for fun :)
+8650    // movl r0, #101
+86e0    // movl r0, #110
+8640    // movl r0, #100
+8650    // movl r0, #101
+8720    // movl r0, #114
+8200    // movl r0, #32
+86d0    // movl r0, #109
+8610    // movl r0, #97
+8740    // movl r0, #116
+8630    // movl r0, #99
+8680    // movl r0, #104
+8610    // movl r0, #97
+ffff    // hal

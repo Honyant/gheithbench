@@ -1,0 +1,8 @@
+again() & coroutines test!
+starting test: 1
+starting test: 2
+starting test: 3
+starting test: 4
+starting test: 5
+Test that when coroutine returns, it supplies infinite sends to the channel:
+200000

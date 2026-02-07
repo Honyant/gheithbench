@@ -1,0 +1,101 @@
+// this test case is designed to test a lot of consecutive stalls
+// it will do this by doing consecutive misaligned loads to create stalls before previous ones can resolve
+@0
+8fe1 // movl r1, 254  used to add 2
+8022 // movl r2, 2    used to subtract 2 from r1 so that we can increase how much we add by
+
+8513 // movl r3, 0x51  memory address of first memory address
+80a4 // movl r4, 10    loop jump location
+834f // movl r15, 52    counter of loops
+
+// this will test misaligned loads by continually loading bew memory addresses into registers
+// so it becomes a connected chain of loads that depend on each other
+
+//start of loop
+f305 // ld r5, r3   // loads a bunch of address through each other
+f506 // ld r6, r5
+f607 // ld r7, r6
+f708 // ld r8, r7
+f809 // ld r9, r8
+f90a // ld r10, r9
+fa0b // ld r11, r10
+fb0c // ld r12, r11
+
+0c1c // sub r12, r12, r1  //increment r12 by some amount so we print different characters each time
+fc00 // ld r0, r12       // prints out a letter
+
+0121 // sub r1, r1, r2   // decrease r1 by 2
+0f2f // sub r15, r15, r2  // decrease r15 by 2
+
+ef14 // jnz r4, r15   // loop again until r15 gets to 0
+
+ffff
+
+// from here we basically have a data section
+// this first part is all the addresses that registers r3-r11 point to 
+
+@28 // memory address 0x50
+61ff    // has 0x61 stored at 0x51 so this means r5 should become 0x61 after the first load
+ff00  
+
+@30 //memory address 0x60
+71ff
+ff00
+
+@38 //memory address 0x70
+81ff
+ff00
+
+@40 //memory address 0x80
+91ff
+ff00
+
+@48 //memory address 0x90
+a1ff
+ff00
+
+@50 //memory address 0xa0
+b1ff
+ff00
+
+@58 //memory address 0xb0
+c1ff
+ff00
+
+@60 //memory address 0xc0
+d1ff
+ff00
+
+//ascii values from A-Z
+@68 // memory address 0xd0
+ffff
+41ff
+4200
+4300
+4400
+4500
+4600
+4700
+4800
+4900
+4a00
+4b00
+4c00
+4d00
+4e00
+4f00
+5000
+5100
+5200
+5300
+5400
+5500
+5600
+5700
+5800
+5900
+5a00
+0a00
+ffff
+ffff
+

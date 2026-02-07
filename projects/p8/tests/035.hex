@@ -1,0 +1,63 @@
+@0
+
+// This is mainly a CPI test which tests how misaligned loads and stores
+// are handled (are they flushed or are they forwarded?). This case also
+// slightly tests correctness with the preservation of the values surrounding
+// a misaligned store.
+
+// set up memory addresses
+// The memory addresses are 0x201, 0x202, 0x203, and 0x204, stored in registers
+// r1 to r4 respectively. This should make it simpler to track which address
+// is being stored to or loaded from.
+
+8011    // movl r1, #1
+9021    // movh r1, #2
+
+8022    // movl r2, #2
+9022    // movh r2, #2
+
+8033    // movl r3, #3
+9023    // movh r3, #2
+
+8044    // movl r4, #4
+9024    // movh r4, #2
+
+// misaligned store, aligned load
+9705    // movh r5, #112
+f315    // st r5, r3
+f400    // should print out #112 = p
+
+// clear the data in the memory addresses
+// this ensures that wrong output will yield a null character instead of another letter
+f210    // st r0, r2
+f410    // st r0, r4
+
+// aligned store, misaligned load
+9695    // movh r5, #105
+f215    // st r5, r2
+f300    // should print out #105 = i
+
+// clear the data
+f210    
+f410    
+
+// misaligned store, misaligned load (basic)
+86e5    // movl r5, #110
+f315    // st r5, r3
+f300    // should print out #110 = n
+
+// clear the data
+f210    
+f410    
+
+// misaligned store, misaligned load (complex)
+// this case tests that you preserve the values surrounding
+// the misaligned address when you store a new value
+9735    // movh r5, #115
+f115    // st r5, r1
+8655    // movl r5, #101
+f315    // st r5, r3
+f300    // should print out #101 = e
+f200    // should print out #115 = s
+
+ffff    

@@ -1,0 +1,81 @@
+// Tests various data hazards
+// A '*' in the output signifies that the test case was failed
+// nops are only used for setting up test cases
+
+@0
+
+// A: read register after writing to it (register RAW)
+// --setup--
+82a1 // regs[r1] = '*'
+// --test--
+8411 // regs[r1] = 'A'
+0100 // print(regs[r1])
+80a0 // print('\n')
+
+// B: two register RAWs
+// --setup--
+82a1 // regs[r1] = '*'
+82a2 // regs[r2] = '*'
+// --test--
+8421 // regs[r1] = 'B'
+0102 // regs[r2] = regs[r1]
+0200 // print(regs[r2])
+80a0 // print('\n')
+
+// C: register RAW with load instruction
+// --setup--
+82a1 // regs[r1] = '*'
+8102 // regs[r2] = 16
+800f // nop
+97d2 // regs[r2] = 32016
+800f // nop
+f211 // mem[regs[r2]] = regs[r1]
+8433 // regs[r3] = 'C'
+8004 // regs[r4] = 0
+800f // nop
+97d4 // regs[r4] = 32000
+800f // nop
+f413 // mem[regs[r4]] = regs[r3]
+82a3 // regs[r3] = '*'
+8101 // regs[r1] = 16
+8102 // regs[r2] = 16
+97d1 // regs[r1] = 32016
+// --test--
+0121 // regs[r1] = regs[r1] - regs[r2]
+f100 // print(mem[regs[r1]])
+80a0 // print('\n')
+
+// D: read memory after writing to it
+// --setup--
+82a2 // regs[r2] = '*'
+800f // nop
+f112 // mem[regs[r1]] = regs[r2]
+800f // nop
+8442 // regs[r2] = 'D'
+// --test--
+f112 // mem[regs[r1]] = regs[r2]
+f100 // print(mem[regs[r1]])
+80a0 // print('\n')
+
+// E: two consecutive load instructions
+// --setup--
+8102 // regs[r2] = 16
+800f // nop
+97d2 // regs[r2] = 32016
+800f // nop
+f112 // mem[regs[r1]] = regs[r2]
+800f // nop
+8453 // res[r3] = 'E'
+800f // nop
+f213 // mem[regs[r2]] = regs[r3]
+8204 // regs[r2] = 32
+800f // nop
+97d4 // regs[r4] = 32032
+82a5 // regs[r5] = '*'
+800f // nop
+f415 // mem[regs[r4]] = regs[r5]
+// --test--
+f104 // regs[r4] = mem[regs[r1]]
+f400 // print(mem[regs[r4]])
+
+ffff // finish

@@ -1,0 +1,9 @@
+jz test
+12
+jnz test
+3
+js test
+45
+jns test
+67
+tests done (:

@@ -1,0 +1,10 @@
+pointer on first malloc call is aligned properly
+abcde
+pointer on second malloc call is aligned properly
+fghij
+klmno
+pointer on second malloc call is aligned properly
+pqrst
+a
+klmno
+abcde

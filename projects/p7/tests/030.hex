@@ -1,0 +1,41 @@
+@0
+800a	// movl r10, #0; r10 will always be 0 for all three parts
+83ef	// movl r15, #62; pc #62 stores the halt instruction
+
+// part 1 (ensuring basic data hazards involving mov/sub/st/ld are dealt with)
+8641	// movl r1, #100
+8464	// movl r4, #70
+f114	// st r4, r1 (mem[100] = 70)
+
+8781	// movl r1, #120
+8142	// movl r2, #20
+0122	// sub r2, r1, r2 (r2 should store 100)
+f203	// ld r3, r2 (r3 should store 70)
+02a0	// sub r0, r2, r10 (both subs should print out "dx")
+01a0	// sub r0, r1, r10
+
+// part 2 (ensuring branch control hazards are dealt with)
+8e21	// movl r1, #-30 (ensuring negative values are properly handled as well)
+8d82	// movl r2, #-40 
+0213	// sub r3, r2, r1 (r3 should be negative)
+e33f	// jns r15, r3 (should not jump to r15 or else program will end)
+
+826b	// movl r11, #38 (location to jump to)
+e32b	// js r11, r3 (should jump to movl r0, #49)
+e32a	// js r10, r3 (should not run)
+8320	// movl r0, #50 (if jumping isn't working properly, "2" could be printed out)
+8310	// movl r0, #49 (if jumping worked, only "1", no "2" should be printed out)
+
+// part 3 (dealing with hazards caused by consecutive loads and load after stores)
+85a1	// movl r1, #90
+8522	// movl r2, #82
+8583	// movl r3, #88
+84c4	// movl r4, #76
+f314	// st r4, r3 (mem[88] = 76)
+f213	// st r3, r2 (mem[82] = 88)
+f201	// ld r1, r2 (r1 should become 88)
+f102	// ld r2, r1 (r2 should become 76)
+0100	// sub r0, r1, r0; if stall works, these two subtractions should print out "XL"
+0200	// sub r0, r2, r0; ensuring r0's value is not forwarded since r0 is unknown
+f300	// ld r0, r3; ensuring can print even with load operation (should print another "L")
+ffff    // halt

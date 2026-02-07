@@ -1,0 +1,33 @@
+// this is a test of some data hazards
+// maybe your implementation uses more techniques to deal with these cases
+
+@0
+// setting up values (letters) in registers
+8411    // <movl r1, 65>
+8422    // <movl r2, 66>
+8433    // <movl r3, 67>
+8444    // <movl r4, 68>
+8455    // <movl r5, 69>
+8006    // <movl r6, 0>
+
+// simple Read-After-Write (RAW)
+8465    // <movl r5, 70>
+0560    // <sub r0, r5, r6> -> print 'F'
+
+// RAW for 2 registers
+8455    // <movl r5, 69>
+8016    // <movl r6, 1>
+0560    // <sub r0, r5, r6> -> print 'D'
+
+// back-to-back load
+8205    // <movl r5, 32> - memory shown at the bottom
+f505    // <ld r5, r5>
+f505    // <ld r5, r5>
+0560    // <sub r0, r5, r6> -> print 'B'
+
+ffff    // terminate
+
+// stores some values in memory to be used
+// @32
+0022    // 34
+0043    // 67

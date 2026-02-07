@@ -1,0 +1,63 @@
+@0
+//part 1 - tests aligned/misaligned store/load for correctness
+//also tests basic data hazards
+//aligned store + misaligned load
+8641    // movl r1, #100 //address of first word
+9792    // movh r2, #121 //#121 = 'y'
+f112    // st r2, r1
+8667    // movl r7, #102 //address of second word
+f710    // st r0, r7
+8653    // movl r3, #101 //misaligned address to load from
+f304    // ld r4, r3
+0400    // sub r0, r4, r0 //print 'y'
+//memory should look like this:
+//100: 79xx
+//102: 0000
+
+//misaligned store + aligned load
+8635    // movl r5, #99 //misaligned address to store to
+9616    // movh r6, #97 //#97 = 'a'
+f516    // st r6, r5
+f104    // ld r4, r1
+0400    // sub r0, r4, r0 //print 'a'
+//memory should look like this:
+//98:  xxxx
+//100: 7961
+//102: 0000
+
+//make sure that you didn't overwrite memory when doing misaligned store
+f304    // ld r4, r3
+0400    // sub r0, r4, r0 //print 'y'
+
+//misaligned store + misaligned load
+8671    // movl r1, #103 //address for misaligned store and load
+8212    // movl r2, #33 //#33 = '!'
+f112    // st r2, r1
+f104    // ld r4, r1
+8015    // movl r15, #1 //no-op
+0400    // sub r0, r4, r0
+//memory should look like this:
+//98:  xxxx
+//100: 5961
+//102: 2100
+//104: xx00
+
+//part 2 - loops through a store-load hazard
+//tests that you forward for store-load instead of flushing for better cpi
+87f1    // movl r1, #127 //loop counter
+8783    // movl r3, #120 //address to store loop counter
+8014    // movl r4, #1 //amount to decrement by in each iteration
+8348    // movl r8, #52 //address of start of loop = @loop
+f311    // st r1, r3
+//@loop
+f306    // ld r6, r3 //r6 is loop counter
+0646    // sub r6, r6, r4
+f316    // st r6, r3 //store loop counter 
+f307    // ld r7, r3 //load loop counter again to compare for jump
+e718    // jnz r8, r7 
+
+83f0    // movl r0, #63 //print '?'
+
+ffff    // halt
+
+

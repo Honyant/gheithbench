@@ -1,0 +1,19 @@
+// The idea of this test is to probe for a potential resource hazard involved with partial flushing. This can be a useful edge-case CPI test, but is also designed to keep those who implement partial flushing to optimize CPI honest; one who would sacrifice correctness for efficiency deserves neither.
+// A combination of three conditions create the resource hazard: a misaligned PC, a misaligned load in x0 (the first execute stage), and self-modifying code that affects a stage at or before decode.
+// This may trigger a partial flush, suggesting the use of a read port to prepare the lower-order bits of the PC. However, some implementations will require both read ports for the instruction in x0 (which is still valid if only the instructions younger than the modified one are flushed).
+// Instructions starting at address 15 are misaligned; comments are placed with the lower half of their instruction and the higher half of the previous instruction.
+ 
+@0
+80ff // movl r15, #15 [0]
+815e // movl r14, #21 [2] [address of last instruction]
+816d // movl r13, #22 [4] [address of last instruction + 1]
+8013 // movl r3, #1 [6]
+8f02 // movl r2, #-16 [8]
+9ff3 // movh r3, #0xff [10]
+e00f // jz r15, r0 [12] [branch unconditionally to mem address 15]
+1300 // st r3, r13 [15] [aligned store; change first source register (a) of last instruction to 1] [instructions starting here are misaligned]
+10fd // movl r0, #97 [17] [print 'a']
+0186 // ld r1, r14 [19] [load numerical value of last instruction into r1]
+20fe // sub r0, r8, r2 [21] [print contents of r1: should be ASCII 32 - (-16) = 48 = '0']
+ff08 // ill
+00ff

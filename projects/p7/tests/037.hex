@@ -1,0 +1,57 @@
+// place at memory location 0
+// r15 holds 1 for the duration of my tests
+// all assignment (e.g. r1 = r1 - 3) is done with movl
+
+@0
+801f	// r15 = 1
+//------------------------------------------------------------------
+// TEST1: FOR LOOPS. SUMS 10 + 9 + ... + 2 + 1 = 55.
+// r1 represents index counter for the for loop
+// r2 represents address of forloop1
+// r3 represents the sum left
+80a1	// r1 = 10
+8373	// r3 = 55
+8082	// r2 = @8
+
+
+//@8
+// forloop1:
+0313	//    r3 = r3 - r1
+01f1	//    r1 = r1 - r15 = r1 - 1
+e112	//    jnz r2, r1
+
+
+8144	// r4 = @20
+e304	// jz r4, r3
+ffff    // HALT
+//@20
+8610	// print 'a'.
+80a0	// print '\n'
+
+//------------------------------------------------------------------
+// TEST2: JUMPING OVER INVALID INSTRUCTIONS.
+
+8225	// r5 = @34
+ef15	// jnz r15, r5 (always true as r15 = 1)
+8780	// invalid instruction to be skipped over.
+8780	// invalid instruction to be skipped over.
+8780	// invalid instruction to be skipped over.
+
+//@34
+8620	// print 'b'.
+80a0	// print '\n'
+
+
+//------------------------------------------------------------------
+// TEST3: FORWARDING (memory)
+8016	// r6 = 1
+8636	// r6 = 99
+06f6	// r6 = r6 - r15 = r6 - 1
+8327	// r7 = @50
+e617	// jnz r7, r6
+ffff    // HALT
+
+//@50
+8630	// print 'c'
+ffff    // HALT
+//------------------------------------------------------------------

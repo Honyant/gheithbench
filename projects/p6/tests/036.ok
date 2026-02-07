@@ -1,0 +1,25 @@
+Test 1:
+20:  result: 7
+21:  result: 7
+22:  result: 15
+23:  result: 15
+24:  result: 10
+25:  result: 23
+26:  result: 10
+27:  result: 111
+28:  result: 18
+29:  result: 18
+30:  result: 18
+31:  result: 106
+32:  result: 5
+33:  result: 26
+34:  result: 13
+35:  result: 13
+36:  result: 21
+37:  result: 21
+38:  result: 21
+39:  result: 34
+40:  result: 8
+Test 2:
+Result for test 2: 520
+Tests are over!

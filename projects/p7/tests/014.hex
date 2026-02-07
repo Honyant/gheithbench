@@ -1,0 +1,32 @@
+@0
+//this test case tests a series of data hazards
+//r15 is always 0
+800f	
+//part 0: read after write, no memory
+8641	//putting 100 in r1
+8342	//putting 52 in r2
+0123	//r3 = 48
+03f0	//writing r3 - 0: 0
+
+//part 2: write after read and read after write from memory
+8641	//putting 100 in r1
+8332	//putting 51 into r2
+87ee	//putting 126 into r14
+fe12	//storing 51 at memory address
+fe02	// loading 51 into r2
+0123	//r3 = 49
+03f0	//writing r3 - 0: 1
+
+//part 3: read from memory after read from memory: this one is tricky, and may require some different logic
+8641	//putting 100 in r1
+8322	//putting 50 in r2
+87ee	//putting 126 in r14
+87cd	//putting 124 in r13
+fe12	//storing 50 at 126
+fd1e	//storing 126 at 124
+fd02	//loading 126 into r2
+f202	//loading 50 into r2
+0123	//r3 = 50
+03f0	//writing r3 - 0: 1
+
+ffff

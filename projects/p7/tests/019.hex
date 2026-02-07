@@ -1,0 +1,27 @@
+@0
+// test read after write
+8283    // movl r3, #40
+8102    // movl r2, #16
+f312    // st r2, r3
+
+8185    // movl r5, #24
+8021    // movl r1, #2
+8072    // movl r2, #7
+0122    // sub r2, r1, r2
+e225    // js r5, r2 // should jump
+
+// then this stuff should be printed after
+8610    // movl r0, 'a'
+8620    // movl r0, 'b'
+8630    // movl r0, 'c'
+ffff    // halt
+
+// this should be printed first
+8640    // movl r0, 'd'
+8650    // movl r0, 'e'
+e015    // jnz r5, r0 // should not jump
+
+// test read after write with ld
+f301    // ld r1, r3
+e001    // jz r1, r0 // should jump
+ffff    // halt

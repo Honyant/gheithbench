@@ -1,0 +1,38 @@
+@0
+// Testing For loop: prints KJIHGFEDCB
+84b1	
+80a2	
+8013	
+8084	
+0100	
+0131	
+0232	
+e214
+
+80a0
+
+// Testing Read after Write
+8011	
+8422	
+0212	
+0200	// Should print an A
+
+8015	
+8436	
+0656	
+0600	// Should print a B
+
+8028	
+850a	
+0a8a	
+0a00	// Should print an N
+
+80a0	
+
+// Testing Memory
+8301	
+8962	
+f211	
+f203	
+0300	// Should print a 0
+ffff

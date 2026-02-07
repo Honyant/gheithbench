@@ -1,0 +1,51 @@
+@0
+// basic sub & mov & jump tests
+80e1	// movl r1, #14
+80d2	// movl r2, #13
+80d3	// movl r3, #13
+0324	// sub r4, r3, r2
+e401	// jz r1, r4 - should jump to WOMP
+
+// control hazard
+8680	// movl r0, #104 - should not print 'h'
+8650	// movl r0, #101 - should not print 'e'
+
+// WOMP
+81a1	// movl r1, #26
+e101	// jz r1, r1 - should not jump
+e011	// jnz r1, r0 - should not jump
+8410	// movl r0, #65 - print 'A'
+e131	// jns r1, r1 - should jump to WAMP
+86c0	// movl r0, #108 - should not print 'l'
+
+// WAMP
+8420	// movl r0, #66 - print 'B'
+e121	// js r1, r1 - should not jump
+8430	// movl r0, #67 - print 'C'
+80a5	// movl r5, #10
+0015	// sub r5, r0, r1
+e531	// jns r1, r5 - should not jump, if jumped should result in infinite loop
+82c1	// movl r1, #44
+e521	// js r1, r5 - should jump to WUMP
+8410	// movl r0, #65 - should not print '\n'
+
+// WUMP
+8440	// movl r0, #68 - print 'D'
+8450	// movl r0, #69 - print 'E'
+
+// test load store
+8466	// movl r6, #70
+f116	// st r6, r1
+f100	// ld r0, r1
+f107	// ld r7, r1
+
+// self modifying code to print out "e" instead of "E"
+8508	// movl r8, #80 // lower bytes of new print instr
+9868	// movh r8, #134 // higher bytes of old print instr
+844b	// movl r11, #68 location of print instruction below
+80e1	// movl r1, #14
+fb18	// st r8, r11
+80e1	// movl r1, #14
+8450	// instruction to print out "E" (should be modified)
+80e1	// movl r1, #14
+ffff

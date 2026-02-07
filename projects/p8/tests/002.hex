@@ -1,0 +1,219 @@
+// This test aims to expose misalignment implementations that are not fully optimized.
+
+// Although there are no loops, this test should still result in four obvious CPI buckets:
+//  - FLUSH for Misaligned Loads + FLUSH for Misaligned Stores 
+//  - FLUSH for Misaligned Loads + STALL for Misaligned Stores
+//  - STALL for Misaligned Loads + FLUSH for Misaligned Stores
+//  - STALL for Misaligned Loads + STALL for Misaligned Stores + Forwarding
+
+// This test accomplishes this task by testing different combinations of aligned/misaligned stores/loads.
+// This test is easy to debug as I have written it to be modular. 
+
+// There is a summary of what is tested/not tested at the bottom of the test case.
+
+@0
+
+// Debugging Advice:
+//      - Each test has its own line on the ok file so you can easily verify which part you are failing.
+//      - You can copy just the test you are currently debugging.
+//      - Make sure to copy the "Data Set-up" section as well so you have the values you need to print.
+
+// Data Set-up
+
+// mov r3, #0x5634
+8343    // movl    r3, #0x34
+9563    // movh    r3, #0x56
+
+// mov r7, #0x5051
+8517    // movl    r7, #0x51
+9507    // movh    r7, #0x50
+
+// TC1: Misaligned Store followed by Misaligned Load - Same Address Variant
+
+8631    // movl    r1, !mis_tc1
+8632    // movl    r2, !mis_tc1
+f213    // st      r3, r2 - mem[!mis_tc1] = 0x5634 - misaligned store 
+f104    // ld      r4, r1 - r4 = mem[!mis_tc1] = 0x5634 - misaligned load
+0400    // sub     r0, r4, r0 - print 0x5634's lower 8 bits - 0x34 - '4'
+
+// TC2: Misaligned Store followed by Aligned Load - Next Word Variant
+// Print \n
+80a0    
+
+8681    // movl r1, tc2
+8672    // movl r2, !mis_tc2
+f213    // st r3, r2 - mem[!mis_tc2] = 0x5634  - misaligned store
+f104    // ld r4, r1 - r4 = mem[tc2] = 0xff56 - aligned load
+0400    // sub r0, r4, r0 - print 0xff56's lower 8 bits - 0x56 - 'V'
+
+// TC3: Aligned Store followed by Misaligned Load - First Word Variant
+// Print \n
+80a0    
+
+86b1    // movl r1, !mis_tc3
+86c2    // movl r2, tc3
+f213    // st r3, r2 - mem[tc3] = 0x5634 - aligned store
+f104    // ld r4, r1 - r4 = mem[!mis_tc3] = 0x3478 - misaligned load
+0400    // sub r0, r4, r0 - print 0x3478's lower 8 bits - 0x78 - 'x'
+
+// TC4: Aligned Store followed by Misaligned Load - Second Word Variant
+// Print \n
+80a0    
+
+86f1    // movl r1, !mis_tc4
+86e2    // movl r2, tc4
+f213    // st r3, r2 - mem[tc4] = 0x5634 - aligned store
+f104    // ld r4, r1 - r4 = mem[!mis_tc4] = 0xff56 - misaligned load
+0400    // sub r0, r4, r0 - print 0xff56's lower 8 bits - 0x56 - 'V'
+
+// TC5: Misaligned Store followed by Misaligned Store - Same Address Variant
+// Print \n
+80a0    
+
+8732    // movl r2, !mis_tc5
+f213    // st r3, r2 - mem[mis_tc5] = 0x5634 - misaligned store
+f217    // st r7, r2 - mem[mis_tc5] = 0x5051 - misaligned store
+f204    // ld r4, r2 - r4 = mem[!mis_data_2_ali_pc_ali_st_mis_ld_2nd] = 0x5051 - misaligned load
+0400    // sub r0, r4, r0 - print 0x5051's lower 8 bits - 0x51 - 'Q'
+
+// TC6: Aligned Store followed by Misaligned Store - 2nd Half of the Word Variant
+// Print \n
+80a0    
+
+8771    // movl r1, !mis_tc6
+8762    // movl r2, tc6
+f213    // st r3, r2 - mem[tc6] = 0x5634 - aligned store
+f117    // st r7, r1 - mem[!mis_tc6] = 0x5051 - misaligned store 
+f204    // ld r4, r2 - mem[tc6] = 0x5634 - aligned load
+0400    // sub r0, r4, r0 - print 0x5634's lower 8 bits - 0x34 - '4'
+f104    // ld r4, r1 - mem[!mis_tc6] = 0x5051 - misaligned load
+0400    // sub r0, r4, r0 - print 0x5051's lower 8 bits - 0x51 - 'Q'
+
+// TC7: Misaligned Load followed by Misaligned Load - Same Address Variant
+// Print \n
+80a0    
+
+87b2    // movl r2, !mis_tc7
+f712    // st r2, r11 - mem[0x5051] = !mis_tc7 - misaligned store 
+f70a    // ld r10, r7 - mem[0x5051] = !mis_tc7 - misaligned load
+fa04    // ld r4, r10 - mem[!mis_tc7] = 0x2b2a - back to back dependent misaligned load
+0400    // sub r0, r4, r0 - print 0x2b2a's lower 8 bits - 0x2a - '*'
+
+ffff
+
+// @BEGIN DATA
+// TC1
+// [PC: 0x63] <!mis_tc1>:
+0012
+ffff
+
+// TC2
+// [PC: 0x67] <!mis_tc2>:
+0078
+// [PC: 0x68] <tc2>:
+00ff
+
+// TC3
+// [PC: 0x6b] <!mis_tc3>:
+78ff
+// [PC: 0x6c] <tc3>:
+ffff
+
+// TC4
+// [PC: 0x6e] <tc4>:
+// [PC: 0x6f] <!mis_tc4>:
+ffff
+ffff
+
+// TC5 
+// [PC: 0x73] <!mis_tc5>:
+ffff
+ffff
+
+// TC6 
+// [PC: 0x76] <tc6>:
+// [PC: 0x77] <!mis_tc6>:
+eeee
+ffff
+
+// TC7
+// [PC: 0x7b] <!mis_tc7>:
+2aff
+002b
+// @END DATA
+
+// Memory After: 
+// TC1
+// 3412
+// ff56
+
+// TC2
+// 3478
+// 0056
+
+// TC3
+// 78ff
+// 5634
+
+// TC4
+// 5634
+// ffff
+
+// TC5 
+// 51ff
+// ff50
+
+// TC6 
+// 5634 -> 5134
+// ff50
+
+// TC7
+// 2aff
+// 002b
+
+// Specific Cases Tested (7 total):
+//      - Store followed by Load Category:
+//              - Misaligned Store followed by Misaligned Load
+//                      - The same address variant (hazardous)
+//              - Misaligned Store followed by Aligned Load
+//                      - The next word variant (hazardous)
+//              - Aligned Store followed by Misaligned Load
+//                      - The first word variant (hazardous)
+//                      - The second word variant (hazardous)
+//      - Store followed by Store Category:
+//              - Misaligned Store followed by Misaligned Store
+//                      - The same address variant (potentially hazardous)
+//              - Aligned Store followed by Misaligned Store
+//                      - The 2nd half of the word variant (hazardous)
+//      - (Dependent) Load followed by Load Category:
+//              - Misaligned Load followed by Misaligned Load
+//                      - The same address variant (hazardous)
+
+// Feel free to create test cases to sanity check the below cases.
+// This test does NOT test:
+//      - Store followed by Load Category:
+//              - Misaligned Store followed by Misaligned Load
+//                      - The next address variant (sanity check - no special logic required)
+//              - Misaligned Store followed by Aligned Load
+//                      - The same word variant (sanity check - no special logic required)
+//              - Misaligned Store followed by Misaligned Store
+//                      - The previous address variant (no special logic required)
+//                      - The next address variant (no special logic required)
+//              - Aligned Store followed by Aligned Load (P7 covered this case.)
+//      - Store followed by Store Category:
+//              - Misaligned Store followed by Aligned Store (no special logic required)
+//              - Aligned Store followed by Misaligned Store
+//                      - The 1st half of the word variant (sanity check - no special logic required)
+//              - Aligned Store followed by Aligned Store (no special logic required)
+//      - Load followed by Store Category:
+//              - Misaligned Load followed by Misaligned Store (non-hazardous - normal forwarding)
+//              - Misaligned Load Followed by Aligned Store (non-hazardous - normal forwarding)
+//              - Aligned Load followed by Misaligned Store (non-hazardous - normal forwarding)
+//              - Aligned Load followed by Aligned Store (non-hazardous - normal forwarding)
+//      - (Dependent) Load followed by Load Category:
+//              - Misaligned Load followed by Misaligned Load
+//                      - The previous address variant (no special logic required)
+//                      - The next address variant (no special logic required)
+//              - Aligned Load followed by Aligned Load (P7 covered this case.)
+//              - Misaligned Load followed by Aligned Load (N/A)
+//              - Aligned Load followed by Misaligned Load (N/A)

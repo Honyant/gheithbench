@@ -1,0 +1,109 @@
+# CS429H Project 7
+
+## Task
+Complete a pipelined implementation of a simple 16-bit CPU in Verilog. The ISA includes sub, movl, movh, jz, jnz, js, jns, and ld instructions. Your design is graded on correctness and CPI.
+
+## Assignment Specification
+Assignment:
+
+(1) Finish a pipelined implementation of a simple instruction set.
+
+    Please look carefully at mem.v and regs.v, leave both the interface
+    and timing alone.
+
+Architecture
+~~~~~~~~~~~~
+
+  - memory is byte addressable
+
+  - words are 16 bits (little-endian)
+
+  - 16 register names r0, r1, ..., r15 (16 bits each)
+  
+  - r0 is special:
+      * reading from r0 always returns 0
+      * writing to r0 interprets the the least significant
+        8 bits as an ASCII code and prints that character
+
+  - all instructions are 16 bit wide
+
+  encoding          instruction   description
+    
+  0000aaaabbbbtttt  sub rt,ra,rb  regs[t] = regs[a] - regs[b]
+
+  1000iiiiiiiitttt  movl rt,i     regs[t] = sign_extend(i)
+  1001iiiiiiiitttt  movh rt,i     regs[t] = (regs[t] & 0xff) | (i << 8)
+
+  1110aaaa0000tttt  jz rt,ra      pc = (regs[ra] == 0) ? regs[rt] : pc + 2
+  1110aaaa0001tttt  jnz rt,ra     pc = (regs[ra] != 0) ? regs[rt] : pc + 2
+  1110aaaa0010tttt  js rt,ra      pc = (regs[ra] < 0) ? regs[rt] : pc + 2
+  1110aaaa0011tttt  jns rt,ra     pc = (regs[ra] >= 0) ? regs[rt] : pc + 2
+
+  1111aaaa0000tttt  ld rt,ra      regs[t] = mem[regs[a]]
+  1111aaaa0001tttt  st rt,ra      mem[regs[a]] = regs[t]
+
+
+  Any illegal instruction halts the processor by asserting the
+  halt signal. This also terminates the simulation.
+
+  Please notice that the "counter" modules prints the number of elapsed
+  cycles before calling "$finish". This is required in order to measure
+  the CPI.
+
+
+Files you can change
+~~~~~~~~~~~~~~~~~~~~
+
+cpu.v contains an incomplete processor design
+
+
+Files you need to leave alone
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+mem.v
+regs.v
+counter.v
+clock.v
+
+The make targets/files:
+~~~~~~~~~~~~~~~~~~~~~~~
+
+    <test name>.raw        => the raw output from running the test
+    <test name>.out        => lines from *.raw that start with #
+    <test name>.cycles     => number of cycles needed to run the test
+    <test name>.vcd        => vcd file after running test
+    <test name>.ok         => expected output
+    <test name>.hex        => the test program
+
+## Workspace Files
+The following files are in your workspace:
+```
+Makefile
+README
+REPORT.txt
+clock.v
+counter.v
+cpu.v
+mem.v
+regs.v
+```
+
+There are 50 tests available. Tests are located in the `tests/` directory (or flat in the workspace for P5).
+
+## Instructions
+1. Read and understand all provided source files in your workspace.
+2. Implement the required functionality by modifying the source files.
+3. To compile and test, use the `./exec` wrapper which runs commands in a Linux
+   environment with all necessary tools:
+   - `./exec 'make'` — compile
+   - `./exec 'make -s test'` — run all tests
+   - `./exec './cpu'` — run the CPU binary
+4. You can edit files directly — they are shared with the build environment.
+5. `iverilog` is available in the build environment.
+6. Focus on correctness first, then optimization.
+
+## Constraints
+- Do NOT modify the Makefile, README, or any test files (.ok files).
+- Do NOT modify the REPORT.txt file.
+- You may create new source files if needed, but prefer modifying existing ones.
+- The code must compile without warnings (`-Wall -Werror` is enabled).

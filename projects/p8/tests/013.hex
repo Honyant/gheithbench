@@ -1,0 +1,83 @@
+@0
+// some non-misaligned hazards
+// RAW hazard - registers
+8411    // movl r1, #65 // Move 65 into r1
+8052    // movl r2, #5 // Move 5 into r2
+0120    // sub r0, r1, r2 // Subtract r2 from r1 and store the result in r0 // prints <
+
+// RAW hazard - ld-ld
+8e81    // movl r1, #232
+9031    // movh r1, #3 // Move 1000 into r1
+8002    // movl r2, #0
+9042    // movh r2, #4 // Move 1024 into r2
+8333    // movl r3, #51 // Move ascii for 3 into r3
+f211    // st r1, r2 // Store the value in r1 at the address in r2
+f113    // st r3, r1 // Store the value in r3 at the address in r1
+f205    // ld r5, r2 // Load the value at the address in r2 into r5
+f500    // ld r0, r5 // Load the value at the address in r5 into r0
+
+80a0    // new line
+
+// basic misaligned load test
+8811    // movl r1, #129 // Move 129 into r1 (link to the data section)
+9001    // movh r1, #0
+f100    // ld r0, r1 // Load the value at the address in r1 into r0 // prints : (003A), ascii for :
+
+// misaligned store then misaligned load test
+8011    // movl r1, #1
+8292    // movl r2, #41 // Move 41 into r2 (ascii for ))
+8013    // movl r3, #1
+f112    // st r2, r1 // Store the value in r2 at the address in r1
+f300    // ld r0, r3 // Load the value at the address in r3 into r0 // prints )
+
+// misaligned store to aligned load test
+8831    // movl r1, #131
+9001    // movh r1, #0
+8002    // movl r2, #0
+90a2    // movh r2, #10 // Move 10 into the upper half of r2 (puts 0x0A00 into r2, shifted ascii for newline)
+f112    // st r2, r1 // Store the value in r2 at the address in r1
+// memory should go from:
+//      3A00
+//      0000
+//      0000
+// to:
+//      3A00
+//      0000
+//      000A
+8843    // movl r3, #132
+9003    // movh r3, #0
+f300    // ld r0, r3 // Load the value at the address in r3 into r0 // prints new line
+
+// regular load - clears the data at 132
+8004    // movl r4, #0
+f314    // st r4, r3 // Store the value in r4 at the address in r3
+// memory is back to:
+//      3A00
+//      0000
+//      0000
+
+// aligned store to misaligned load test
+8821    // movl r1, #130
+9001    // movh r1, #0
+8002    // movl r2, #0
+9682    // movh r2, #104 // Move 104 into the upper half of r2 (character for 'h')
+8833    // movl r3, #131
+9003    // movh r3, #0
+f112    // st r2, r1 // Store the value in r2 at the address in r1 
+// memory should look like:
+//      3A00
+//      6800
+//      0000
+f306    // ld r6, r3 // Load the value at the address in r3 into r6 // loads 'h' (0x0068) into r6
+0600    // sub r0, r6, r0 // Subtract r0 from r6 and store the result in r0 // tests that r0 is 0
+
+80a0    // new line
+
+ffff
+
+// @BEGIN DATA
+@40
+3A00
+0000
+0000
+// @END DATA

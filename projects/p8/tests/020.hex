@@ -1,0 +1,41 @@
+@0
+// THIS TEST CASE TESTS YOUR BRANCH PREDICTOR
+// its literally a recreation of the loop with an if statement
+// inside that alternates that we saw in class (mod 3)
+// might wanna implement saturated counter or history to do well here
+
+83c1    // movl r1, #30 // our counter
+8012    // movl r2, #1 // decrementer
+8fa3    // movl r3, #250 // store location
+8084    // movl r4, #8 // jump location
+// start of loop
+// stores alternating (mod 3) 0s and 1s from 250 to 70 in memory
+0121    // sub r1, r1, r2
+f310    // st r0, r3
+0323    // sub r3, r3, r2
+0323    // sub r3, r3, r2
+f312    // st r2, r3
+0323    // sub r3, r3, r2
+0323    // sub r3, r3, r2
+f312    // st r2, r3
+0323    // sub r3, r3, r2
+0323    // sub r3, r3, r2
+e114    // jnz r4, r1
+
+// ok now we test branch prediction for real
+
+85a1    // movl r1, #90 // counter
+8012    // movl r2, #1 // decrementer
+8fa3    // movl r3, #250 // store location
+8284    // movl r4, #40 // jump location (outer loop)
+8345    // movl r5, #52 // jump location (if statement inside loop)
+
+0121    // sub r1, r1, r2
+f306    // ld r6, r3
+0323    // sub r3, r3, r2
+0323    // sub r3, r3, r2
+e615    // jnz r5, r6
+8610    // movl r0, 'a'
+e114    // jnz r4, r1
+
+ffff    

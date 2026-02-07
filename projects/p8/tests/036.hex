@@ -1,0 +1,50 @@
+@0
+
+//This tc tests self modifying branches and loops
+//You have to make sure the instruction at the pc updates properly so that you are branching properly
+//This also tests your branch prediction mechanism- this test will most likely cause incorrect branch predictions
+
+//Section 1: setting registers and initial branch
+
+8021 //moving 2 into r1 for check val for branches
+8222 // moving 34 into r2, r2 has address of branch #2 which branch #1 should branch to first
+81C3 //moving 28 into r3, should be responsile for looping back to branch #1
+8264 //moving 38 into r4, should be responsible for the jump target which branch #2 takes
+82E5 //moving 46 into r5, which is responsible for the jump target which branch #3 takes
+
+//Section 2: moving memory addresses into registers for use
+
+8226 //move 34 into r6
+8157 //move E115 into r7 part 1
+9E17 //move E115 into r7 part 2
+8248 //move 36 to r8
+8049 //move E104 into r9 part 1
+9E19 //move E104 into r9 part 2
+81CA //move 28 into r10
+822B //move E122 into R11 part 1
+9E1B //move E122 into R11 part 1
+
+//Section 3: Branch #1
+
+E132 //should jump to branch #2 check
+8240 //prints $
+ffff //HALTING
+
+//Section 4: Branch #2 Check
+
+E114 //second branch to see if r1 is not 0, should branch past branch #3 check
+
+//Section 4: Branch #3 Check
+
+E105 //else branch immediately after branching to branch #3 content, which will not be taken
+
+//Section 5: Branch #2 Content... for now
+8230 //prints #
+F617 //changes E114 to E115. This now changes the branch address for branch #2
+F819 //changes E105 to E104, effectively changing the branch address for branch #3
+E133 //loop back to branch #1 
+
+//Section 6: Branch #3 Content... for now
+8250 //prints %
+FA1B //Changes branch #1 from E132 to E122, changing it to a is negative check instead of an is positive or 0 check
+E133 //loop back to branch #1

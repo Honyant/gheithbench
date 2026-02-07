@@ -1,0 +1,58 @@
+@0
+// Tests Data Hazards and Control Hazards (by virtue of the branches)
+
+// Data Hazard 1, Read after Write (RAW)
+8191	// 0
+8142	// 2
+0123	// 4 (r3 = r1 - r2, r3 should be 5)
+8124	// 6 (address of next success instruction)
+e314	// 8, should jump to where r4 is
+
+// FAIL, should skip this
+8460	// 10, print F
+8410	// 12, print A
+8490	// 14, print I
+84c0	// 16, print L
+
+// SUCCESS
+8310	// 18, print 1
+
+// Data Hazard 2, Write after Write (WAW)
+8191	// 20
+8142	// 22
+81e5	// 24
+82a4	// 26 (address of next success instruction)
+0123	// 28 (r3 = r1 - r2, r3 should be 5)
+0153	// 30 (r3 = r1 - r5, r3 should be -10)
+e324	// 32, should jump to where r4 is
+
+// FAIL, should skip this
+8460	// 34, print F
+8410	// 36, print A
+8490	// 38, print I
+84c0	// 40, print L
+
+// SUCCESS
+8320	// 42, print 2
+
+// Data Hazard 3, Write after Read (WAR)
+8151	// 44
+8142	// 46
+8135	// 48
+8123	// 50
+8444	// 52 (address of next success instruction)
+
+0136	// 54 (r6 = r1 - r3, r6 should be 3)
+0153	// 56 (r3 = r1 - r5, r3 should be 2)
+e334	// 58, should jump to where r4 is
+
+// FAIL, should skip this
+8460	// 60, print F
+8410	// 62, print A
+8490	// 64, print I
+84c0	// 66, print L
+
+// SUCCESS
+8330	// 68, print 3
+
+ffff // Done!!!!!

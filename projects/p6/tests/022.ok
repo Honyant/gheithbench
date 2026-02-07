@@ -1,0 +1,14 @@
+0
+infinity
+again call 1
+again call 2
+again call 3
+again call 4
+again call 5
+again call 6
+again call 7
+again call 8
+again call 9
+again call 10
+Correctly forced context switch away from main.
+This is the last thing printed!

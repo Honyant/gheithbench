@@ -1,0 +1,6 @@
+Test 1 pass: send/receive/me
+Test 2 pass: sending/receiving through channel that's a global variable
+Test 3 pass: infinite supply when return
+Test 4 passed: sending message through channel that was sent through a channel
+Test 5 pass: testing "again" function
+Test 6 pass: code still runs with dead coroutine

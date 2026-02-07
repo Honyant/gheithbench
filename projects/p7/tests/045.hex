@@ -1,0 +1,42 @@
+@0 // The numbers represent which pc it is for each instruction
+8071    // movl r1, #7      // Tests forwarding // 0
+86e2    // movl r2, #110    // Hazard cause values aren't updated yet // 2
+0212    // sub r2, r2, r1   // 4
+8103    // movl r3, #16     // 6
+86f4    // movl r4, #111    // 8
+
+e413    // jnz r3, r4       // Should jump to line 11 since 111 != 0 // 10
+8630    // movl r0, #99     // 12
+8630    // movl r0, #99     // 14
+8310    // movl r0, #49     // Should print 1 // 16
+
+8051    // movl r1, #5      // Sets values // 18
+82c2    // movl r2, #44     // 20
+81a4    // movl r4, #26     // 22
+8185    // movl r5, #24     // 24
+
+e102    // jz r2, r1        // Loop until it gets down to 0 // 26
+8410    // movl r0, #65     // Prints A 5 times // 28
+8013    // movl r3, #1      // 30
+0131    // sub r1, r1, r3   // 32
+e514    // jnz r4, r5       // 34
+
+8620    // movl r0, #98     // Prints "bad" if it isn't skipping over // 36
+8610    // movl r0, #97     // 38
+8640    // movl r0, #100    // 40
+ffff    // end              // 42
+
+8670    // movl r0, #103    // Prints "good" if branched to here // 44
+86f0    // movl r0, #111    // 46
+86f0    // movl r0, #111    // 48
+8640    // movl r0, #100    // 50
+
+8371    // movl r1, #55     // Tests load after store // 52
+8645    // movl r5, #100    // 54
+f511    // st r1, r5        // 56
+f502    // ld r2, r5        // 58
+8001    // movl r1, #0      // 60
+0210    // sub r0, r2, r1   // Prints 777 // 62
+0210    // sub r0, r2, r1   // 64
+0210    // sub r0, r2, r1   // 66
+ffff    // end              // 68

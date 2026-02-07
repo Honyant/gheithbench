@@ -1,0 +1,67 @@
+//this tests a few different hazards, namely read after writes and read after stores
+//I also test that you store and interpret negatives correctly both in memory and registers
+//This will print out BAD followed by what jump you failed if you miss a jump, and should print GOOD 
+//followed by what jump you passed if you pass.
+
+@0
+
+8281    // movl r1, #40 //first reg
+81e2    // movl r2, #30 //second reg
+0213    // sub r3, r2, r1    //simple data hazard, -10 should be in r3
+8144    // movl r4, #20 //move the jump address 
+
+e324    // js r4, r3, we should jump here (r3 < 0)
+8420    // movl r0, #66 //prints bad1
+8410    // movl r0, #65
+8440    // movl r0, #68
+8310    // movl r0, #49
+ffff    // halt
+
+8470    // movl r0, #71 //prints good1 if you pass the negative branch test
+84f0    // movl r0, #79
+84f0    // movl r0, #79
+8440    // movl r0, #68
+8310    // movl r0, #49
+80a0    // movl r0, #10
+
+8344    // movl r4, #52 //second jump address
+80a5    // movl r5, #10
+f513    // st r3, r5 //now we test a ld/st data hazard
+f506    // ld r6, r5
+
+e624    // js r4, r6 //again jump if less than 0, test storing values correctly as negatives (r6 = r3 < 0)
+8420    // movl r0, #66 //prints bad2, shouldn't go here
+8410    // movl r0, #65
+8440    // movl r0, #68
+8310    // movl r0, #49
+ffff    // halt
+
+8470    // movl r0, #71 //prints good2 if you jumped h ere
+84f0    // movl r0, #79
+84f0    // movl r0, #79
+8440    // movl r0, #68
+8320    // movl r0, #50
+80a0    // movl r0, #10
+
+//Now we focus on some tricky memory cases. St after St isn't good since its a read after potential write
+//and ld after ld requires stalling or flushing. This should print YAY! if you are successful
+
+8021    // movl r1, #2 //now we store values to test consecutive ld and st
+8042    // movl r2, #4
+8063    // movl r3, #6
+8084    // movl r4, #8
+8595    // movl r5, #89
+8416    // movl r6, #65
+8597    // movl r7, #89
+8218    // movl r8, #33 
+
+f115    // st r5, r1 //perform consecutive stores
+f216    // st r6, r2
+f317    // st r7, r3
+f418    // st r8, r4
+
+f100    // ld r0, r1 //perform consecutive loads
+f200    // ld r0, r2
+f300    // ld r0, r3
+f400    // ld r0, r4
+ffff    // halt

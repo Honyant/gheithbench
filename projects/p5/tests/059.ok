@@ -1,0 +1,6 @@
+ptr is byte alligned: 1
+ptr1 is byte alligned: 1
+ptr2 is byte alligned: 1
+ptr3 is byte alligned: 1
+Consistency Test: 1
+Malloc of size too large results in null pointer: 1

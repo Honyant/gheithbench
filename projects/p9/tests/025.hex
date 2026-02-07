@@ -1,0 +1,92 @@
+// CPI test whether you fully flush or partially flush for self-modifying code 
+// Increase by 24 cycles when fully flushing compared to partially flushing
+// Doesn't use a loop to avoid testing branch prediction (so longer test case :( )
+@0
+// puts instruction to print A in r1
+8101  // movl r1, #16 
+9841  // movh r1, #132
+// memory address of the instruction to change
+80e2  // movl r2, #14
+f211  // st r1, r2
+8003  // movl r3, #0
+8003  // movl r3, #0
+8003  // movl r3, #0
+8610  // movl r0, #97 (shouldn't print "a", should be modified to "A")
+
+// puts instruction to print B in r1
+8201  // movl r1, #32
+9841  // movh r1, #132
+// memory address of the instruction to change
+81e2  // movl r2, #30
+f211  // st r1, r2
+8003  // movl r3, #0
+8003  // movl r3, #0
+8003  // movl r3, #0
+8620  // movl r0, #98 (shouldn't print "b", should be modified to "B")
+
+// puts instruction to print C in r1
+8301  // movl r1, #48
+9841  // movh r1, #132
+// memory address of the instruction to change
+82e2  // movl r2, #46
+f211  // st r1, r2
+8003  // movl r3, #0
+8003  // movl r3, #0
+8003  // movl r3, #0
+8630  // movl r0, #99 (shouldn't print "c", should be modified to "C")
+
+// puts instruction to print D in r1
+8401  // movl r1, #64
+9841  // movh r1, #132
+// memory address of the instruction to change
+83e2  // movl r2, #62
+f211  // st r1, r2
+8003  // movl r3, #0
+8003  // movl r3, #0
+8003  // movl r3, #0
+8640  // movl r0, #100 (shouldn't print "d", should be modified to "D")
+
+// puts instruction to print E in r1
+8501  // movl r1, #80
+9841  // movh r1, #132
+// memory address of the instruction to change
+84e2  // movl r2, #78
+f211  // st r1, r2
+8003  // movl r3, #0
+8003  // movl r3, #0
+8003  // movl r3, #0
+8650  // movl r0, #101 (shouldn't print "e", should be modified to "E")
+
+// puts instruction to print F in r1
+8601  // movl r1, #96
+9841  // movh r1, #132
+// memory address of the instruction to change
+85e2  // movl r2, #94
+f211  // st r1, r2
+8003  // movl r3, #0
+8003  // movl r3, #0
+8003  // movl r3, #0
+8660  // movl r0, #102 (shouldn't print "f", should be modified to "F")
+
+// puts instruction to print G in r1
+8701  // movl r1, #112
+9841  // movh r1, #132
+// memory address of the instruction to change
+86e2  // movl r2, #110
+f211  // st r1, r2
+8003  // movl r3, #0
+8003  // movl r3, #0
+8003  // movl r3, #0
+8670  // movl r0, #103 (shouldn't print "g", should be modified to "G")
+
+// puts instruction to print H in r1
+8801  // movl r1, #128
+9841  // movh r1, #132
+// memory address of the instruction to change
+87e2  // movl r2, #126
+f211  // st r1, r2
+8003  // movl r3, #0
+8003  // movl r3, #0
+8003  // movl r3, #0
+8680  // movl r0, #104 (shouldn't print "h", should be modified to "H")
+ffff

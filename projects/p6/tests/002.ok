@@ -1,0 +1,20 @@
+test 1: basic send/receive
+0
+1
+2
+3
+4
+5
+f1 ran
+f2 sent: 10
+f2 ran
+test 1 passed!
+
+test 2: main has a channel
+test 2 passed!
+
+test 3: me() in functions called by coroutines
+test 3 passed!
+
+test 4: exit on main() being blocked
+bye bye (:

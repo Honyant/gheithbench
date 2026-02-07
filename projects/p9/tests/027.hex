@@ -1,0 +1,121 @@
+// This test case calculates the number of prime numbers under 110. It is a stress test for branch prediction
+// as it uses a lot of loops and control flow to do this calculation
+
+//////////////////////////////////////////
+// Pseudocode for this test case        //
+//                                      //
+// counter = 1                          //
+// for num in range(3, 110):            //
+//     # Testing if number is prime     //
+//     is_prime = True                  //
+//     for div in range(2, num):        //
+//         num_copy = num               //
+//         while num_copy > 0:          //
+//             num_copy -= div          //
+//             if num_copy == 0:        //
+//                 is_prime = False     //
+//     if is_prime:                     //
+//         counter += 1                 //
+//                                      //
+// if counter == 29:                    //
+//     print("Test Passed")             //
+// else:                                //
+//     print("Test Failed")             //
+//                                      //
+//////////////////////////////////////////
+
+
+@0
+8ff1    // movl r1, #0xff: loop increment
+8012    // movl r2, #1: counter
+8033    // movl r3, #3: current number to check
+86e4    // movl r4, #110: last number to check
+
+// [PC: 0x8] <prime_counter>:
+// [PC: 0x8] <is_prime>:
+8025    // movl r5, #2: setting divisor to test
+8016    // movl r6, #1: is prime (by default true)
+
+0307    // sub r7, r3, r0: making a copy of the current number for testing divisibility
+
+// Code to test a divisor on the current number
+// [PC: 0xe] <test_divisor>:
+0757    // sub r7, r7, r5: decrement the current number copy
+81c8    // movl r8, divisible: setting branch label
+8229    // movl r9, not_divisible: setting branch label
+e708    // jz r8, r7: jump if r7 is 0 (divisible)
+e729    // js r9, r7: jump if r7 is less than 0 (not divisible)
+
+// Repeat the loop
+// [PC: 0x18] <repeat>:
+80e8    // movl r8, test_divisor: set branch label
+e008    // jz r8, r0: loop back to test_divisor. 
+
+// Divisor is divisible
+// [PC: 0x1c] <divisible>:
+8ff6    // movl r6, #0xff: setting is_prime to false
+8308    // movl r8, is_prime_done: setting branch label
+e008    // jz r8, r0: Jump to the end of the is prime instructions. Current number is not prime
+
+// Divisor is not divisible
+// [PC: 0x22] <not_divisible>:
+0515    // sub r5, r5, r1: Increment divisor
+0307    // sub r7, r3, r0: copying current number
+0358    // sub r8, r3, r5: calculating (current number - divisor)
+8309    // movl r9, is_prime_done: setting branch label
+e809    // jz r9, r8: Jump to end of the is prime instructions. Current number is prime
+80e9    // movl r9, test_divisor: setting branch label
+e009    // jz r9, r0: Test the incremented divisor on the current number
+
+// [PC: 0x30] <is_prime_done>:
+
+8388    // movl r8, increment_prime_counter: setting branch label
+e638    // jns r8, r6: Increment prime counter if the current number is prime
+
+83a8    // movl r8, loop_again: setting branch label
+e008    // jz r8, r0: Increment the current number and loop
+
+// [PC: 0x38] <increment_prime_counter>:
+0212    // sub r2, r2, r1: Incrementing the prime counter
+
+// [PC: 0x3a] <loop_again>:
+0313    // sub r3, r3, r1: Incrementing current number
+0438    // sub r8, r4, r3: Calculating (last number - current number) to see if we need to stop looping
+8089    // movl r9, prime_counter: setting branch label
+e839    // jns r9, r8: Loop if we still have numbers to test
+
+81d3    // movl r3, #29: setting the correct number of primes
+0232    // sub r2, r2, r3: calculating the error in counted primes
+8644    // movl r4, test_passed: setting branch label
+e204    // jz r4, r2: if there is no error, you passed the test case!
+
+// Test Failed
+8540    
+8650    
+8730    
+8740    
+8200    
+8460    
+8610    
+8690    
+86c0    
+8650    
+8640    
+80a0    
+ffff
+
+// Test Passed
+// [PC: 0x64] <test_passed>:
+8540    
+8650    
+8730    
+8740    
+8200    
+8500    
+8610    
+8730    
+8730    
+8650    
+8640    
+80a0    
+ffff

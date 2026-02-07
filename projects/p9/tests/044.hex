@@ -1,0 +1,48 @@
+@0 // testing multiple consecutive loads; stress test of stalling.
+8404 // movl r4, #64
+8491 // movl r1, #73
+8013 // movl r2, #1
+f402 // ld r2, r4
+f204 // ld r4, r2
+f402 // ld r2, r4
+f204 // ld r4, r2
+0131 // sub r1 = r1 - r3
+f402 // ld, r2, r4
+f204 // ld r4, r2
+f402 // ld r2, r4
+0131 // sub r1 = r1 - r3
+0131 // sub r1 = r1 - r3
+f402 // ld r2, r4
+f204 // ld r4, r2
+f402 // ld r2, r4
+f204 // ld r4, r2
+0131 // sub r1 = r1 - r3
+0131 // sub r1 = r1 - r3
+0131 // sub r1 = r1 - r3
+0131 // sub r1 = r1 - r3
+0131 // sub r1 = r1 - r3
+0200 // print r2
+0400 // print r4
+0100 // print r1
+ffff
+
+@20 // data
+0042
+0044
+0046
+0048
+004a
+004c
+004e
+0050
+0052
+0054
+0056
+0058
+005a
+005c
+005e
+0060
+0062
+0064
+ffff

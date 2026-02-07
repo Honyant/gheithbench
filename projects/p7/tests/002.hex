@@ -1,0 +1,65 @@
+// Many test cases do memory hazards and byte misalignmnet, so this
+//    test case focuses on other edge cases and functionality
+// This test case tests:
+//  1. forwarding r0 results in zero value (hazard!)
+//  2. all jump cases work, including with signed numbers
+//  3. invalid instructions don't halt the program unless executed
+
+@0
+// ====
+// TEST: forwarding r0 results in zero value.
+// FIX: make sure you don't forward if the register is r0
+// ====
+
+//   forwading in second execute stage
+80a1	// <movl r1, #10>
+8410	// <movl r0, #65> print A
+e001	// <jz r1, r0>
+8610	// <movl r0, #97> FAIL => print a
+ffff
+
+//   forwarding in first execute stage
+8420	// <movl r0, #66> print B
+8141	// <movl r1, #20>
+e001	// <jz r1, r0>
+8620	// <movl r0, #98> FAIL => print b
+ffff
+
+8430	// <movl r0, #67> Test succeeded, print C
+
+// ====
+// TEST: all jump types.
+// FIX: make sure you use signed values for js/jns
+// ====
+
+8011	// <movl r1, #1>
+8ff2	// <movl r2, #-1>
+//   jz
+8223	// <movl r3, #34>
+e003	// <jz r3, r0>
+8630	// <movl r0, #99> FAIL => print c
+ffff
+//   jnz
+82a3	// <movl r3, #42>
+e113	// <jnz r3, r1>
+8640	// <movl r0, #100> FAIL => print d
+ffff
+//   js
+8323	// <movl r3, #50>
+e223	// <js r3, r2>
+8650	// <movl r0, #101> FAIL => print e
+ffff
+//   jns
+83a3	// <movl r3, #58>
+e133	// <jns r3, r1>
+8660	// <movl r0, #102> FAIL => print f
+ffff
+
+// ====
+// TEST: Halt doesn't exit until the invalid instruction is executed.
+// FIX: I had this bug for a long time. Make sure you use only halt in the writeback/last stage
+// ====
+8440	// <movl r0, #68> print D
+ffff
+ffff
+ffff

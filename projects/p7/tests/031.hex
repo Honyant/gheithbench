@@ -1,0 +1,58 @@
+// data hazard test
+@0
+814f // movl r15, 20
+86e0 // movl r0, 110
+8610 // movl r0, 97
+8680 // movl r0, 104
+8200 // movl r0, 32
+8690 // movl r0, 105
+8640 // movl r0, 100
+8200 // movl r0, 32
+81ef // movl r15, 30
+e00f // jz r15, r0      
+86c0 // movl r0, 108
+86f0 // movl r0, 111
+8730 // movl r0, 115
+8650 // movl r0, 101
+ffff
+8770 // movl r0, 119
+8690 // movl r0, 105
+86e0 // movl r0, 110
+80a0 // movl r0, 10
+
+// Now we will test repeated data hazards
+8dd1 // movl r1, 221
+8142 // movl r2, 20
+0121 // sub r1, r1, r2
+0121 // sub r1, r1, r2
+0121 // sub r1, r1, r2
+0121 // sub r1, r1, r2
+0121 // sub r1, r1, r2
+0100 // sub r0, r1, r0
+8c91 // movl r1, 201
+0121 // sub r1, r1, r2
+0121 // sub r1, r1, r2
+0121 // sub r1, r1, r2
+0121 // sub r1, r1, r2
+0121 // sub r1, r1, r2
+0100 // sub r0, r1, r0
+8d71 // movl r1, 215
+0121 // sub r1, r1, r2
+0121 // sub r1, r1, r2
+0121 // sub r1, r1, r2
+0121 // sub r1, r1, r2
+0121 // sub r1, r1, r2
+0100 // sub r0, r1, r0
+80a0 // movl r0, 10
+
+// load after store hazard
+8fa3 // movl r3, 250
+8671 // movl r1, 103
+f311 // st r1, r3
+f300 // ld r0, r3
+86c1 // movl r1, 108
+f311 // st r1, r3
+f300 // ld r0, r3
+
+1000 // end
+

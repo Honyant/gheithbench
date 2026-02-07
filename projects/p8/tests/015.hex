@@ -1,0 +1,49 @@
+//Test Read-after-write hazards and misaligned stores and loads
+//This does not test CPI, it is intended to help with correctness and fixing bugs
+
+@0 // code at word address 0
+//Register Forwarding between execute stages
+83c1 // movl r1, 60 : 0
+f100 // ld r0, r1 : 2 // Should print 5
+
+//Register forwarding with a typical 2 stage gap from writeback
+8092 // movl r2, 9 : 4
+8340 // movl r0, 52 : 6 // Should print 4
+0120 // sub r0, r1, r2 : 8  // Should print 3
+
+//Register forwarding with a typical 1 stage gap from writeback
+80a2 // movl r2, 10 : 10
+0120 // sub r0, r1, r2 : 12 // Should print 2
+
+//Memory Forwarding from writeback
+8312 // movl r2, 49 : 14
+f112 // st r2, r1 : 16 // mem[60] = 49
+f100 // ld r0, r1 : 18 // print mem[60] (1 in ASCII)
+
+//Dependent loading
+83e1 // movl r1, 62 : 20
+f102 // ld r2, r1 : 22 // r2 = 64
+f200 // ld r0, r2 : 24 // print mem[64] (0)
+
+//Misaligned store
+8411 // movl r1, 65 : 26
+8412 // movl r2, 65  : 28
+f112 // st r2, r1 : 30
+
+//Misaligned Load
+f100 // ld r0, r1 : 32 // Check value was stored (print A)
+8431 // movl r1, 67 : 34
+
+//Check that the store preserved what was originally there
+f100 // ld r0, r1 : 36 // Print a
+8401 // movl r1, 64 : 38
+f100 // ld r0, r1 : 40 // Print 0
+
+ffff
+
+@1e // memory address 60 (1e = 30)
+0035 // hex for 53 (5 in ASCII)
+0040 // hex for 64
+0030 // hex for 48 (0 in ASCII)
+6100 // 61 is hex for 97 ("a" in ASCII)
+0000

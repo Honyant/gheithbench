@@ -1,0 +1,52 @@
+@0
+//THIS DOES NOT TEST MISALIGNMENT. It focuses on branch prediction and simple hazard handling optimizations.
+
+//This is a simple case to test you branch predictor. It will pass relatively quickly but it should be 
+//helpful for you to debug your branch predictors and measure CPI for simple for loops. It will print out 
+//GOOD1 if you pass this first test
+
+87f1    //loop counter set to 127 (r1 will always be this)
+8012    //r2 will always have 1 in it so we can subtract 1
+80e3    //address of the loop
+8004    //counter for the loop
+8015    //allow us to add 1
+8006    
+9106    //store loop total count in r6 
+
+0121    //we are basically decreasing 127 by 1 each time, tests your branch predictor for CPI
+e113    //loop until r1 = 0
+
+8470    //prints good1 if you get here (shouldn't be executed until loop is done)
+84f0    
+84f0    
+8440    
+8310    
+80a0 
+
+//Test 2: A loop for dependent back to back loads. This tests that you stall for dependent ld ld conflicts for cpi, 
+//and that your stalling is correct for multiple stalls in a row (if you branch predict). This has much less weight 
+//(1/2 the cycles) for cpi, so focus on optimizing the first loop before this one :). 
+
+8401    //set the loop counter to #64
+87aa    
+87cc    
+847d    
+fa1c    //store #124 at mem #122
+fc1d    //store #71 (G) at mem #124
+82c3    
+
+0121    //loop start: decrement loop counter
+fa04    
+f40b    //back-toback dependent loads, you should stall for these to optimize instead of flushing ideally
+e113    //loop until r1 = 0
+
+0b00   //test that the correct thing was loaded into r11 (G)  
+84f0    
+84f0    
+8440    
+8320    
+80a0    
+
+//end test! nice and simple!
+
+ffff

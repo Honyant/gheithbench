@@ -1,0 +1,33 @@
+0
+0
+100
+60
+20
+10
+3
+2
+75
+-10
+2
+0
+4
+-10
+4
+10
+4
+2
+-1
+0
+0
+0
+0
+0
+failed at offset 890
+"str"
+print str
+
+testing = textAfterFailure
+extraVar = 47
+print extraVar
+
+this is just extra text that's printed after the fail

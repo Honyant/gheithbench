@@ -1,0 +1,115 @@
+@0
+
+//checks loops and branching :D
+//prints different stuff based on if r1 is a capital letter, a lowercase letter, or neither
+//here, it is neither (r1= 5B). this case checks almost everything of what this test covers
+
+//if you want, you can change the first line to set r1 to a capital letter or a lowercase letter (as a bonus :3)
+//output for capital letter (example r1= O): Capital O Small o
+//output for lowercase letter (example r1= k): Small k Capital K
+
+85B1		// load 5B (capital letter 0x41 ~ 0x5A, small letter 0x61 ~ 0x7A) to r1 : 0
+8412		// load 41 to r2							: 2
+0123		// r3 = r1 - r2								: 4
+8724		// load out of bound jump pointer (72) to r4				: 6
+E324		// pc = r3 <0 ? r4 : next						: 8
+85B2		// load 5B to r2							: A
+0123		// r3 = r1 - r2								: C
+83C5		// load 2nd jump pointer (3C) to r5					: E
+E335		// pc = r3 >= 0 ? r5 : next						: 10
+8430            // C                                                                    : 12
+8610            // a                                                                    : 14
+8700            // p                                                                    : 16
+8690            // i                                                                    : 18
+8740            // t                                                                    : 1A
+8610            // a                                                                    : 1C
+86c0            // l 									: 1E
+8200		// white space								: 20
+8006            // load 00 to r6							: 22
+0160		// input letter r1 - r6							: 24
+8200		// white space								: 26
+8530            // S                                                                    : 28
+86D0            // m                                                                    : 2A
+8610            // a                                                                    : 2C
+86c0            // l                                                                    : 2E
+86c0            // l 									: 30
+8200		// white space								: 32
+8e06		// load -0x20 to r6							: 34
+0160		// input letter r1 - r6, i.e. r1 +0x20					: 36
+80a0		// new line								: 38
+ffff		// quit									: 3A
+8612		// load 61 to r2							: 3C
+0123		// r3 = r1 - r2								: 3E
+E324		// pc = r3 < 0 ? r4 : next						: 40
+87B2		// load 7B to r2							: 42
+0123		// r3 = r1 - r2								: 44
+E334		// pc = r3 >= 0 ? r4 : next						: 46
+8530            // S                                                                    : 48
+86D0            // m                                                                    : 4A
+8610            // a                                                                    : 4C
+86c0            // l                                                                    : 4E
+86c0            // l                                                                    : 50
+8200            // white space  							: 52
+8006		// load 00 to r6							: 54
+0160		// input letter r1 - r6 						: 56
+8200		// white spacea								: 58
+8430            // C                                                                    : 5A
+8610            // a                                                                    : 5C
+8700            // p                                                                    : 5E
+8690            // i                                                                    : 60
+8740            // t                                                                    : 62
+8610            // a                                                                    : 63
+86c0            // l                                                                    : 66
+8200            // white space								: 68
+8206		// load 20 to r6							: 6A
+0160		// input letter r1 - r6							: 6C
+80a0		// new line								: 6E
+ffff		// quit 								: 70
+84E0		// N									: 72
+86F0		// o									: 74
+8740		// t									: 76
+8200		// white space								: 78
+8610		// a									: 7A
+86E0		// n									: 7C
+8200		// white space								: 7E
+8450		// E									: 80
+86E0		// n									: 82
+8670		// g									: 84
+86c0		// l									: 86
+8690		// i									: 88
+8730		// s									: 8A
+8680		// h									: 8C
+8200		// white space								: 8E
+86c0		// l									: 90
+8650		// e									: 92
+8740		// t									: 94
+8740		// t									: 96
+8650		// e									: 98
+8720		// r									: 9A
+80a0		// new line								: 9C
+8411		// load A to r1								: 9E
+87B2		// load 0x72 to r2							: A0
+0123		// r3 = r1 - r2								: A2
+8AE4		// load jump pointer to r4						: A4
+9004		// make high byte 0 to make the pointer positive			: A6
+E324		// pc = r3 < 0 ? r4 : next						: A8
+80a0		// new line								: AA
+ffff		// quit									: AC
+8FF5		// use memory FF to store data						: AE
+F511		// store contents in r1 to memory FF					: B0
+F500		// print content in memory FF						: B2
+85A2		// load 0x5A to r2							: B4
+0123		// r3 = r1 - r2								: B6
+8C64		// load jump pointer to r4						: B8
+9004		// make high byte 0 to make the pointer positive			: BA
+E304		// pc = Z ? r4 : next							: BC
+8FF2		// load -1 to r2							: BE
+8CA4		// load jump pointer to r4						: C0
+9004		// make high byte 0 to make the pointer positive			: C2
+E314		// pc = Z ? next : r4							: C4
+80a0		// new line								: C6
+8F92		// load -0x7 to r2							: C8
+0121		// r1 = r1 - r2								: CA
+8A04		// load jump point to r4						: CC	
+9004		// make high byte 0 to make the pointer positive			: CE
+E114		// pc = (r1 != 0) ? r4 : next, always true				: D0

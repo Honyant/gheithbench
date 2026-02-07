@@ -1,0 +1,13 @@
+started main routine
+started main routine
+started f1 routine
+42
+started returner routine
+Received value 102 from infinite channel 1 times
+Received value 102 from infinite channel 2 times
+Received value 102 from infinite channel 3 times
+Received value 102 from infinite channel 4 times
+Received 5 from main's channel 1 times
+Received 5 from main's channel 2 times
+Received 5 from main's channel 3 times
+Received 5 from main's channel 4 times

@@ -1,0 +1,25 @@
+@0
+
+// Simple always take branch predictor should do well
+
+8001 // movl r1, #0       outer loop control variable
+8ff2 // movl r2, #-1      used to increment 
+85b3 // movl r3, #91      ('Z' in ascii + 1)
+8504 // movl r4, #80      # of iterations of outer loop
+80ca // movl rA, <outer_loop_start> 
+80eb // movl rB, <inner_loop_start>
+// outer_loop_start:
+    8415 // movl r5, #65      ('A' in ascii)
+    // inner_loop_start:
+        0500 // sub r0, r5, r0    print r5 (current letter) 
+        0525 // sub r5, r5, r2    increment the current letter register  
+        0536 // sub r6, r5, r3    r6 = last letter - current letter
+        e61b // jnz rA, r6        if current letter < "Z", branch to <inner_loop_start>
+
+    80a0 // movl r0, #10     print newline
+    0121 // sub r1, r1, r2   increment outer loop control variable
+    0417 // sub r7, r4, r1   r7 = total iterations - current iteration
+    e71a // jnz rB, r7       if iteration < total_iterations, branch to <outer_loop_start>
+
+
+ffff // halt

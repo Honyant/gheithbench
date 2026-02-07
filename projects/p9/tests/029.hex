@@ -1,0 +1,74 @@
+@0
+//////////////////////////////////////////////////////////////////////////////
+// This is a test on CPI for stalling and some branch prediction (sorry <3) //
+//////////////////////////////////////////////////////////////////////////////
+
+
+// Test #1: stalling optimization vs flushing for ld ld conflicts
+8001    // movl r1, #0
+9011    // movh r1, #1  r1 = 0x100 (256)
+8002    // movl r2, #0
+9022    // movh r2, #2  r2 = 0x200 (512)
+8003    // movl r3, #0
+9043    // movh r3, #4  r3 = 0x400 (1024)
+8004    // movl r4, #0
+9084    // movh r4, #8  r4 = 0x800 (2048)
+84f5    // movl r5, #79 r5 = O
+
+// setting up our pointers  @18
+f115    // st r5, r1    mem[256] = J
+f211    // st r1, r2    mem[512] = 256
+f312    // st r2, r3    mem[1024] = 512
+f413    // st r3, r4    mem[2048] = 1024
+
+// back to back dependent loads @26
+f403    // ld r3, r4    mem[2048] = 1024
+f302    // ld r2, r3    mem[1024] = 512
+f201    // ld r1, r2    mem[512] = 256
+f100    // ld r0, r1    mem[256] = E
+82e0    // movl r0, #46 r0 = .
+84f0    // movl r0, #79 r5 = O
+80a0    // movl r0, #10 r0 = \n
+
+
+// Test #2: branching CPI test for  always branch taken @36
+// setup for the looping and branching
+83ee    // movl r14, if_even
+84af    // movl r15, else 
+802b    // movl r11, #2
+8369    // movl r9, counter_loop (top of loop)
+8548    // movl r8, even_or_odd
+8013    // movl r3, #1
+80a2    // movl r2, #10 (counter)
+
+// counter_loop
+// [PC: 0x36] <counter_loop>:
+0232    // sub r2, r2, r3 (counter--)
+020d    // sub r13, r2, r0 (copy same value into r13)
+ed18    // jnz r8, r13 (ends program when value is 0)
+ffff
+
+// if_even:
+// [PC: 0x3e] <if_even>:
+8650    // movl r0, #101
+8760    // movl r0, #118
+8650    // movl r0, #101
+86e0    // movl r0, #110 (prints out "even")
+80a0    // movl r0, #10 r0 = \n
+e009    // jz r9, r0 (loops back to the counter_loop)
+
+// else:
+// [PC: 0x4a] <else>:
+86f0    // movl r0, #111
+8640    // movl r0, #100
+8640    // movl r0, #100 (prints out "odd")
+80a0    // movl r0, #10 r0 = \n
+e009    // jz r9, r0 (loops back to the counter_loop)
+
+// create a set of instructions to find whether a number is divisible by 2 (puts answer in r1)
+// even_or_odd:
+// [PC: 0x54] <even_or_odd>:
+ed0e    // jz r14, r13  (checks for even)
+ed2f    // js r15, r13  (checks for odd)
+0dbd    // sub r13, r13, r11 (keep subtracting by 2)
+e008    // jz r8, r0 (unconditional branch to even_or_odd)

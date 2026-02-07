@@ -1,0 +1,57 @@
+//This test case is dedicated to testing that you correctly handle 
+//read after writes for ld instructions, which were not testing in any of the selected
+//p7 cases.
+
+//You should not flush but rather forward computed values from 
+//movl/movh/sub in execute2 to memory in case of instruction sequences like below
+
+//mov ra, #10
+//ld rb, ra (you should fetch the memory address corresponding to the
+//newly updated ra, which is 10)
+
+
+//movl r15, #1 is used as a no-op
+//rx =  number is equivalent to movl rx, number
+@0
+//------------------------------------------------------------------
+//TEST1: RAW HAZARD FOR LD AFTER MOV
+8004    //0: r4 = 0
+8024    //2: r4 = 2 
+//if you don't forward from x2, the below instruction will set r3 = 0x8004 instead of 
+//the correct value 0x8024
+f403    //4: ld r3, r4
+
+801f    //6: r15 = 1
+801f    //8: r15 = 1
+801f    //10: r15 = 1
+801f    //12: r15 = 1
+
+f405    //14: ld r5, r4 (r5 = 0x8024 now)
+0536    //16: r6 = r5 - r3 (will be 0 if you forwarded correctly, 32 otherwise)
+
+8187    //18: r7 = 24
+e607    //20: jz r7, r6 (you should jump here)
+ffff
+
+8610    //24: print 'a'
+
+//------------------------------------------------------------------
+//TEST2: TESTING YOUR CPI FOR LD AFTER MOV (SHOULDN'T FLUSH BUT RATHER FORWARD)
+//r8 represents for loop counter. the for loop should run for 16384 cycles
+
+8002    //26: r2 = 0
+
+8ff8    //28: r8 = 255 (0x00FF)
+90f8    //30: movh r8, #15 (r8 = 0x0FFF)
+
+//forloop1: 
+08f8    //32: r8 = r8 - r15 = r8 - 1
+81ca    //34: r10 = 28
+81ea    //36: r10 = 30
+fa0b    //38: ld r11, r10 (r11 should equal 0x0040 if you forward from x2,
+        //if you don't it would equal 0x0020)
+820c    //40: r12 = 32
+e81c    //42: jnz r12, r8
+
+8620    //44: print 'b'. will succeed if you don't time out due to bad cpi.
+ffff

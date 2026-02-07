@@ -1,0 +1,16 @@
+mainCount: 0
+mainCount: 1
+mainCount: 2
+mainCount: 3
+mainCount: 4
+mainCount: 5
+mainCount: 6
+mainCount: 7
+mainCount: 8
+mainCount: 9
+fCount: 0
+fCount: 1
+fCount: 2
+fCount: 3
+fCount: 4
+(Pass) Return statement infinitely sends its return value.

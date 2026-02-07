@@ -1,0 +1,79 @@
+// This test case aims to test data and control hazards
+
+@0
+80a3	// movl r3, 10
+
+// TEST 1: There are three read after write tests.
+//      a) move a value into a register then read it
+//      b) store a value in memory then load it
+//      c) write to a register with arithmetic then read it for arithmetic
+
+// 1a
+80a2	// mov r2, 10
+0222	// sub r2, r2, r2
+e203	// jz r3, r2
+8410	// movl r0, 65     'A' means test failed here
+
+// @10
+81a3	// movl r3, 26
+
+// 1b
+80f4	// movl r4, 15
+81f45	// movl r5, 500
+f514	// st r4, r5  mem[500] = 15
+f506	// ld r6, r5 r6 = mem[500] = 15
+0647	// sub r7, r6, r4
+e703	// jz r3, r7
+8420	// movl r0, 66      'B' means test failed here
+
+// @26
+82e3	// movl r3, 46
+
+
+// 1c
+8014	// movl r4, 1
+8005	// movl r5, 0
+80a6	// movl r6, 10
+80a7	// movl r7, 10
+81e8	// movl r8, 30
+0875	// sub r5, r8, r7 --- r5 = 30 - 10 = 20
+0654	// sub r4, r6, r5 --- r4 = 10 - 20 = -10
+e423	// jns r3, r4 --- should jump because r4 is -10 is negative
+8430	// movl r0, 67     'C' means test failed here
+
+
+// @46
+83c3	// movl r3, 60
+
+
+// TEST 2: FLUSHING
+//     this ensures instructions between a jump instruction and its target are skipped
+e313	// jnz r3, r3
+8440	// movl r0, 68 print 'D' means test failed here
+8440	// movl r0, 68
+8440	// movl r0, 68
+8440	// movl r0, 68
+8440	// movl r0, 68
+
+// @60
+8563	// movl r3, 86
+
+
+// TEST 3: LOAD AFTER LOAD
+//     this ensures stalling or flushing is implemented to account for load delays
+8134	// movl r4, 19
+82585	// movl r5, 600
+f514	// str r4, r5  --- mem[600] = 19
+
+82584	// movl r4, 600
+81f45	// movl r5, 500
+8136	// movl r6, 19
+
+f514	// str r4, r5 --- mem[500] = 600
+f507	// ld r7, r5 --- r7 = mem[500] = 600
+f705	// ld r5, r7 --- r5 = mem[600] = 19
+0656	// sub r6, r6, r5 --- r6 = 19 - 19 = 0
+e603	// jz r3, r6 --- should jump because r6 is 0
+8450	// movl r0, 69      print 'E' means test failed here
+
+ffff

@@ -1,0 +1,87 @@
+// Tests branch prediction for various branching patterns
+
+@0           
+80af    // movl r15, 10        // r15 = '\n'
+
+
+// Test 1: never branch
+
+@1           
+80f1    // movl r1, 15         // r1 = 15
+8012    // movl r2, 1          // r2 = 1
+80a3    // movl r3, 10         // loop start address
+8314    // movl r4, 49         // r4 = '1'
+
+@5                             // loop start
+e013    // jnz r3, r0          // never branch
+0400    // sub r0, r4, r0      // print('1')
+0121    // sub r1, r1, r2      // r1 -= 1
+e113    // jnz r3, r1          // loop while r1 > 0
+
+0f00    // sub r0, r15, r0     // print('\n')
+
+
+// Test 2: always branch
+
+@a           
+80f1    // movl r1, 15         // r1 = 15
+81c3    // movl r3, 28         // loop start address
+8204    // movl r4, 32         // branch address
+8325    // movl r5, 50         // r5 = '2'
+
+@e                             // loop start
+e004    // jz r4, r0           // always branch
+ffff    // end                 // end
+0500    // sub r0, r5, r0      // print('2')
+0121    // sub r1, r1, r2      // r1 -= 1
+e113    // jnz r3, r1          // loop while r1 > 0
+
+0f00    // sub r0, r15, r0     // print('\n')
+
+
+// Test 3: branch every other iteration
+
+@14                             
+80a1    // movl r1, 10         // r1 = 10
+8363    // movl r3, 54         // loop start address
+83a4    // movl r4, 58         // branch address
+8335    // movl r5, 51         // r5 = '3'
+8006    // movl r6, 0          // r6 = 0
+9806    // movh r6, 128        // r6 = 32768
+8007    // movl r7, 0          // value to check for branching
+
+@1b                            // loop start
+e704    // jz r4, r7           // branch if r7 == 0
+0500    // sub r0, r5, r0      // print('3')
+0500    // sub r0, r5, r0      // print('3')
+0767    // sub r7, r7, r6      // r7 = !r7
+0121    // sub r1, r1, r2      // r1 -= 1
+e113    // jnz r3, r1          // loop while r1 > 0
+
+0f00    // sub r0, r15, r0     // print('\n')
+
+
+// Test 4: nested loops, inner loop is taken every other
+// iteration of the outer loop
+
+@22                             
+8061    // movl r1, 6          // r1 = 6
+8503    // movl r3, 80         // outer loop start address
+8549    // movl r9, 84         // inner loop start address
+85a4    // movl r4, 90         // branch address
+8345    // movl r5, 52         // r5 = '4'
+8007    // movl r7, 0          // value to check for branching
+
+@28                            // loop start
+e704    // jz r4, r7           // branch if r7 == 0
+8058    // movl r8, 5          // r8 = 5
+0500    // sub r0, r5, r0      // print('4')
+0828    // sub r8, r8, r2      // r8 -= 1
+e819    // jnz r9, r8          // loop while r8 > 0
+0767    // sub r7, r7, r6      // r7 = !r7
+0121    // sub r1, r1, r2      // r1 -= 1
+e113    // jnz r3, r1          // loop while r1 > 0
+
+0f00    // sub r0, r15, r0     // print('\n')
+
+ffff    // end

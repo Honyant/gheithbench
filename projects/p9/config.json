@@ -1,0 +1,5 @@
+{
+  "name": "P9 - Pipelined CPU with Performance Feedback",
+  "description": "Like P8, but with cycle reference data and performance checking script available",
+  "docker_image": "gheithbench-verilog:latest"
+}

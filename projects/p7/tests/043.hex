@@ -1,0 +1,19 @@
+@0
+8c86	// movl r6, #200: set up to store memory address
+85a1	// movl r1, #90: initialize the loop counter to 90 (z)
+8012	// movl r2, #1: initializing decrementer
+8413	// movl r3, #65: initialize end number
+8084	// movl r4, #8: setting location of jump instruction
+
+
+f611	// st r1, r6: store letters into memory address
+f600	// ld r0, r6: prints the letter
+0121	// sub r1, r1, r2: decrement the letter
+0135	// sub r5, r1, r3: will be used to check if we are at 65
+e534	// jns r4, r5: jumps if index - 65 >= 0
+
+0101	// sub r1, r1, r0: testing if reading from r0 subtracts 0
+f611	// st r1, r6: storing value to print
+f600	// ld r0, r6: printing 'A'
+
+ffff    // halt

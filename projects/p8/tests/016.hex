@@ -1,0 +1,70 @@
+@0
+//this test case is intended as a cpi test case for good branch predictors
+//part 1: mod 2 (you need a decently complex branch predictor for good behavior here)
+//setup //Listing PC Values in Hex
+8001    //0
+9011    //2
+8012    //4
+
+//address of the exit to the loop
+8203    //6
+
+//address of the start of the loop
+8104    //8
+
+//r5 = address of ifZero
+8165    //A
+
+//r6 = address of endOfLoop
+81a6    //C
+
+//r7 = value that will either be 0 or 1 at all tiems
+8007    //E
+//start of the loop (16) (THESE INDICES ARE IN DECIMAL):
+
+//this logic is meant to result in alternating jumps (one cycle they are taken, the next they are not)
+//if it r7 is zero, we make it one, and vice versa
+//this is basically the mod 2 thing Geith talked about in lecture
+e705    //10
+8007    //12
+e236    //14
+
+//ifZero (22): 
+8017    //16
+e236    //18
+
+//endOfLoop (26):
+0121    //1A
+//jump to loop exit, will cause problems if you predict always taken
+e103    //1C
+//jump to start of loop
+e234    //1E
+//loop exit (32):
+8300    //20
+//printing 0 = passed 
+
+
+//part 2: no mod 2, just a big loop
+//you should get good cpi on this loop (which lasts 16x longer than the previous)
+//as long as you have any branch predictor
+8001    //22
+90a1    //24
+8012    //26
+
+//address of the exit to the loop
+8323    //28
+
+//address of the start of the loop
+82c4    //30
+
+//start of the loop (44):
+0121    //32
+//jump to loop exit, will cause problems if you predict always taken
+e103    //34
+//jump to start of loop
+e234    //36
+//loop exit (50):
+8310    //38
+//printing 1 = passed this part 
+
+ffff    //40

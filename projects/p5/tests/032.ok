@@ -1,0 +1,5 @@
+TEST 1: SUCCESS. Did not malloc when block too large.
+TEST 2: SUCCESS. Merged blocks and made space for bigger malloc.
+TEST 3: SUCCESS. All pointers are 16-aligned.
+TEST 4: SUCCESS. Reverse freeing done successfully.
+TEST 5: SUCCESS. Random freeing done successfully.

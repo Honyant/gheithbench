@@ -1,0 +1,257 @@
+/******************************************************************************
+ * This test case isn't super helpful for pipeline debugging, but I think     *
+ * it's an interesting application of how we can use this limited ISA to      *
+ * create a "normal looking" program, and even perhaps serves as a            *
+ * demonstration of the instruction set's Turing-completeness.                *
+ * This program uses ARM-like function calls, with r13 being the stack        *
+ * pointer and r14 being the link register (for branch+link).                 *
+ * The focus of the program is the recursive fibonacci implementation, which  *
+ * is used to obtain the first 15 values of the sequence. It also utilizes    *
+ * recursion for a function which behaves like printf("%d") to print register *
+ * contents as an integer base-10 value, rather than as ASCII.                *
+ * I have also included my original assembly below, since the assembled code  *
+ * can be hard to read due to the additional instructions added by my         *
+ * assembler (especially with many push/pop/bl instructions in a row).        *
+ ******************************************************************************/
+
+@0
+  // <_start>:
+8fcd    // (0000) movl r13, fffc (#-4)
+9ffd    // (0002) movh r13, ff00                   // Init stack pointer to (end of memory - 2)=(0xfffe-2)=(0xfffc)
+80ce    // (0004) movl r14, 000c (#12)             // Save return address to LR
+8b6f    // (0006) movl r15, &main
+900f    // (0008) movh r15, &main
+e00f    // (000a) jmp r15                          // main();
+ffff    // (000c) hlt
+
+
+  // <fib>:                                        // fib(int n) -> int(n^th fibonacci number) {
+8022    // (000e) movl r2, 0002 (#2)
+0123    // (0010) sub r3, r1, r2
+81cf    // (0012) movl r15, &fib.recursive
+900f    // (0014) movh r15, &fib.recursive
+e33f    // (0016) jns r15, r3                      //     (if n - 2 >= 0) { // (n <= 1) == (n - 1 <= 0) == (n - 2 < 0)
+8011    // (0018) movl r1, 0001 (#1)               //         return 1;
+e00e    // (001a) jmp r14                          //     }
+  // <fib.recursive>:
+802f    // (001c) movl r15, 0002 (#2)
+0dfd    // (001e) sub r13, r13, r15
+fd1e    // (0020) st r14, r13
+802f    // (0022) movl r15, 0002 (#2)
+0dfd    // (0024) sub r13, r13, r15
+fd11    // (0026) st r1, r13
+0301    // (0028) mov r1, r3                       //     a = n - 2;
+834e    // (002a) movl r14, PC + 10
+900e    // (002c) movh r14, PC + 8
+80ef    // (002e) movl r15, &fib
+900f    // (0030) movh r15, &fib
+e00f    // (0032) jmp r15                          //     b = fib(a);
+fd04    // (0034) ld r4, r13
+8fef    // (0036) movl r15, fffe (#-2)
+0dfd    // (0038) sub r13, r13, r15
+802f    // (003a) movl r15, 0002 (#2)
+0dfd    // (003c) sub r13, r13, r15
+fd11    // (003e) st r1, r13
+
+8012    // (0040) movl r2, 0001 (#1)
+0421    // (0042) sub r1, r4, r2                   //     c = n - 1;
+84ee    // (0044) movl r14, PC + 10
+900e    // (0046) movh r14, PC + 8
+80ef    // (0048) movl r15, &fib
+900f    // (004a) movh r15, &fib
+e00f    // (004c) jmp r15                          //     d = fib(c);
+
+fd04    // (004e) ld r4, r13
+8fef    // (0050) movl r15, fffe (#-2)
+0dfd    // (0052) sub r13, r13, r15
+001f    // (0054) sub r15, r0, r1
+04f1    // (0056) sub r1, r4, r15                  //     return b + d;
+fd0e    // (0058) ld r14, r13
+8fef    // (005a) movl r15, fffe (#-2)
+0dfd    // (005c) sub r13, r13, r15
+e00e    // (005e) jmp r14                          // }
+
+                                                   // // Shifts a base 10 value ABC to the right to get C, AB. Recurses on AB to get C,B,A.
+                                                   // // On the return, prints C. By power of the recursive stack, this will print C,B,A in
+                                                   // // reverse order to correctly print the integer ABC
+  // <print_decimal>:                              // print_decimal(int val) {
+802f    // (0060) movl r15, 0002 (#2)
+0dfd    // (0062) sub r13, r13, r15
+fd1e    // (0064) st r14, r13
+80a2    // (0066) movl r2, 000a (#10)
+872e    // (0068) movl r14, PC + 10
+900e    // (006a) movh r14, PC + 8
+89af    // (006c) movl r15, &divmod
+900f    // (006e) movh r15, &divmod
+e00f    // (0070) jmp r15                          //     quotient, remainder = divmod(val, 10);
+88ef    // (0072) movl r15, &print_decimal.base_case
+900f    // (0074) movh r15, &print_decimal.base_case
+e10f    // (0076) jz r15, r1                       //     if (quotient != 0) {
+802f    // (0078) movl r15, 0002 (#2)
+0dfd    // (007a) sub r13, r13, r15
+fd12    // (007c) st r2, r13
+888e    // (007e) movl r14, PC + 10
+900e    // (0080) movh r14, PC + 8
+860f    // (0082) movl r15, &print_decimal
+900f    // (0084) movh r15, &print_decimal
+e00f    // (0086) jmp r15                          //         print_decimal(quotient);
+fd02    // (0088) ld r2, r13
+8fef    // (008a) movl r15, fffe (#-2)
+0dfd    // (008c) sub r13, r13, r15
+  // <print_decimal.base_case>:                    //     }
+8d03    // (008e) movl r3, ffd0 (#-48)
+0230    // (0090) putsub r2, r3                    //     putchar(remainder + '0');
+fd0e    // (0092) ld r14, r13
+8fef    // (0094) movl r15, fffe (#-2)
+0dfd    // (0096) sub r13, r13, r15
+e00e    // (0098) jmp r14                          // }
+
+  // <divmod>:                                     // divmod(nat a, nat b) -> pair<nat, nat>(a / b, a % b) {
+8003    // (009a) movl r3, 0000 (#0)
+8ff4    // (009c) movl r4, ffff (#-1)
+  // <divmod.loop>:                                //     while (true) {
+0121    // (009e) sub r1, r1, r2                   //         a -= b;
+8aef    // (00a0) movl r15, &divmod.end
+900f    // (00a2) movh r15, &divmod.end
+e12f    // (00a4) js r15, r1                       //         if (a < 0) break; // [(a >= b) == (a - b >= 0)]
+0343    // (00a6) sub r3, r3, r4                   //         i++;
+89ef    // (00a8) movl r15, &divmod.loop
+900f    // (00aa) movh r15, &divmod.loop
+e00f    // (00ac) jmp r15                          //     }
+  // <divmod.end>:
+002f    // (00ae) sub r15, r0, r2
+01f2    // (00b0) sub r2, r1, r15                  //     // have add b because loop condition is checked one more time than the body is run
+0301    // (00b2) mov r1, r3                       //     return i, a + b;
+e00e    // (00b4) jmp r14                          // }
+
+  // <main>:                                       // main() {
+802f    // (00b6) movl r15, 0002 (#2)
+0dfd    // (00b8) sub r13, r13, r15
+fd1e    // (00ba) st r14, r13
+8001    // (00bc) movl r1, 0000 (#0)               //     i = 0;
+80f2    // (00be) movl r2, 000f (#15)
+8ff3    // (00c0) movl r3, ffff (#-1)
+  // <main.loop>:                                  //     do {
+802f    // (00c2) movl r15, 0002 (#2)
+0dfd    // (00c4) sub r13, r13, r15
+fd11    // (00c6) st r1, r13
+802f    // (00c8) movl r15, 0002 (#2)
+0dfd    // (00ca) sub r13, r13, r15
+fd12    // (00cc) st r2, r13
+802f    // (00ce) movl r15, 0002 (#2)
+0dfd    // (00d0) sub r13, r13, r15
+fd13    // (00d2) st r3, r13
+8dee    // (00d4) movl r14, PC + 10
+900e    // (00d6) movh r14, PC + 8
+80ef    // (00d8) movl r15, &fib
+900f    // (00da) movh r15, &fib
+e00f    // (00dc) jmp r15                          //         a = fib(i);
+8e8e    // (00de) movl r14, PC + 10
+900e    // (00e0) movh r14, PC + 8
+860f    // (00e2) movl r15, &print_decimal
+900f    // (00e4) movh r15, &print_decimal
+e00f    // (00e6) jmp r15                          //         print_decimal(a);
+80a0    // (00e8) put '\n'
+fd03    // (00ea) ld r3, r13
+8fef    // (00ec) movl r15, fffe (#-2)
+0dfd    // (00ee) sub r13, r13, r15
+fd02    // (00f0) ld r2, r13
+8fef    // (00f2) movl r15, fffe (#-2)
+0dfd    // (00f4) sub r13, r13, r15
+fd01    // (00f6) ld r1, r13
+8fef    // (00f8) movl r15, fffe (#-2)
+0dfd    // (00fa) sub r13, r13, r15
+0131    // (00fc) sub r1, r1, r3                   //         i++;
+0214    // (00fe) sub r4, r2, r1
+80cf    // (0100) movl r15, &main.end
+901f    // (0102) movh r15, &main.end
+e40f    // (0104) jz r15, r4
+8c2f    // (0106) movl r15, &main.loop
+900f    // (0108) movh r15, &main.loop
+e00f    // (010a) jmp r15                          //     } while (i != 15);
+  // <main.end>:
+fd0e    // (010c) ld r14, r13
+8fef    // (010e) movl r15, fffe (#-2)
+0dfd    // (0110) sub r13, r13, r15
+e00e    // (0112) jmp r14                          // }
+
+ffff    // (0114) hlt
+
+
+/* ASSEMBLY CODE:
+fib:                        // fib(int n) -> int(n^th fibonacci number) {
+    movl r2, 2
+    sub r3, r1, r2
+    jns .recursive, r3      //     (if n - 2 >= 0) { // (n <= 1) == (n - 1 <= 0) == (n - 2 < 0)
+        movl r1, 1          //         return 1;
+        ret                 //     }
+    .recursive:
+    push r14
+    push r1
+    mov r1, r3              //     a = n - 2;
+    bl fib                  //     b = fib(a);
+    pop r4
+    push r1
+
+    movl r2, 1
+    sub r1, r4, r2          //     c = n - 1;
+    bl fib                  //     d = fib(c);
+
+    pop r4
+    add r1, r4, r1          //     return b + d;
+    pop r14
+    ret                     // }
+
+// // Shifts a base 10 value ABC to the right to get C, AB. Recurses on AB to get C,B,A.
+// // On the return, prints C. By power of the recursive stack, this will print C,B,A in
+// // reverse order to correctly print the integer ABC
+print_decimal:              // print_decimal(int val) {
+    push r14
+    movl r2, 10
+    bl divmod               //     quotient, remainder = divmod(val, 10);
+    jz .base_case, r1       //     if (quotient != 0) {
+        push r2
+        bl print_decimal    //         print_decimal(quotient);
+        pop r2
+    .base_case:             //     }
+    movl r3, -48
+    putsub r2, r3           //     putchar(remainder + '0');
+    pop r14
+    ret                     // }
+
+divmod:                     // divmod(nat a, nat b) -> pair<nat, nat>(a / b, a % b) {
+    movl r3, 0
+    movl r4, -1
+    .loop:                  //     while (true) {
+        sub r1, r1, r2      //         a -= b;
+        js .end, r1         //         if (a < 0) break; // [(a >= b) == (a - b >= 0)]
+        sub r3, r3, r4      //         i++;
+        jmp .loop           //     }
+    .end:
+    add r2, r1, r2          //     // have add b because loop condition is checked one more time than the body is run
+    mov r1, r3              //     return i, a + b;
+    ret                     // }
+
+main:                       // main() {
+    push r14
+    movl r1, 0              //     i = 0;
+    movl r2, 15
+    movl r3, -1
+    .loop:                  //     do {
+        push r1
+        push r2
+        push r3
+        bl fib              //         a = fib(i);
+        bl print_decimal    //         print_decimal(a);
+        put '\n'
+        pop r3
+        pop r2
+        pop r1
+        sub r1, r1, r3      //         i++;
+        sub r4, r2, r1
+        jz .end, r4
+        jmp .loop           //     } while (i != 15);
+    .end:
+    pop r14
+    ret                     // }
+*/

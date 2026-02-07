@@ -1,0 +1,36 @@
+// the goal of this test is to test branch prediction with an inner loop and an outer loop
+
+@0
+
+// r15 = the number of times to run the test
+807f // movl r15, 7
+
+// constant value
+801e // movl r14, 1
+801d // movl r13, 1
+
+// outer loop location
+80cc // movl r12, 12
+// inner loop location
+810b // movl r11, 16
+
+// Start at 'Z' and go backwards
+85a1 // movl r1, 90
+
+// outer loop:
+// counter
+8042 // movl r2, 4
+
+// print the letter
+0100 // sub r0, r1, r0
+
+// inner loop:
+01d1 // sub r1, r1, r13
+02e2 // sub r2, r2, r14
+e21b // jnz r11, r2
+
+0fef // sub r15, r15, r14
+ef1c // jnz r12, r15
+
+// end of test case
+ffff

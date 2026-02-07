@@ -1,0 +1,36 @@
+// This test case tests for branch prediction and a couple hazards
+// Emulates the follow code:
+// counter = 500
+// end_letter = 65
+// while (counter >= 0):
+//      letter = 90
+//      while (letter >= end_letter):
+//          print(letter)
+//          letter--;
+//      counter--;
+
+@0
+8c86	// 0: movl r6, #200: set up to store memory address
+8012	// 2: movl r2, #1: initialize the decrementer
+8f37	// 4: movl r7, #243: initialize outside loop counter to 500 (lower bits)
+9017	// 6: movh r7, #1: initialize outside loop counter to 500 (upper bits)
+8413	// 8: movl r3, #65: initialize end letter/number to compare to
+80e8	// 10: movl r8, #14: setting location of outside jump instruction
+8104	// 12: movl r4, #16: setting location of inside jump instruction
+
+85a1	// 14: movl r1, #90: setting starting letter value at end of each inside loop
+
+f611	// 16: st r1, r6: store letters into memory address
+f600	// 18:ld r0, r6: prints the letter
+0121	// 20: sub r1, r1, r2: decrement the letter
+0135	// 22: sub r5, r1, r3: will be used to check if we are at 65
+e534	// 24: jns r4, r5: jumps if index - 65 >= 0
+
+0101	// 26: sub r1, r1, r0: testing if reading from r0 subtracts 0
+f611	// 28: st r1, r6: storing value to print
+f600	// 30: ld r0, r6: printing 'A'
+80a0	// 32: movl r0, #10: print out a new line
+
+0727	// 34: sub r7, r7, r2: decrement outside loop counter
+e738	// 36: jns r8, r7: jumps if outside loop counter >= 0
+ffff    // halt

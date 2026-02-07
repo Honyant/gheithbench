@@ -1,0 +1,80 @@
+@0
+// tests reading from registers with sub (no hazards)
+8431    // movl r1, #67 // ins 0
+8222    // movl r2, #34 // ins 2
+8680    // movl r0, #104 // prints  h // ins 4
+8650    // movl r0, #101 // prints e // ins 6
+86c0    // movl r0, #108 // prints l // ins 8
+86c0    // movl r0, #108 // prints l // ins 10
+86f0    // movl r0, #111 // prints 0 // ins 12
+0120    // sub r0, r1, r2 // prints ! // ins 14
+
+80a0    // movl r0, #10 // new line // ins 16
+
+// tests jump (no hazards)
+e112    // jnz r2, r1 // ins 18
+8011    // movl r1, #1 // ins 20
+8011    // movl r1, #1 // ins 22
+8011    // movl r1, #1 // ins 24
+8011    // movl r1, #1 // ins 26
+8011    // movl r1, #1 // ins 28
+84e0    // movl r0, #78 // prints N // ins 30
+84f0    // movl r0, #79 // prints O // ins 32
+8680    // movl r0, #104 // prints h // ins 34
+8650    // movl r0, #101 // prints e // ins 36
+86c0    // movl r0, #108 // prints l // ins 38
+86c0    // movl r0, #108 // prints l // ins 40
+86f0    // movl r0, #111 // prints o // ins 42
+
+// tests reading from registers with sub (RAW hazard with one instruction back)
+83f1    // movl r1, #63 // ins 44
+0100    // sub r0, r1, r0 // prints ? // tests reading from r0 is 0 // ins 46
+
+80a0    // movl r0, #10 // new line // ins 48
+
+// tests reading from registers with sub (RAW hazard with two instructions back)
+8680    // movl r0, #104 // prints h // ins 50
+8650    // movl r0, #101 // prints e // ins 52
+86c0    // movl r0, #108 // prints l // ins 54
+86c0    // movl r0, #108 // prints l // ins 56
+86f0    // movl r0, #111 // prints o // ins 58
+// tests reading from registers with sub (RAW hazard with one instruction back)
+8411    // movl r1, #65 // ins 60
+8022    // movl r2, #2 // ins 62
+0120    // sub r0, r1, r2 // prints ? // tests reading from r0 is 0 // ins 64
+
+80a0    // movl r0, #10 // new line // ins 66
+
+// tests jumping (with RAW and flushing hazards)
+8051    // movl r1, #5 // ins 68
+84e2    // movl r2, #78 // ins 70
+e132    // jns r2, r1 // ins 72
+84e0    // movl r0, #78 // prints N // ins 74
+84f0    // movl r0, #79 // prints O // ins 76
+8680    // movl r0, #104 // prints h // ins 78
+8650    // movl r0, #101 // prints e // ins 80
+86c0    // movl r0, #108 // prints l // ins 82
+86c0    // movl r0, #108 // prints l // ins 84
+86f0    // movl r0, #111 // prints o // ins 86
+
+80a0    // movl r0, #10 // new line // ins 88
+
+// tests ld and st (no hazards)
+8643    // movl r3, #100 // store address // ins 90
+8645    // movl r5, #100 // ins 92
+8624    // movl r4, #98 // address of b // ins 94
+8011    // movl r1, #1 // ins 96
+8011    // movl r1, #1 // ins 98
+8011    // movl r1, #1 // ins 100
+8011    // movl r1, #1 // ins 102
+8011    // movl r1, #1 // ins 104
+f314    // st r4, r3 // ins 106
+8011    // movl r1, #1 // ins 108
+8011    // movl r1, #1 // ins 110
+8011    // movl r1, #1 // ins 112
+8011    // movl r1, #1 // ins 114
+8011    // movl r1, #1 // ins 116
+f500    // ld r0, r5 // to make sure it’s not register dependent // prints ‘b’ // ins 118
+
+80a0    // movl r0, #10 // new line // ins 120
+ffff

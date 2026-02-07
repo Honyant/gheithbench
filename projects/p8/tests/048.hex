@@ -1,0 +1,34 @@
+@0
+
+// our test will test branch prediction by having nested for loops that 
+// increment and branch with the same preceeding instructions.
+
+// OUTER LOOP SETUP
+85af    // movl r15, #90       // OUTER LOOP INDEX ASCII == Z @0
+808e    // movl r14, #8        // OUTER LOOP ADDRESS -> INNER LOOP SETUP @2
+8011    // movl r1, #1         // R1 ALWAYS EQUALS 1 @4
+8402    // movl r2, #64        // ASCII == @ @6
+
+    // INNER LOOP SETUP
+    80a0    // movl r0, #10         // PRINT NEWLINE @8
+    839a    // movl r10, #57        // INNER LOOP INDEX ASCII == 9 @10
+    8305    // movl r5, #48         // ASCII == 0 @12
+    8109    // movl r9, #16         // INNER LOOP ADDRESS -> INNER LOOP BODY @14
+
+        // INNER LOOP BODY
+        0a00    // sub r0, r10, r0      // PRINT CURRENT INNER INDEX @16
+        0a1a    // sub r10, r10, r1     // DECREMENT INNER INDEX @18
+        0a56    // sub r6, r10, r5      // JNZ CONDITION (R10 - R5 == 0)? @20
+        e619    // jnz r9, r6           // RESTART INNER LOOP BODY IF (R6 < 0) @22
+
+// COMPLETED INNER LOOP
+8011    // movl r1, #1         // CONFUSE BRANCH PREDICTORS W/ 4-BIT HISTORY, SAME AS HISTORY OF INNER LOOP @24
+
+0f00    // sub r0, r15, r0     // PRINT CURRENT OUTER INDEX @26
+0f1f    // sub r15, r15, r1    // DECREMENT OUTER INDEX @28
+0f23    // sub r3, r15, r2     // JNZ CONDITION (R15 - R2 == 0)? @30
+e31e    // jnz r14, r3         // LOOP BACK TO START OF INNER LOOP IF (R15 >= 0) @32
+
+80a0    // movl r0, #10        // PRINT NEWLINE @34
+8580    // movl r0, #88        // FINISHED, PRINT X @36
+ffff

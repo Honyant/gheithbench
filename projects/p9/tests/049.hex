@@ -1,0 +1,26 @@
+// welcome to my test case!
+
+// this test case will test out of order execution
+// if you implement out of order execution, you will 
+// be able to take advantage of some of the instructions 
+// in the for loop not being dependent on each other,
+// which will improve your CPI, compared to people who
+// do not implement out of order execution
+
+@0
+
+// setup
+8641 // 1000011001000001 // mov r1, #100 // start value
+8012 // 1000000000010010 // mov r2, #1 // decrement
+8043 // 1000000001000011 // mov r3, #4 // jump PC
+
+// for loop - test for out of order execution
+8014 // 1000000000010100 // mov r4, #1
+8025 // 1000000000100101 // mov r5, #2
+0546 // 0000010101000110 // sub r6, r5, r4
+0121 // 0000000100100001 // sub r1, r1, r2 
+E113 // 1110000100010011 // jnz r3, r1
+
+// success!
+8410 // 1000010000010000 // mov r0, #65
+ffff

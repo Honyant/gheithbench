@@ -1,0 +1,72 @@
+/*
+Basic Misaligned Store Test
+
+Does a misaligned store and then 2 aligned loads to make sure you preserve the other halves
+This will print 1 or 2 if you fail to read the aligned values
+
+Little Endian: Most Significant Byte is at the lower address
+
+            Aligned 0x1234 at address 0000
+            -------------------
+   Address  |  0000  |  0001  |
+    Data    |   34   |   12   |
+
+            Misaligned 0x1234 at address 0001
+            -------------------
+   Address  |  0000  |  0001  |
+    Data    |        |   34   |
+            -------------------
+   Address  |  0002  |  0003  |
+    Data    |   12   |        |
+            -------------------
+*/
+
+
+@0
+  // <main@0000>:
+8cd8    // (0000) movl r8, ffcd
+9ab8    // (0002) movh r8, ab00
+8641    // (0004) movl r1, 0064
+f118    // (0006) st r8, r1                        // Initialize memory at address 0x0064 to abcd
+8662    // (0008) movl r2, 0066
+f218    // (000a) st r8, r2                        // Also init memory at 0x0066 to abcd
+
+8653    // (000c) movl r3, 0065
+8344    // (000e) movl r4, 0034
+9124    // (0010) movh r4, 1200
+f314    // (0012) st r4, r3                        // Do a misaligned store of data 0x1234 at address 0x0065
+800f    // (0014) movl r15, 0000                   // No-ops to make sure it works without forwarding
+800f    // (0016) movl r15, 0000
+800f    // (0018) movl r15, 0000
+800f    // (001a) movl r15, 0000
+800f    // (001c) movl r15, 0000
+
+f205    // (001e) ld r5, r2                        // Did you correctly perform the misaligned memory st?
+8126    // (0020) movl r6, 0012
+9ab6    // (0022) movh r6, ab00
+0567    // (0024) sub r7, r5, r6
+830f    // (0026) movl r15, &main.next
+900f    // (0028) movh r15, &main.next
+e70f    // (002a) jz r15, r7                       // assert r5 == 0xab12
+8310    // (002c) put '1'
+80a0    // (002e) put '\n'
+
+  // <main.next@0030>:
+f105    // (0030) ld r5, r1                        // Did you correctly perform the misaligned memory st?
+8cd6    // (0032) movl r6, ffcd
+9346    // (0034) movh r6, 3400
+0567    // (0036) sub r7, r5, r6
+842f    // (0038) movl r15, &main.end
+900f    // (003a) movh r15, &main.end
+e70f    // (003c) jz r15, r7                       // assert r5 = 0x34cd
+8320    // (003e) put '2'
+80a0    // (0040) put '\n'
+
+  // <main.end@0042>:
+8590    // (0042) put 'Y'
+8610    // (0044) put 'a'
+8790    // (0046) put 'y'
+8210    // (0048) put '!'
+80a0    // (004a) put '\n'
+ffff    // (004c) hlt
+

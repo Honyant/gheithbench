@@ -1,0 +1,50 @@
+@0
+// TESTING THE 3 DIFFERENT DATA HAZARDS(RAW, WAR, WAW)
+// r1, r2, r15 will be CONSTANT and have 1, 2, and 66 respectively
+8011 // movl r1, #1
+8022 // movl r2, #2
+842F // movl r15, #66
+// TESTING READ AFTER WRITE
+// initial values of r3 and r4
+8023 // movl r3, #2
+8044 // movl r4, #4
+8013 // movl r3, #1
+0234 // sub r4, r2, r3 // r4 = 2 - r3 (r3 should be 1 not 2)
+0F40 // sub r0, r15, r4 // should print out A (66 - 1, not 66 - 0)
+// TESTING WRITE AFTER READ
+// initial value of r3
+8023 // movl r3, #2
+0314 // sub r4, r3, r1 // r4 = r3 - 1 (r3 should be 2 not 1)
+8013 // movl r3, #1
+0F40 // sub r0, r15, r4 // should print out A (66 - 1, not 66 - 0)
+// TESTING WRITE AFTER WRITE
+// initial value of r3
+8023 // movl r3, #2
+0324 // sub r4, r3, r2 // r4 = r3 - 2 = 0 
+0314 // sub r4, r3, r1 // r4 = r3 - 1 = 1 (this should not write back before the previous instruction)
+0F40 // sub r0, r15, r4 // should print out A (66 - 1, not 66 - 0)
+
+// TESTING THE JUMPS (this would also be testing control hazards)
+8FF3 // movl r3, #-1
+     // btw remember reading from r0 is just 0
+// testing jz
+8284 // movl r4, #40 (address of start of jnz test)
+E004 // jz r4, r0
+8420 // movl r0, #66 (prints B, should skip this)
+
+// testing jnz
+82E4 // movl r4, #46 (address of start of js test)
+E314 // jnz r4, r3
+8430 // movl r0, #67 (prints C, should skip this)
+
+// testing js
+8344 // movl r4, #52 (address of start of jns test)
+E324 // js r4, r3
+8440 // movl r0, #68 (prints D, should skip this)
+
+// testing jns
+83A4 // movl r4, #58 (address of ffff instruction)
+E034 // jns, r4, r0
+8450 // movl r0, #69 (prints E, should skip this)
+
+ffff

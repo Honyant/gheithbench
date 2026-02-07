@@ -1,0 +1,81 @@
+// Tests store store load load optimizations and tests branching through inconsistent jumping for CPI
+@0
+864a // movl r10, #100 // 0
+878e // movl r14, #120 // 2
+
+// Prints TRI
+8019 // movl r9, #1 // 4
+0a9a // sub r10, r10, r9
+8c81 // movl r1, #200
+8542 // movl r2, #84
+8fa3 // movl r3, #250
+// Store store load load hazards
+f112 // st r2, r1 
+f311 // st r1, r3
+f304 // ld r4, r3
+f400 // ld r0, r4
+8520 // movl r0, #82
+8490 // movl r0, #73
+80a0 // movl r0, #10
+82c9 // movl r9, #44
+854d // movl r13, #84
+832c // movl r12, #50
+0acc // sub r12, r10, r12
+// if equal to 0 jump to end
+ea0e // jz r14, r10
+// if greater than 0 and less than 50 jump to TA
+ec2d // js r13, r12
+// else jump to FEC
+ea39 // jns r9, r10
+ffff // end
+
+// Prints FEC
+8019 // movl r9, #1 // 44
+0a9a // sub r10, r10, r9
+8c81 // movl r1, #200
+8462 // movl r2, #70
+8fa3 // movl r3, #250
+// Store store load load hazards
+f112 // st r2, r1
+f311 // st r1, r3
+f304 // ld r4, r3
+f400 // ld r0, r4
+8450 // movl r0, #69
+8430 // movl r0, #67
+80a0 // movl r0, #10
+8549 // movl r9, #84
+804d // movl r13, #4
+819c // movl r12, #25
+0acc // sub r12, r10, r12
+// if equal to 0 jump to end
+ea0e // jz r14, r10
+// if greater than 0 and less than 25 jump to TRI
+ec2d // js r13, r12
+// else jump to TA
+ea39 // jns r9, r10
+ffff // end
+
+// Prints TA
+8019 // movl r9, #1 // 84
+0a9a // sub r10, r10, r9
+8c81 // movl r1, #200
+8542 // movl r2, #84
+8fa3 // movl r3, #250
+// Store store load load hazards
+f112 // st r2, r1
+f311 // st r1, r3
+f304 // ld r4, r3
+f400 // ld r0, r4
+8410 // movl r0, #65
+80a0 // movl r0, #10
+8049 // movl r9, #4
+82cd // movl r13, #44
+80fc // movl r12, #15
+0acc // sub r12, r10, r12
+// if equal to 0 jump to end
+ea0e // jz r14, r10
+// if greater than 0 and less than 15 jump to FEC
+ec2d // js r13, r12
+// else jump to TRI
+ea39 // jns r9, r10
+ffff // end // 120

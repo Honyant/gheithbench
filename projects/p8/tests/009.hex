@@ -1,0 +1,85 @@
+// This test case is meant to highlight a few optimizations:
+//  - early branches (in execute instead of writeback)
+//  - partial flushing on branch prediction failures
+// It loops a bunch of times, each time just doing a chain of branches to the next instruction (so
+// that early flushes can save a cycle or two each time), and it alternates between branching
+// forwards 4 or 6 so that a predictor can't predict it (this makes partial flushing save a lot of
+// time). A basic branch predictor is also necessary to make the loop run efficiently.
+
+@0
+8202    // movl r2, #32 // start of loop
+8005    // movl r5, #0
+8006    // movl r6, #0
+9016    // movh r6, #256 // number of times to loop
+8fec    // movl r12, #-2
+801d    // movl r13, #1
+8fce    // movl r14, #-4
+802f    // movl r15, #2
+e002    // jz r2, r0
+
+// Loop start
+@10
+0f55    // sub r5, r15, r5 // toggle r5 between 2 and 0
+0e53    // sub r3, r14, r5  // make r3 toggle between -4 and -6
+8264    // movl r4, #38 // reset r4 to point to the first instruction
+
+// @13
+// Repeat a loop of adding to r4, then jumping to it
+// (so it just jumps forwards repeatedly)
+
+0434    // sub r4, r4, r3
+e004    // jz r4, r0
+04c4    // sub r4, r4, r12
+
+0434    // sub r4, r4, r3
+e004    // jz r4, r0
+04c4    // sub r4, r4, r12
+
+0434    // sub r4, r4, r3
+e004    // jz r4, r0
+04c4    // sub r4, r4, r12
+
+0434    // sub r4, r4, r3
+e004    // jz r4, r0
+04c4    // sub r4, r4, r12
+
+0434    // sub r4, r4, r3
+e004    // jz r4, r0
+04c4    // sub r4, r4, r12
+
+0434    // sub r4, r4, r3
+e004    // jz r4, r0
+04c4    // sub r4, r4, r12
+
+0434    // sub r4, r4, r3
+e004    // jz r4, r0
+04c4    // sub r4, r4, r12
+
+0434    // sub r4, r4, r3
+e004    // jz r4, r0
+04c4    // sub r4, r4, r12
+
+0434    // sub r4, r4, r3
+e004    // jz r4, r0
+04c4    // sub r4, r4, r12
+
+0434    // sub r4, r4, r3
+e004    // jz r4, r0
+04c4    // sub r4, r4, r12
+
+// Loop footer
+84c0    // movl r0, #76 // Print "Loop"
+86f0    // movl r0, #111
+86f0    // movl r0, #111
+8700    // movl r0, #112
+80a0    // movl r0, #10
+06d6    // sub r6, r6, r13
+e612    // jnz r2, r6 // Count down and jump if 0
+
+// End of program (print "End!")
+8450    // movl r0, #69
+86e0    // movl r0, #110
+8640    // movl r0, #100
+8210    // movl r0, #33
+80a0    // movl r0, #10
+ffff    // halt

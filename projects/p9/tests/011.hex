@@ -1,0 +1,37 @@
+// This testcase will test whether or not you have a branch predictor
+// It is a simple case, where it just loops and prints the alphebet out many timestart
+// You won't fail it in correctness, but make sure you are implementing a branch predictor so your CPI is low!
+
+@0
+8411    // movl r1, #65
+8802    // movl r2, #128 
+87f3    // movl r3, #127
+8204    // movl r4, #32
+8015    // movl r5, #1
+81a8    // movl r8, #26
+8ffa    // movl r10, #255
+8146    // movl r6, register_adder
+81e7    // movl r7, loop_start
+8329    // movl r9, outside_loop
+
+// [PC: 0x14] <register_adder>:
+0323    
+0454    
+e407    
+e416    
+ffff
+
+// [PC: 0x1e] <loop_start>:
+0100    // prints the alphabet
+01a1    
+0858    
+0353    
+e309    // loop end
+e817    // keep on looping
+8411    
+81a8    
+e007    
+ffff
+
+// [PC: 0x32] <outside_loop>:
+ffff

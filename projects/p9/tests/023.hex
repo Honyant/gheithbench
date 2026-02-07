@@ -1,0 +1,49 @@
+// this tests that you can handle various data hazards with misaligned addresses
+// using stalling and forwarding will also help reduce cpi
+
+@0
+// misaligned st, misaligned ld
+84b1    // movl r1, #75
+8612    // movl r2, #97
+f112    // st r2, r1
+f100    // ld r0, r1       // print 'a'
+
+// misaligned st, aligned ld
+84d1    // movl r1, #77
+84e3    // movl r3, #78
+8632    // movl r2, #99 'c'
+9622    // movh r2, #98 'b'
+f112    // st r2, r1
+f300    // ld r0, r3       // print 'b'
+
+// aligned st, misaligned ld
+85a1    // movl r1, #90
+8652    // movl r2, #101 'e'
+9642    // movh r2, #100 'd'
+85b3    // movl r3, #91
+f112    // st r2, r1
+f300    // ld r0, r3       // print 'd'
+
+// misaligned ld, misaligned ld
+85d1    // movl r1, #93
+85f2    // movl r2, #95
+f112    // st r2, r1
+85f3    // movl r3, #95
+8662    // movl r2, #102 'f'
+9672    // movh r2, #103 'g'
+f312    // st r2, r3
+f104    // ld r4, r1
+f400    // ld r0, r4       // print 'f'
+
+// aligned st, misaligned st
+8621    // movl r1, #98
+8682    // movl r2, #104 'h'
+8633    // movl r3, #99
+8694    // movl r4, #105 'i'
+96a4    // movh r4, #106 'j'
+f112    // st r2, r1
+f314    // st r4, r3
+8645    // movl r5, #100
+f100    // ld r0, r1       // print 'h'
+f500    // ld r0, r5       // print 'j'
+ffff    // halt

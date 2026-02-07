@@ -1,0 +1,10 @@
+@0
+8191 // movl r1, #25
+85a2 // movl r2, #90
+0123 // sub r3, r1, r2 - data hazard
+80a4 // movl r4, #10
+8015 // movl r5, #1
+0210 // sub r0, r2, r1
+0151 // sub r1, r1, r5
+e134 // jns r4, r1 (branching)
+ffff // invalid instruction

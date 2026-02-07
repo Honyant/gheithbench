@@ -1,0 +1,116 @@
+Objectives:
+~~~~~~~~~~~
+
+    - Improve your C skills
+    - Think about performance
+
+Assignment:
+~~~~~~~~~~~
+
+    - Add more features to the language
+
+The language (it's a stretch to call it that):
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The language has no formal definition. It is defined by the given interpreter
+
+Here is a quick overview:
+
+   - all values are encoded as 64 bit unsigned binary numbers
+   - 2 statements:
+
+       print <expression>      // prints the value of the expression
+                               // as a 64 bit unsigned quantity
+
+       <identifier> = <expression> // assign the value of the expression
+                                   // to the identifier
+
+    - operators are +, -, *, /, %. Same precedence, associativity, and
+      semantics as C
+
+    - '(' and ')' are used to change precedence
+
+    - identifiers must start with an alphabetic character and contain
+      alphanumeric characters
+
+
+Extra features
+~~~~~~~~~~~~~~
+
+- operators (<=, <, >=, ">", "==", "!=", "&&", "||", ",", "&") with the
+  same semantics, precedence, and associativity) as their C counterparts
+
+- "if" statement (with optional "else"):
+
+    if <expression> <statement> [else <statement>]
+
+- "while" statement:
+
+    while <expression> statement
+
+- "fun" expression:
+
+    fun <statement>
+
+    Defines a function that runs the given statement when called.
+    All functions take exactly one uint64_t argument and return
+    one uint64_t value.
+
+    The <statement> can access the passed argument as the local
+    variable named "it"
+
+    "fun" doesn't run the statement; it returns an opaque uint64_t
+    that identifies the function.
+
+- function call expression:
+
+    <identifier>(<expression>)
+
+    Calls the given function, passing it the result of evaluating
+    <expression>. The value of the whole expression is the value
+    returned by the function; 0 if there is no return
+
+- "return" statement:
+
+    return <expression>
+
+    Can only be used inside a function. Returns from the function with
+    the value of the given expression
+
+See the provided test cases for examples.
+
+Important files:
+~~~~~~~~~~~~~~~~
+
+    *.c     C files, feel free to add them, remove them, edit them, etc.
+    *.h     header files, feel free to add them, remove them, edit them, etc.
+    
+Generated files:
+~~~~~~~~~~~~~~~~
+
+    for each test:
+
+        <test>.out    output from running the test
+        <test>.diff   differences between the actual and expected output
+        <test>.result pass/fail
+
+To run tests:
+~~~~~~~~~~~~~
+
+    make test
+
+To make the output less noisy:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    make -s test
+
+To run one test
+~~~~~~~~~~~~~~~
+
+    make -s t0.test
+
+To run by hand
+~~~~~~~~~~~~~~
+
+    ./build/main t0.fun
+

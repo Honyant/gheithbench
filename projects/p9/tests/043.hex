@@ -1,0 +1,52 @@
+// branches a constantly changing number of times
+// typical branch predictors probably won't work;
+// number of cycles depends on how efficient overall implementation is
+@0
+// constants
+801f	// movl r15 : #1
+8ffe	// movl r14, #255 : -1
+864c	// movl r12, #100 : 'd'
+0c05	// sub r5, r12, r0 : r5 = 'd'
+
+8613	// movl r3, #97 : lower boundary
+
+812a	// movl r10, #18 : outer loop pc
+814b	// movl r11, #20 : inner loop pc
+8241	// movl r1, #36 : wraparound pc
+// OUTER LOOP:
+        // for (r13 = 120; r13 >= 0; r13--)
+878d	// movl r13, #120
+
+// INNER LOOP:
+        // for (r6 = 'a'; r6 <= r5; r6++)
+8616	// <pc:18> // movl r6, #97 : 'a'
+
+0600	// <pc:20> // sub r0, r6, r0 : prints current letter
+
+06e6	// sub r6, r6, r14 : r6++
+
+0568	// sub r8, r5, r6
+e83b	// jns r11, r8 : loop to <pc:20> if r5 >= r6
+
+// INNER LOOP END
+
+80a0	// movl r0, 10 : print '\n'
+
+// increment with wraparound 100->0
+0534	// sub r4, r5, r3 : r5--
+e431	// if r4 < 0, jump to <pc:36>
+0c05	// sub r5, r12, r0 : reset r5 to #100 ('d')
+
+05f5	// <pc:36> // sub r5, r5, r15 : r5--
+
+// increment and loop
+0dfd	// sub r13, r13, r15 // r13--
+ed3a	// jns r10, r13 : loop to <pc:18> if r13 >= 0
+
+// OUTER LOOP END
+8210	// movl r0, 33
+8210	// movl r0, 33
+ffff
+
+
+

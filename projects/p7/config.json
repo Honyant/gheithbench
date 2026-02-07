@@ -1,0 +1,7 @@
+{
+  "project": "p7",
+  "docker_image": "gheithbench-verilog:latest",
+  "starter_commit": "6f11376",
+  "repo": "cs429h_s24_p7_anthonyw",
+  "test_layout": "tests_dir"
+}

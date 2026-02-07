@@ -1,0 +1,42 @@
+@0
+87a0    // movl r0, "z"
+8790    // movl r0, "y"
+8780    // movl r0, "x"
+8770    // movl r0, "w"
+8760    // movl r0, "v"
+8750    // movl r0, "u"
+8740    // movl r0, "t"
+8730    // movl r0, "s"
+8720    // movl r0, "r"
+8710    // movl r0, "q"
+8700    // movl r0, "p"
+86f0    // movl r0, "o"
+86e0    // movl r0, "n"
+86d0    // movl r0, "m"
+86c0    // movl r0, "l"
+86b0    // movl r0, "k"
+86a0    // movl r0, "j"
+8690    // movl r0, "i"
+8680    // movl r0, "h"
+8670    // movl r0, "g"
+8660    // movl r0, "f"
+8650    // movl r0, "e"
+8640    // movl r0, "d"
+8630    // movl r0, "c"
+8620    // movl r0, "b"
+8610    // movl r0, "a"
+// Loop and keep subtracting 2 from reg 4 (#10) till it goes to 0
+8023    // movl r3, '#2'
+83a5    // movl r5, '#58'
+80a4    // movl r4, '#10'
+0434    // sub r4, r4, r3
+e415    // jns r5, r4
+// Ensure the looping was done correctly by printing an ascii character
+8ae2    // movl r2, #174
+9002    // movh r2, #0
+0424    // sub r4, r4, r2
+0400    // sub r0, r4, r0
+// Test for hazard - load after store
+f311    // st r1, r3
+f309    // ld r9, r3
+ffff    //invalid

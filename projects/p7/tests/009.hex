@@ -1,0 +1,28 @@
+@0
+// Test Data Hazards
+8643	
+8a55	
+0534	// Test that register values are forwarded correctly
+
+// Test load after stores
+8425	
+8436	
+f315	
+f300	// prints B
+f314	
+f300	// prints A
+f316	
+f300	// prints C
+
+
+// Test stalling
+83c1	
+8322	
+8463	
+f113	
+f211	
+f204	
+f405	// stalls here
+f315	// double stall here
+f300	// prints F
+ffff

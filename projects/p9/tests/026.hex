@@ -1,0 +1,51 @@
+//branch prediction case, 10 iterations, we switch branches every iteration, so this needs a branch predictor with history
+//In this chilling tale of digital horror, we find ourselves face to face with a test case, a twisted amalgamation of assembly language and dark sorcery. The code, a labyrinthine construct of registers and instructions, weaves a sinister tapestry of logic and madness.
+//At the heart of this eldritch abomination lies a loop, a cyclic ritual of incrementing and branching, a maddening dance of toggle and addition. With each iteration, the global counter, a blasphemous accumulator of values, grows ever larger, fed by the unholy machinations of the odd and even paths.
+//The odd path, a realm of stagnation and inertia, serves only to perpetuate the cycle, to keep the loop forever trapped in its infernal embrace. But the even path, ah, the even path! It is here that the true horror lies. In this nightmarish realm, the global counter is subjected to unspeakable tortures, its value warped and distorted by the malevolent forces of subtraction and negation.
+//And what of the loop counter, that wretched thing, that twisted mockery of progress and iteration? With each pass through the loop, it is subjected to the same perverse ritual of increment, a Sisyphean task that knows no end.
+//But amidst the madness, there is one small glimmer of hope, one tiny spark of sanity in this ocean of insanity. The sub r0, rX, r0 instruction, a printout of values, a desperate cry for help in this digital wasteland. It is a fleeting glimpse of the world as it once was, a reminder of the order and reason that have been lost.
+@0
+8011    // r1 = 1
+8d0c    // r12 = -48 = 256-208 (for printing)
+80a2    // r2 = 255 (loop end condition)
+8003    // r3 = 48 (loop counter)
+8004    // r4 = 0 (starts at 0) (global counter)
+8005    // r5 = 0 (temporary register for subtraction)
+8016    // r6 = 1 (odd/even toggle)
+8289    // r9 = even (jump target)
+83aa    // r10 = skip (jump target)
+814b    // r11 = loop (jump target)
+// [PC: 0x14] <loop>:
+03c0    // print loop counter (r3)
+8200    // print space
+0617    // r7 = r6 - r1
+e709    // if r7 == 0 (r6 == 1), jump to even
+
+// [PC: 0x1c] <odd>:
+86f0    // o
+8640    // d
+8640    // d
+80a0    // \n
+8016    // r6 = 1 (next iteration will be even)
+e00a    // jump to skip
+
+// [PC: 0x28] <even>:
+8650    // e
+8760    // v
+8650    // e
+86e0    // n
+80a0    // \n
+8006    // r6 = 0 (next iteration will be odd)
+8005    // r5 = 0 (clear r5)
+0535    // r5 = r5 - r2 (negate r2)
+0454    // r4 = r4 - r5 (add r2 to r4)
+
+// [PC: 0x3a] <skip>:
+04c0    // print global counter (r4)
+80a0    
+8005    // r5 = 0 (clear r5)
+0515    // r5 = r5 - r1 (negate r1)
+0353    // r3 = r3 - r5 (increment loop counter)
+0237    // r7 = r2 - r3
+e73b    // if r7 >= 0 (r3 <= 10), jump to loop
+ffff

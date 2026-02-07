@@ -1,0 +1,29 @@
+@0
+// test printing
+8300 // movl    r0, 48      print 0
+8301 // movl    r1, 48      r1 = 0
+0100 // sub     r0, r1, r0  check that reading from r0 is always 0. should be 0 - 0, not 48 - 0, so expected to print 0.
+// test load/store
+8c8f // movl    r15, 200    mem store address
+84c4 // movl    r4, 76      load 'L' into r4
+ff14 // st      r4, r15     store 'L' in mem location 200
+ff03 // ld      r3, r15     read 'L' from mem location 200
+0300 // sub     r0, r3, r0  print 'L'
+// test data forwarding - ALU positioning w/ sub and ld
+8445 // movl    r5, 68      load 'D' into r5
+8646 // movl    r6, 100     r6 = 100
+81e7 // movl    r7, 30      r7 = 30
+ff15 // st      r5, r15     store 'D' into mem location 200
+0678 // sub     r8, r6, r7  r8 = 100 - 30 = 70
+ff08 // ld      r8, r15     r8 = 'D' from memory location 200
+0800 // sub     r0, r8, r0  print 70 = 'D'
+// if F is printed, then you don't do data forwarding correctly,
+// and are printing the result of the subtract instruction instead
+// of the load instruction. Make sure ALU calculations are happening
+// in your execute stage, not WB!
+// test forwarding - branching
+8029 // movl    r9, 2       r9 = 2 (branch location)
+864a // movl    r10, 100    r10 = 100
+800a // movl    r10, 0      r10 = 0 (this value should overwrite the previous instruction for the purpose of the next instruction)
+ea19 // jnz     r9, r10     shouldn't branch to r9 = 2!
+ffff // nop

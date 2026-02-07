@@ -1,0 +1,178 @@
+@0
+//this will be an extensive jumping test
+//testing control hazards and data hazards
+//comment decoding:
+//(@#) means # is the address of that line
+//(pc = #) means that is the jump location being put in a register
+//jump here (#) means # is being compared to determine whether to jump
+
+//put wanted letters into regs
+8741 //movl t to r1 (@0)
+8652 //movl e to r2
+8733 //movl s to r3
+86a4 //movl j to r4
+86e5 //movl n to r5
+87a6 //movl z to r6 (@10)
+8207 //movl space to r7
+80a8 //movl \n to r8
+86f9 //movl o to r9
+870a //movl p to r10
+
+//put 1s in upper bits of all letter registers
+//(checks that printing only uses lower 8 bits)
+//(also check that movh works correctly)
+9ff1 //(@20)
+9ff2
+9ff3
+9ff4
+9ff5
+9ff6 //(@30)
+9ff7
+9ff8
+9ff9
+9ffa
+
+//put in some numbers for jump comparisons
+8f5b //movl -11 to r11 (@40)
+80bc //movl 11 to r12
+800d //movl 0 to r13
+//put in PC targets
+80ce //incorrect jump destination in r14
+901e //r14 = 0x010c = 268, hopefully
+858f //jump 1 loc in r15 (pc = 88) (@50)
+
+//wow I was not expecting to use every register
+
+//print jz test
+//printing via sub r0, ra, r0 -> r0 = ra - 0 -> print ra
+0400 //print j
+0600 //print z
+0700 //print  
+0100 //print t
+0200 //print e (@60)
+0300 //print s
+0100 //print t
+0800 //print \n
+eb0e //shouldnt jump here
+8310 //print 1 (@70)
+ec0e //shouldnt jump here
+8320 //print 2
+ed0f //should jump here
+
+//didnt jump (or didnt flush) oops and halt
+//print oops and then halt
+//sub r0, ra, r13 -> r0 = ra - 0 -> print ra
+09d0 //print o
+09d0 //print o (@80)
+0ad0 //print p
+03d0 //print s
+1111 //halt
+
+//jump 1 loc (@88)
+87ef //put jump 2 loc in r15 (pc = 126) (@88)
+//print jnz test
+0800 //print \n (after numbers) (@90)
+0400 //print j
+0500 //print n
+0600 //print z
+0700 //print space
+0100 //print t (@100)
+0200 //print e
+0300 //print s
+0100 //print t
+0800 //print \n
+ed1e //shouldnt jump here (0) (@110)
+8330 //print 3
+ec1f //should jump here (11)
+//didnt jump (or didnt flush) oops and halt
+09d0 //print o
+09d0 //print o
+0ad0 //print p (@120)
+03d0 //print s
+1111 //halt
+
+//jump 2 loc (@126)
+8a8f //update jump 3 loc in r15 (pc = 168) (@126)
+900f //0 out upper 8 (basically un sign-extend)
+//print js test
+0800 //print \n (@130)
+0400 //print j
+0300 //print s
+0700 //print space
+0100 //print t
+0200 //print e (@140)
+0300 //print s
+0100 //print t
+0800 //print \n
+ed2e //shouldnt jump (0)
+8340 //print 4 (@150)
+ec2e //shouldnt jump (11)
+8350 //print 5
+eb2f //should jump (-11)
+//didnt jump (or didnt flush) oops and halt
+09d0 //print o
+09d0 //print o (@160)
+0ad0 //print p
+03d0 //print s
+1111 //halt
+
+//jump 3 loc (@168)
+8d0f //jump 4 loc to r15 (pc = 208) (@168)
+900f //again un sign-extend (@170)
+//print jns test
+0800 //print \n
+0400 //print j
+0500 //print n
+0300 //print s
+0700 //print space (@180)
+0100 //print t
+0200 //print e
+0300 //print s
+0100 //print t
+0800 //print \n (@190)
+eb3e //shouldnt jump (-11)
+8360 //print 6
+ed3f //should jump (0)
+//didnt jump (or didnt flush) oops and halt
+09d0 //print o
+09d0 //print o (@200)
+0ad0 //print p
+03d0 //print s
+1111 //halt
+
+//jump 4 loc (@208)
+8e0f //jump 5 loc to r15 (pc = 224) (@208)
+900f //un sign-extend (@210)
+ec3f //should jump (11)
+//didnt jump (or didnt flush) oops and halt
+09d0 //print o
+09d0 //print o
+0ad0 //print p
+03d0 //print s (@220)
+1111 //halt
+
+//jump 5 loc (@224)
+8370 //print 7 (@224)
+0800 //print \n
+0100 //print t
+0200 //print e (@230)
+0300 //print s
+0100 //print t
+0300 //print s
+0700 //print space
+8640 //print d (@240)
+86f0 //print o
+86e0 //print n
+0200 //print e
+0700 //print space
+8280 //print ( (@250)
+83a0 //print :
+0800 //print \n
+e08f //invalid instruction, halt
+
+//incorrect jump loc (@268)
+09d0 //print o (@268)
+09d0 //print o (@270)
+0ad0 //print p
+03d0 //print s
+1111 //halt

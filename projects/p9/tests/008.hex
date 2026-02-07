@@ -1,0 +1,56 @@
+//This test tests for handling of hash collisions in a branch predictor
+//If you have a memory-based branch predictor that doesn't handle hash collisions well, it will branch to the wrong pc on every jump, causing the pipeline to be flushed often
+@0 
+//load constants
+
+//memory addresses
+8001 //movl r1, 0	
+9101 //movh r1, 16	
+8002 //movl r2, 0	
+9202 //movh r2, 32	
+8003 //movl r3, 0	
+9303 //movh r3, 48	
+8004 //movl r4, 0	
+9404 //movh r4, 64	
+8005 //movl r5, 0	
+9505 //movh r5, 80	
+
+//loop counter
+8ff8 //movl r8, 255	
+8809 //movl r9, 128	
+
+//print constants
+80aa //movl r10, 10	
+831b //movl r11, 49	
+832c //movl r12, 50	
+833d //movl r13, 51	
+834e //movl r14, 52	
+835f //movl r15, 53	
+
+//enter loop
+e811 //jnz r1, r8 	
+
+//start of loop
+@800 //pc = 4096
+0b00 //print '1'
+e812 //jnz r2, r8 	
+
+@1000 //pc = 8192
+0c00 //print '2'
+e813 //jnz r3, r8  	
+
+@1800 //pc = 12288
+0d00 //print '3'
+e814 //jnz r4, r8  	
+
+@2000 //pc = 16384
+0e00 //print '4'
+e815 //jnz r5, r8  	
+
+@2800 //pc = 20480
+0f00 //print '5'
+0a00 //print '\n'	
+0989 //increment loop counter (will run 128 times)
+e911 //jnz r1, r9 (jump to start of loop)
+//end of loop
+ffff //end

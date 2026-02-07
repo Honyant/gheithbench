@@ -1,0 +1,46 @@
+@0
+
+// Test writing to r0 with the subtract instruction
+
+8321 // movl r1, #50 
+8012 // movl r2, #1 
+0120 // sub r0, r1, r2
+
+// Test reading from r0 with subtract
+
+0100 // sub r0, r1, r0
+
+// Test jump reading from r0
+
+e010 // jnz r0, r0
+
+// Test signed comparisons
+
+8ff1 // movl r1, #-1
+e130 // jns r0, r1
+
+// Test that movh keeps the lower order bits
+
+8341 // movl r1, #52
+9011 // movh r1, #1
+8012 // movl r2, #1
+0120 // sub r0, r1, r2
+
+// Invalid instruction tests
+// These test proper decoding of instructions with edge cases
+// These instructions should terminate the program
+
+// The upper opcode matches the general jump operation
+// But the lower opcode does not match of the jump operations
+
+ef8f // 1110 1111 1000 1111
+8580 // movl r0, #88
+
+// Similar idea for ld
+// Upper opcode matches the ld/st instruction
+// But lower opcode opcode is neither ld nor st
+
+ff1f
+8580 // movl r0, #88
+
+ffff // finish

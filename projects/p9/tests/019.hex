@@ -1,0 +1,52 @@
+//Test branch prediction to misaligned PC
+
+@0      //loop to print pyramid of ascii
+8ff2    // movl r2, #255 (to increment ascending using sub)
+8a03    // movl r3, #160 //memory address for storing inner loop
+8b07    //movl r7, #176 //memory address for storing outer loop
+87f6    // movl r6, #127 //bound value for loop
+8238    //movl r8, #35 (out iter)
+
+8434    // movl r4, #67 //mem address of (inner)
+841b    // movl r11, #65 //mem address of (outer)
+e41b    // jnz r11, r4 //jump to misaligned
+
+
+@20
+
+01ff
+1108
+00f3
+21f3
+6501
+1401
+a0e5
+2880
+6a08
+1b08
+ffea
+00ff
+ffff
+
+//outer: address r11: 14
+
+0801    // sub r1, r8, r0 (set r1 to r8)
+
+//inner: address r4: 16
+
+f311    // st r1, r3 //hazard: ld after st
+f300    // ld r0, r3 //print out r1 which is stored at memory address r3 = #160
+
+0121    // sub r1, r1, r2
+0165    // sub r5, r1, r6 //use r5 for end of inner loop
+
+e514    // jnz r4, r5
+
+80a0    // movl r0, #10 (print newline)
+
+0828    // sub r8, r8, r2 //outer iter
+086a    // sub r10, r8, r6 //use r10 for end of outer loop
+
+ea1b    // jnz r11, r10
+
+ffff    // halt

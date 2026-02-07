@@ -1,0 +1,49 @@
+
+@0
+
+// -------------------
+// testing r0 behavior
+// -------------------
+
+8680 // movl r0, 'h'
+8690 // movl r0, 'i'
+80a1 // movl r1, '\n' 
+0100 // sub r0, r1, r0
+
+// Expected output by this point: "hi\n"
+
+
+// -------------
+// testing jumps 
+// ------------- 
+8102 // movl r2, 16
+e002 // jz r2, r0
+8580 // movl r0, "X" should be jumped over
+ffff // invalid, should be jumped over
+80c2 // movl r2, 12
+e012 // jnz r2, r0 (shouldnt jump to the movl r0, 'X' instruction)
+0023 // sub r3, r0, r2 (r3 should be negative now)
+e332 // jns r2, r3 (shouldn't jump)
+8202 // movl r2, 32 (should jump to movl r0, '!')
+e322 // js r2, r3
+8590 // movl r0, "Y" should be jumped over
+ffff // invalid, should be jumped over
+
+84a0 // movl r0, "J"   jumps succeeded!!
+
+
+// ------------------
+// testing load/store
+// ------------------ 
+8404 // movl r4, 64 
+84c5 // movl r5, 'L' 
+f415 // str r5, r4
+0999 // sub r9, r9, r9 (kindly waiting)
+0999 // sub r9, r9, r9
+f406 // ld r6, r4
+0999 // sub r9, r9, r9 (kindly waiting)
+0999 // sub r9, r9, r9
+0600 // sub r0, r6, r0 (should print "!")
+
+80a0 // movl r0, "\n"
+ffff // DONE!!!!

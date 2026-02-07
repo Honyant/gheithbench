@@ -1,0 +1,58 @@
+# CS429H Project 5
+
+## Task
+Implement malloc() and free() in C. Your allocator must manage a heap using sbrk(), handle allocations of varying sizes, and correctly free memory for reuse.
+
+## Assignment Specification
+Objective:
+~~~~~~~~~~
+
+- Become better at working with memory and pointers in C
+
+Assignment:
+~~~~~~~~~~~
+
+- Implement your own malloc/free
+
+Rules:
+~~~~~~
+
+- heap/heap.h declares 4 important variables:
+
+   - heap_size, contains the total heap size in bytes, defined by the test
+   - the_heap, the memory for the heap, defined by the test
+   - mCount, number of times malloc is called, defined and updated by heap.c
+   - fCount, number of times free is called, defined and updated by heap.c
+
+- Your implementation should only use the memory defined by "the_heap" to
+  implement the heap.
+
+## Workspace Files
+The following files are in your workspace:
+```
+Makefile
+README
+REPORT.txt
+heap/heap.c
+heap/heap.h
+heap/panic.c
+heap/panic.h
+```
+
+There are 59 tests available. Tests are located in the `tests/` directory (or flat in the workspace for P5).
+
+## Instructions
+1. Read and understand all provided source files in your workspace.
+2. Implement the required functionality by modifying the source files.
+3. To compile and test, use the `./exec` wrapper which runs commands in a Linux
+   environment with all necessary tools:
+   - `./exec 'make'` — compile
+   - `./exec 'make -s test'` — run all tests
+4. You can edit files directly — they are shared with the build environment.
+5. Focus on correctness first, then optimization.
+
+## Constraints
+- Do NOT modify the Makefile, README, or any test files (.ok files).
+- Do NOT modify the REPORT.txt file.
+- You may create new source files if needed, but prefer modifying existing ones.
+- The code must compile without warnings (`-Wall -Werror` is enabled).

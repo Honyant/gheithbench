@@ -1,0 +1,31 @@
+@0
+8033	// movl r3, #3
+8045    // movl r5, #4
+8044	// movl r4, #4
+
+0434	// sub r4, r4, r3
+0356	// sub r6, r3, r5
+812a	// movl r10, #18
+818b	// movl r11, #24
+
+e62a	// js r10, r6
+8410	// movl r0, #65 FAIL will print A
+8420	// movl r0, #66 GOOD will print B pc = 18
+
+e51b	// jnz r11, r4
+8430	// movl r0, #67 FAIL will print C
+8440	// movl r0, #68 GOOD will print D  pc = 24
+
+822c	// movl r12, #34
+828d	// movl r13, #40
+
+e00c	// jz r12, r0
+8410	// movl r0, #65 FAIL will print A
+8420	// movl r0, #66 GOOD will print B pc = 34
+
+e43d	// jns r13, r4 
+8430	// movl r0, #67 FAIL will print C
+8440	// movl r0, #68 GOOD will print D pc = 40
+
+80a0    // print newline
+ffff

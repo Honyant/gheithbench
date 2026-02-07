@@ -1,0 +1,97 @@
+@0
+
+// ====
+// TEST: (p7) -- printing -- "test print\n"
+// FIX: make sure writing to r0 prints i
+//   movl   --      1000iiiiiiiitttt  movl rt,i     regs[t] = sign_extend(i)
+//   movh   --      1001iiiiiiiitttt  movh rt,i     regs[t] = (regs[t] & 0xff) | (i << 8)
+// ====
+8740 // movl r0, 't'
+8650 // movl r0, 'e'
+8730 // movl r0, 's'
+8740 // movl r0, 't'
+8200 // movl r0, ' '
+8700 // movl r0, 'p'
+8720 // movl r0, 'r'
+8690 // movl r0, 'i'
+86e0 // movl r0, 'n'
+8740 // movl r0, 't'
+80a0 // movl r0, '\n'
+
+// ====
+// TEST: (p8) -- branching -- "s\n"
+// FIX: check signed values
+//   jz     --      1110aaaa0000tttt  jz rt,ra      pc = (regs[ra] == 0) ? regs[rt] : pc + 2
+//   jnz    --      1110aaaa0001tttt  jnz rt,ra     pc = (regs[ra] != 0) ? regs[rt] : pc + 2
+//   js     --      1110aaaa0010tttt  js rt,ra      pc = (regs[ra] < 0) ? regs[rt] : pc + 2
+//   jns    --      1110aaaa0011tttt  jns rt,ra     pc = (regs[ra] >= 0) ? regs[rt] : pc + 2
+// ***** NO DATA HAZARDS ***** added padding *****
+// ====
+8011 // movl r1, #1                                       @22
+8ff2 // movl r2, #-1                                      @24
+
+82e3 // movl r3, #46                                      @26 -- 3
+820f 
+820f 
+820f 
+820f 
+820f 
+e003 // jz r3, r0 -- should branch to next block          @38
+8660 // movl r0, 'f'                                      @40
+8310 // movl r0, '1'                                      @42
+ffff //                                                   @44
+
+8423 // movl r3, #66                                      @46 -- 13
+820f 
+820f 
+820f 
+820f 
+820f 
+e113 // jnz r3, r1 -- should branch to next block         @58
+8660 // movl r0, 'f'                                      @60
+8320 // movl r0, '2'                                      @62
+ffff //                                                   @64
+
+8563 // movl r3, #86                                      @66 -- 23
+820f 
+820f 
+820f 
+820f 
+820f 
+e223 // js r3, r2 -- should branch to next block          @78
+8660 // movl r0, 'f'                                      @80
+8330 // movl r0, '3'                                      @82
+ffff //                                                   @84
+
+86a3 // movl r3, #106                                     @86 -- 33
+820f 
+820f 
+820f 
+820f 
+820f 
+e133 // jns r3, r1 -- should branch to next block         @98
+8660 // movl r0, 'f'                                      @100
+8340 // movl r0, '4'                                      @102
+ffff //                                                   @104              
+
+8730 // movl r0, 's'                                      @106
+80a0 // movl r0, '\n'                                     @108
+
+
+// ====
+// TEST: (p8) data hazards, misaligned load/store
+// FIX: check proper forwarding and forced aligned values
+// ====
+8624    // movl r4, #98
+86f6    // movl r6, #111
+8737    // movl r7, #115
+
+f416    // st r6, r4 
+f714    // st r3, r7 
+
+f70b    // ld r11, r7
+fb0c    // ld r12, r11 r12 misaligned --> forwarding
+
+0c00    // sub r0, r12, r0 should print out o
+
+ffff // end of program                                    

@@ -1,0 +1,36 @@
+@0
+
+// this tests the general pipeline and the RAW hazard for both load and store
+// note that the immediate values in my comments are decimal
+
+
+// MOVL/SUB/PRINTING
+
+8410 // movl r0, #65 - basic printing test: A
+8641 // movl r1, #100
+81e2 // movl r2, #30
+8413 // movl r3, #65 - this and the next line are placed here as dummies in case hazards are not controlled yet
+84b4 // movl r4, #75
+0120 // sub r0, r1, r2 - should print out F (100 - 30)
+
+// LD/ST
+
+8dc6 // movl r6, #220 - set up store address
+8413 // movl r3, #65 - dummy line
+84b4 // movl r4, #75 - dummy line
+f611 // st r1, r6 - stores 100 into mem address 220
+8413 // movl r3, #65 - dummy line
+84b4 // movl r4, #75 - dummy line
+f600 // ld r0, r6  - should print out d (100)
+
+// RAW: MOVL
+
+80a2 // movl r2, #10
+0120 // sub r0, r1, r2 - prints Z (100 -10); should use new value of r2, or else there is an error
+
+// RAW: ST
+
+8447 // movl r7, #68
+f617 // st r7, r6 
+f600 // ld r0, r6 // should print out D, (68), the new val in mem address 220
+ffff
