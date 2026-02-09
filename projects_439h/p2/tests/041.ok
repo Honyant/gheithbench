@@ -1,0 +1,14 @@
+*** Edge Case Test started.
+*** Some thread received promise value
+*** Some thread received promise value
+*** Some thread received promise value
+*** Some thread received promise value
+*** Some thread received promise value
+*** Some thread received promise value
+*** Some thread received promise value
+*** Some thread received promise value
+*** Some thread received promise value
+*** Some thread received promise value
+*** All threads synchronized.
+*** Edge Case Test passed! Sum = 450
+*** Edge Case Test completed.

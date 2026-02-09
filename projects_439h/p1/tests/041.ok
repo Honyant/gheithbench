@@ -1,0 +1,9 @@
+*** A core is running step #0
+*** AB (1, 1) = 87
+*** A core is running step #1
+*** AB (1, 2) = 54
+*** A core is running step #2
+*** AB (2, 1) = 66
+*** A core is running step #3
+*** AB (2, 2) = 36
+*** DET(AB) = -432

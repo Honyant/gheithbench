@@ -1,0 +1,13 @@
+*** starting test 1
+*** in thread, stack_local=1
+*** in thread, stack_local=1
+*** in thread, stack_local=1
+*** in thread, stack_local=1
+*** in thread, stack_local=1
+*** all threads done, heap_global=5
+*** starting test 2
+*** main thread still running...
+*** main thread still running...
+*** all threads done, thread_counter=15
+*** starting test 3
+*** all threads done, start_counter=3, completion_counter=3, yield_counter=4

@@ -1,0 +1,105 @@
+Due:
+    test 9/11/2024 @ 11:59pm
+    code 9/13/2024 @ 11:59pm
+
+Assignment:
+~~~~~~~~~~~
+
+    - Learn about C++ templates and lambdas (closures)
+    - Implement cooperative multi-threading
+    - Implement blocking promises and barriers
+    - Deal with simple race conditions
+    - Deal with resource (memory) leaks
+    - contribute a test case
+
+Given:
+~~~~~~
+
+    - An incomplete single core implementation
+
+Creating a thread:
+~~~~~~~~~~~~~~~~~~
+
+    template <typename T>
+    void thread(T t) {   // T is a callable object
+       ...
+    }
+
+Threads share global memory but have private stacks (8KB each)
+
+Examples:
+
+- using a C++ lambda
+
+   thread([] {
+       /* This code runs concurrently with the caller of "thread" */
+       Debug::printf("hello from thread\n");
+    });
+
+- using a function
+
+void body() {
+    Debug::print("this is a thread\n");
+}
+
+void some_other_function() {
+    ...
+    thread(body);  // create a thread that runs the "body" function
+    ...
+}
+
+Working with promises:
+~~~~~~~~~~~~~~~~~~~~~~
+
+- create a promise
+
+Promise<int> p = new Promise<int>();
+
+- getting the value from a promise
+
+int v = p->get(); // blocks the caller until the value is set
+                  // returns the value
+
+- setting the value of a promise
+
+p->set(10); // can only be set once
+
+Working with barriers:
+~~~~~~~~~~~~~~~~~~~~~~
+
+- create a barrier
+
+auto b = new Barrier(n);    // create a barrier that synchronizes 'n' threads
+
+- synchronizing using a barrier
+
+b->sync();  // the caller blocks until 'n' threads call sync on the same barrier
+            // calling sync on the same barrier more than 'n' times is a programming error
+
+
+Scheduling:
+~~~~~~~~~~~
+
+- Can't make any assumptions about the exact execution order
+- All threads must get a chance to run (no thread starvation)
+- All cores must participate in running ready threads
+- No preemption, threads yield to each other using the "yield" call
+
+
+Yielding the core:
+~~~~~~~~~~~~~~~~~~
+
+    void yield();  // let other threads run
+
+Stopping a thread:
+~~~~~~~~~~~~~~~~~~
+
+    void stop();   // doesn't return, never run the calling thread again
+
+Files you can change (without changing the API)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+kernel/threads.h
+kernel/threads.cc
+kernel/promise.h
+kernel/promise.cc

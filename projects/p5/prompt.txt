@@ -30,13 +30,12 @@ Rules:
 ## Workspace Files
 The following files are in your workspace:
 ```
-Makefile
-README
-REPORT.txt
 heap/heap.c
 heap/heap.h
 heap/panic.c
 heap/panic.h
+Makefile
+README
 ```
 
 There are 59 tests available. Tests are located in the `tests/` directory (or flat in the workspace for P5).

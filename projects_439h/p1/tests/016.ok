@@ -1,0 +1,17 @@
+*** core 0 ran loop 0
+*** core 0 ran loop 1
+*** core 0 ran loop 2
+*** core 0 says goodbye
+*** core 1 ran loop 0
+*** core 1 ran loop 1
+*** core 1 ran loop 2
+*** core 1 says goodbye
+*** core 2 ran loop 0
+*** core 2 ran loop 1
+*** core 2 ran loop 2
+*** core 2 says goodbye
+*** core 3 ran loop 0
+*** core 3 ran loop 1
+*** core 3 ran loop 2
+*** core 3 says goodbye
+*** sum: 6

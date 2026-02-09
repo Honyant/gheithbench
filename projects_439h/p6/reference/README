@@ -1,0 +1,110 @@
+Due:
+    test 10/23/2024 @ 11:59pm
+    code 10/25/2024 @ 11:59pm
+
+Assignment:
+~~~~~~~~~~~
+
+    - Enable virtual memory
+    - Donate a test case (.ok, .cc, .dir, .block_size)
+
+Starter code:
+~~~~~~~~~~~~~
+
+You're given some code to help you bootstrap your work but it's incomplete:
+
+    - you need to think about adding a VMM context to each thread
+        * Page directory, ...
+        * VMEs, ...
+        * changes to context switch
+        * flushing TLBs when needed
+        * what is the VMM context for the helper thread
+        * ...
+
+    - the ext2 implementation is incomplete
+
+
+The physical address space:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    0x00000000 - 0x00100000      kernel text and data
+    0x00100000 - 0x00600000      kernel heap
+    0x00600000 - kConfig.memSize available frames
+    kConfig.ioAPIC               the IOPIC (one page)
+    kConfig.localAPIC            the LAPIC (one page)
+
+The virtual address space:
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    0x00000000 - 0x00001000      invalid (causes a kernel panic)
+    0x00001000 - 0x00100000      kernel text and data
+    0x00100000 - 0x00600000      kernel heap
+    0x00600000 - 0x80000000      undefined
+    0x80000000 - 0xF0000000      private to each thread
+                                   naive_mmap(..., false, ...)
+    0xF0000000 - 0xFFFFFFFF+1    shared between threads
+                                   naive_mmap(..., true, ...)
+
+
+naive_mmap
+~~~~~~~~~~
+
+    extern void* naive_mmap(
+        uint32_t size,           // size of the virtual mapping in bytes
+        bool shared,             // true -> shared with all other threads
+                                 // false -> private to this thread
+        StrongPtr<Node> file,    // the file to map
+                                 // file == nullptr => anonymous mapping
+        uint32_t file_offset     // offset in the file
+   );
+
+   Returns the virtual address, guaranteed to be the lowest available
+   virtual address in the selected region, nullptr if there is an error.
+
+
+naive_unmap
+~~~~~~~~~~~~
+
+   extern void naive_unmap(void* va); // unmaps the entire mapping
+                                  // containing va
+
+Handling page faults:
+~~~~~~~~~~~~~~~~~~~~~
+
+   void vmm_pageFault(uintptr_t va_, uintptr_t *saveState)
+
+    - called as the result of a page fault exception
+    - called with interrupts enabled
+    - retries the faulting instruction when it returns
+
+
+The physical memory API (in physmem.h):
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+// allocates a new 4K-aligned zero-filled frame, returns its physical address
+// panics if out of frames
+uint32_t PhysMem::alloc_frame();
+
+// frees an allocated 4K-aligned frame
+void PhysMem::free_dealloc_frame(uint32_t pa);
+
+initialization
+~~~~~~~~~~~~~~
+
+Look carefully in kernel/init.cc in order to understand when/where those
+calls are made and how they related to the initialization of other
+sub-systems
+
+// called by the bootstrap core to initialize the available frames area
+void PhysMem::init(uint32_t start, uint32_t size);
+
+// called by the bootstrap core to initialize any global virtual memory
+// structures. Look in init.cc for exact placement
+void VMM::global_init();
+
+// called by each core to initialize any per-core virtual memory
+// structures. Look in init.cc for exact placement
+void VMM::per_core_init();
+
+

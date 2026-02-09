@@ -1,0 +1,18 @@
+*** Starting edge case tests ***
+*** Open non-existent file: Failed as expected
+*** Read from invalid fd: Failed as expected
+*** Length of invalid fd: Failed as expected
+*** Write to invalid fd: Failed as expected
+*** Close invalid fd: Failed as expected
+*** Seek with negative offset: Failed as expected
+*** Execl non-existent program: Failed as expected
+*** Edge case tests complete
+*** Semaphore creation test 
+*** Passed (Semaphore #100 creation failed as expected)
+*** File opening test
+*** Passed (File #97 open failed as expected)
+*** Testing Kernel Memory is Protected
+*** Kernel safe
+*** Testing Lapics Memory is Protected
+*** Lapics safe
+*** Finished all tcs!

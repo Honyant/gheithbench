@@ -1,0 +1,19 @@
+*** Test #1: a regular mmap to private memory space
+*** a mere spooky mmap
+*** Test #2: mapping to shared memory
+*** candy apple
+*** Test #3: cannot unmap shared memory
+*** If you handle this incorrectly, then the next test will fail.
+*** Test #4: shared memory can be accessed by all threads
+*** candy apple
+*** candy apple
+*** candy apple
+*** candy apple
+*** candy apple
+*** candy apple
+*** candy apple
+*** candy apple
+*** candy apple
+*** candy apple
+*** Test #5: files are mapped to first available location in VM
+*** trick or treat! the file is in the correct location

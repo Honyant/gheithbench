@@ -1,0 +1,109 @@
+# CS439H Project 4
+
+## Task
+Implement atomic reference counting (ARC) with StrongPtr<T> and WeakPtr<T> smart pointer templates. Control blocks track strong_count and weak_count with atomic operations. Objects are freed when strong_count reaches 0, control blocks freed when both reach 0.
+
+## Assignment Specification
+
+Assignment:
+~~~~~~~~~~~
+
+    - Improve your preemptive multi-threading implementation:
+           The O(1) requirement for critical sections implemented using spinning and/or disabling
+           interrupts will be more strict
+    - Implement ARC (atomic reference counting) as discussed in class
+
+Files you can change (without changing the API)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+kernel/threads.{h,cc}
+kernel/threads.{h,cc}
+kernel/pit.{h,cc}
+kernel/promise.{h,c}
+kernel/bb.{h,cc}
+kernel/blocking_lock.{h,cc}
+kernel/shared.{h,cc}
+
+## Workspace Files
+The following files are in your workspace:
+```
+attach_qemu
+debug_qemu
+.gitignore
+kernel/atomic.cc
+kernel/atomic.h
+kernel/barrier.cc
+kernel/barrier.h
+kernel/bb.h
+kernel/blocking_lock.h
+kernel/config.cc
+kernel/config.h
+kernel/context.S
+kernel/crt.h
+kernel/crti.cc
+kernel/crtn.cc
+kernel/debug.cc
+kernel/debug.h
+kernel/.gitignore
+kernel/heap.cc
+kernel/heap.h
+kernel/idt.cc
+kernel/idt.h
+kernel/init.cc
+kernel/init.h
+kernel/io.h
+kernel/kernel.h
+kernel/libk.cc
+kernel/libk.h
+kernel/loop.h
+kernel/machine.h
+kernel/machine.S
+kernel/Makefile
+kernel/mbr.S
+kernel/pit.cc
+kernel/pit.h
+kernel/promise.cc
+kernel/promise.h
+kernel/queue.h
+kernel/random.h
+kernel/script.ld
+kernel/shared.cc
+kernel/shared.h
+kernel/smp.cc
+kernel/smp.h
+kernel/snprintf.cc
+kernel/threads.cc
+kernel/threads.h
+kernel/u8250.cc
+kernel/u8250.h
+Makefile
+monitor_qemu
+README
+run_qemu
+tools/summarize.py
+```
+
+There are 59 tests available. Tests are located in the `tests/` directory.
+
+## Instructions
+1. Read and understand all provided source files in your workspace.
+2. Implement the required functionality by modifying the kernel source files.
+3. To compile and test, use the `./exec` wrapper which runs commands in a Linux
+   environment with all necessary tools:
+   - `./exec 'make'` — compile
+   - `./exec 'make -s test'` — run all tests
+4. You can edit files directly — they are shared with the build environment.
+5. The kernel runs in QEMU (i386, 4 cores, 128MB RAM). Tests timeout after 10 seconds.
+6. This is a freestanding kernel — no libc. Use only what's provided.
+7. Focus on correctness first. Concurrency bugs and race conditions are the main challenge.
+8. Your primary goal is to pass ALL test cases. Partial solutions are not acceptable — strive to make every single test pass.
+9. You may create your own test files (`.cc` and `.ok`) in the `tests/` directory to help debug your implementation.
+
+## Constraints
+- Do NOT modify the Makefile or kernel/Makefile.
+- Do NOT modify the README.
+- Do NOT modify test files (.ok files, .dir directories).
+- Do NOT modify kernel infrastructure files unless the README says you can:
+  - Leave alone: kernel/machine.h, kernel/machine.S, kernel/script.ld
+- You may create new source files in the kernel/ directory if needed.
+- The code must compile without warnings (`-Wall -Werror` is enabled).

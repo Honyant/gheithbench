@@ -1,0 +1,199 @@
+# CS439H Project 6
+
+## Task
+Implement virtual memory management with x86 paging. Write a physical frame allocator, page directory/table management, page fault handler, and naive_mmap/naive_unmap for memory-mapped regions. Each thread gets its own virtual address space.
+
+## Assignment Specification
+
+Assignment:
+~~~~~~~~~~~
+
+    - Enable virtual memory
+
+Starter code:
+~~~~~~~~~~~~~
+
+You're given some code to help you bootstrap your work but it's incomplete:
+
+    - you need to think about adding a VMM context to each thread
+        * Page directory, ...
+        * VMEs, ...
+        * changes to context switch
+        * flushing TLBs when needed
+        * what is the VMM context for the helper thread
+        * ...
+
+    - the ext2 implementation is incomplete
+The physical address space:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    0x00000000 - 0x00100000      kernel text and data
+    0x00100000 - 0x00600000      kernel heap
+    0x00600000 - kConfig.memSize available frames
+    kConfig.ioAPIC               the IOPIC (one page)
+    kConfig.localAPIC            the LAPIC (one page)
+
+The virtual address space:
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    0x00000000 - 0x00001000      invalid (causes a kernel panic)
+    0x00001000 - 0x00100000      kernel text and data
+    0x00100000 - 0x00600000      kernel heap
+    0x00600000 - 0x80000000      undefined
+    0x80000000 - 0xF0000000      private to each thread
+                                   naive_mmap(..., false, ...)
+    0xF0000000 - 0xFFFFFFFF+1    shared between threads
+                                   naive_mmap(..., true, ...)
+naive_mmap
+~~~~~~~~~~
+
+    extern void* naive_mmap(
+        uint32_t size,           // size of the virtual mapping in bytes
+        bool shared,             // true -> shared with all other threads
+                                 // false -> private to this thread
+        StrongPtr<Node> file,    // the file to map
+                                 // file == nullptr => anonymous mapping
+        uint32_t file_offset     // offset in the file
+   );
+
+   Returns the virtual address, guaranteed to be the lowest available
+   virtual address in the selected region, nullptr if there is an error.
+naive_unmap
+~~~~~~~~~~~~
+
+   extern void naive_unmap(void* va); // unmaps the entire mapping
+                                  // containing va
+
+Handling page faults:
+~~~~~~~~~~~~~~~~~~~~~
+
+   void vmm_pageFault(uintptr_t va_, uintptr_t *saveState)
+
+    - called as the result of a page fault exception
+    - called with interrupts enabled
+    - retries the faulting instruction when it returns
+The physical memory API (in physmem.h):
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// allocates a new 4K-aligned zero-filled frame, returns its physical address
+// panics if out of frames
+uint32_t PhysMem::alloc_frame();
+
+// frees an allocated 4K-aligned frame
+void PhysMem::free_dealloc_frame(uint32_t pa);
+
+initialization
+~~~~~~~~~~~~~~
+
+Look carefully in kernel/init.cc in order to understand when/where those
+calls are made and how they related to the initialization of other
+sub-systems
+
+// called by the bootstrap core to initialize the available frames area
+void PhysMem::init(uint32_t start, uint32_t size);
+
+// called by the bootstrap core to initialize any global virtual memory
+// structures. Look in init.cc for exact placement
+void VMM::global_init();
+
+// called by each core to initialize any per-core virtual memory
+// structures. Look in init.cc for exact placement
+void VMM::per_core_init();
+
+## Workspace Files
+The following files are in your workspace:
+```
+attach_qemu
+debug_qemu
+.gitignore
+kernel/atomic.cc
+kernel/atomic.h
+kernel/barrier.cc
+kernel/barrier.h
+kernel/bb.h
+kernel/blocking_lock.h
+kernel/blocking_queue.h
+kernel/block_io.cc
+kernel/block_io.h
+kernel/buffer_cache.h
+kernel/buffer.h
+kernel/config.cc
+kernel/config.h
+kernel/context.S
+kernel/crt.h
+kernel/crti.cc
+kernel/crtn.cc
+kernel/debug.cc
+kernel/debug.h
+kernel/ext2.cc
+kernel/ext2.h
+kernel/.gitignore
+kernel/heap.cc
+kernel/heap.h
+kernel/ide.cc
+kernel/ide.h
+kernel/idt.cc
+kernel/idt.h
+kernel/init.cc
+kernel/init.h
+kernel/io.h
+kernel/kernel.h
+kernel/libk.cc
+kernel/libk.h
+kernel/loop.h
+kernel/machine.h
+kernel/machine.S
+kernel/Makefile
+kernel/mbr.S
+kernel/physmem.cc
+kernel/physmem.h
+kernel/pit.cc
+kernel/pit.h
+kernel/promise.cc
+kernel/promise.h
+kernel/queue.h
+kernel/random.h
+kernel/script.ld
+kernel/semaphore.h
+kernel/shared.cc
+kernel/shared.h
+kernel/smp.cc
+kernel/smp.h
+kernel/snprintf.cc
+kernel/threads.cc
+kernel/threads.h
+kernel/u8250.cc
+kernel/u8250.h
+kernel/vmm.cc
+kernel/vmm.h
+Makefile
+monitor_qemu
+README
+run_qemu
+```
+
+There are 52 tests available. Tests are located in the `tests/` directory.
+
+## Instructions
+1. Read and understand all provided source files in your workspace.
+2. Implement the required functionality by modifying the kernel source files.
+3. To compile and test, use the `./exec` wrapper which runs commands in a Linux
+   environment with all necessary tools:
+   - `./exec 'make'` — compile
+   - `./exec 'make -s test'` — run all tests
+4. You can edit files directly — they are shared with the build environment.
+5. The kernel runs in QEMU (i386, 4 cores, 128MB RAM). Tests timeout after 40 seconds.
+6. Tests mount an ext2 disk image as a second drive.
+7. This is a freestanding kernel — no libc. Use only what's provided.
+8. Focus on correctness. Virtual memory bugs can be very subtle.
+9. Your primary goal is to pass ALL test cases. Partial solutions are not acceptable — strive to make every single test pass.
+10. You may create your own test files (`.cc`, `.ok`, `.dir`, `.block_size`) in the `tests/` directory to help debug your implementation.
+11. A grading tool is available at `./grade`. After building, run `./exec './grade -n 10'` to run each test 10 times and check for flaky concurrency bugs. Your final grade depends on test reliability — tests must pass consistently, not just once.
+
+## Constraints
+- Do NOT modify the Makefile or kernel/Makefile.
+- Do NOT modify the README.
+- Do NOT modify test files (.ok files, .dir directories).
+- Do NOT modify kernel infrastructure files unless the README says you can:
+  - Leave alone: kernel/machine.h, kernel/machine.S, kernel/script.ld
+- You may create new source files in the kernel/ directory if needed.
+- The code must compile without warnings (`-Wall -Werror` is enabled).

@@ -1,0 +1,35 @@
+*** Begin!
+*** Replacing cin with /data/fruit.txt:
+***     Opened fruit.txt at fd 0
+***     Reading (then closing) fruit.txt in separate processes:
+***         Best fruit:
+***         strawberries
+***         blueberries
+***         watermelon
+***         apples
+***     Wait with invalid pointer: -1
+***     Last child exited with code 123
+*** Opened concurrency.txt at fd 0
+***     Seeking to 100: 100
+***         Reading: -1
+***     Seeking back to 0: 0
+***     Closing it concurrently on several processes
+***     MMapping it
+***         Reading file: multithreading = pain
+***     Reading after unmap: -1
+*** Accessing nonexistent file: -1
+*** Chdir-ing to nonexistent directory: -1
+*** Execl-ing non-executable (/data/fruit.txt): -1
+*** Execl-ing executable with bad memory address (/sbin/invalid): -1
+*** Execl-ing with bad string address (/sbin/flags): -1
+*** Pagefaulting at kernel address
+***     Child exited with code -1
+*** Pagefaulting at unmapped shared address
+***     Child exited with code -1
+*** Forking with overflow flag SET
+***     In forked child: overflow flag is SET
+***     Child exited with code 321
+*** Forking with overflow flag UNSET
+***     In forked child: overflow flag is UNSET
+***     Child exited with code 321
+*** Done with test case!

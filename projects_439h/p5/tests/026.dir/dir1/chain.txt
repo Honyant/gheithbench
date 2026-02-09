@@ -1,0 +1,1 @@
+Congrats! You were able to follow a chained symlink.

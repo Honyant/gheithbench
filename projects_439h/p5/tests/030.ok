@@ -1,0 +1,14 @@
+*** block size is 1024
+*** inode size is 128
+*** looking at /
+***      is a directory
+***      contains 6 entries
+***      has 3 links
+*** entry counts match expected
+*** find test 1 matches expected
+*** looking at /c
+***      is a file
+***      contains 1 bytes
+***      has 1 links
+*** find test 2 matches expected
+*** passed 2 checks

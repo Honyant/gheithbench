@@ -1,0 +1,52 @@
+*** block size is 1024
+*** inode size is 128
+*** looking at /
+***      is a directory
+***      contains 8 entries
+***      has 3 links
+*** attempting to find the max length filename
+*** looking at /[max_filename]
+***      is a file
+***      contains 39 bytes
+***      has 1 links
+*** Done with Test 1!
+*** attempting to find 'self_symlink'
+*** looking at /self_symlink
+***      is a symbolic link
+***      link size is 12
+***       => self_symlink
+*** self_symlink points to 'self_symlink'
+*** looking at /self_symlink target
+***      is a symbolic link
+***      link size is 12
+***       => self_symlink
+*** Done with Test 2!
+*** attempting to find 'link_a'
+*** looking at /link_a
+***      is a symbolic link
+***      link size is 6
+***       => link_b
+*** 'link_a' points to 'link_b'
+*** looking at link_b
+***      is a symbolic link
+***      link size is 6
+***       => link_c
+*** 'link_b' points to 'link_c'
+*** looking at link_c
+***      is a symbolic link
+***      link size is 6
+***       => link_a
+*** 'link_c' points to 'link_a'
+*** looking at link_a
+***      is a symbolic link
+***      link size is 6
+***       => link_b
+*** 'link_a' points to 'link_b'
+*** looking at link_b
+***      is a symbolic link
+***      link size is 6
+***       => link_c
+*** Done with Test 3!
+*** sum: 800
+*** Done with Test 4!
+*** passed 2 checks

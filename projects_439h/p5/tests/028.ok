@@ -1,0 +1,5 @@
+*** you free your caches if you allocate a separate cache for every Ext2 object
+*** 67 of 67 entries counted
+*** you synchronize your cache accesses
+*** you don't lock the entire cache
+*** done

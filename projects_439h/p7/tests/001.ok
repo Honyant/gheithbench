@@ -1,0 +1,51 @@
+*** 1
+*** init
+*** -----------------------------------------
+*** PART 1: ID Numbering System
+*** -----------------------------------------
+*** I am the child
+*** I am the parent. The child returned: 0
+*** child_id is >= 100 ? yes
+*** sem_id is >= 100 ? yes
+*** -----------------------------------------
+*** PART 2: Entry Type Validation
+*** -----------------------------------------
+*** up(file ID) fails correctly ? yes
+*** down(file ID) fails correctly ? yes
+*** write(sem ID) fails correctly ? yes
+*** wait(sem ID) fails correctly ? yes
+*** -----------------------------------------
+*** PART 3: Existence Checks
+*** -----------------------------------------
+*** write(nonexistent file ID) fails correctly ? yes
+*** up(nonexistent sem ID) fails correctly ? yes
+*** down(nonexistent sem ID) fails correctly ? yes
+*** close(nonexistent sem ID) fails correctly ? yes
+*** wait(nonexistent proc ID) fails correctly ? yes
+*** len(nonexistent file ID) fails correctly ? yes
+*** read(nonexistent file ID) fails correctly ? yes
+*** seek(nonexistent file ID) fails correctly ? yes
+*** Cleaning up our semaphore before we move on
+*** closing semaphore works? yes
+*** -----------------------------------------
+*** PART 4: Stdout/Stderr Special Case
+*** -----------------------------------------
+*** closing stderr correctly results in a failed write? yes
+*** opening a file returns the lowest available number? yes
+*** write to random file works? yes
+*** stdout was successfully closed 
+*** -----------------------------------------
+*** PART 5: Free Space Checks
+*** -----------------------------------------
+*** Attempting to create 100 semaphores
+*** created 100 semaphores
+*** Attempting to create one more semaphore
+*** sem failed as expected
+*** Attempting to open 100 files
+*** opened 100 files
+*** Attempting to open one more file
+*** open failed as expected
+*** Attempting to fork 100 processes
+*** forked 100 processes
+*** Attempting to fork one more process
+*** fork failed as expected

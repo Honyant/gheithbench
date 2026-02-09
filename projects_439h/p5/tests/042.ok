@@ -1,0 +1,17 @@
+*** block size is 4096
+*** inode size is 128
+*** looking at /
+***      is a directory
+***      contains 8 entries
+***      has 0 links
+*** looking at /abcde
+***      is a directory
+***      contains 4 entries
+***      has 0 links
+*** looking at /g
+***      is a directory
+***      contains 3 entries
+***      has 0 links
+*** looking at /not_there
+***      does not exist
+*** done!

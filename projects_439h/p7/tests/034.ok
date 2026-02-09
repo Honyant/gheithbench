@@ -1,0 +1,22 @@
+*** starting tests...
+*** bytes read: 43
+*** this is nice
+*** we can read and write
+*** bytes written to stdout: 43
+*** seek offset: 17
+*** this is nice
+*** we can read and write
+*** bytes written to stderr: 43
+*** bytes not written to stdinn: -1
+*** bytes not written to data.txt: -1
+*** close status: 0
+*** semaphore id: 100
+*** semaphore down succeeded
+*** semaphore up succeeded
+*** semaphore close status: 0
+*** invalid semaphore close status: -1
+*** in child process
+*** about to set promise
+*** promise value for child: 0
+*** parent wait status: 0, child exit status: 99
+*** all tests completed.

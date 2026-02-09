@@ -1,0 +1,16 @@
+*** block size is 4096
+*** inode size is 128
+*** looking at /
+***      is a directory
+***      contains 15 entries
+***      has 4 links
+*** looking at /link_to_dir_1
+***      is a symbolic link
+***      link size is 1019
+***       => dir4_lets_make_this_name_approx_255_chars_to_really_stress_that_symlink_buffers_are_freed_by_the_way_did_i_mention_this_is_a_directory_name_which_is_lowkey_a_little_unfortunate_but_lets_keep_it_moving_im_just_a_bill_waiting_to_make_my_way_to_capitol_hill/dir3_lets_make_this_name_approx_255_chars_to_really_stress_that_symlink_buffers_are_freed_by_the_way_did_i_mention_this_is_a_directory_name_which_is_lowkey_a_little_unfortunate_but_lets_keep_it_moving_im_just_a_bill_waiting_to_make_my_way_to_capitol_hill/dir2_lets_make_this_name_approx_255_chars_to_really_stress_that_symlink_buffers_are_freed_by_the_way_did_i_mention_this_is_a_directory_name_which_is_lowkey_a_little_unfortunate_but_lets_keep_it_moving_im_just_a_bill_waiting_to_make_my_way_to_capitol_hill/dir1_lets_make_this_name_approx_255_chars_to_really_stress_that_symlink_buffers_are_freed_by_the_way_did_i_mention_this_is_a_directory_name_which_is_lowkey_a_little_unfortunate_but_lets_keep_it_moving_im_just_a_bill_waiting_to_make_my_*** looking at /link_to_dir_1/
+***      is a directory
+***      contains 3 entries
+***      has 2 links
+*** If everything above matches the ok file up until this point, your symbolic links resolve correctly and you are now ready for the freeing test
+*** (If nothing appears after this, you didn't make it) Get ready to make the jump... 1... 2... 3... JUMP!
+*** Wow congratulations, you made it to the other side and didn't fall into the chasm

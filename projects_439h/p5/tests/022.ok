@@ -1,0 +1,18 @@
+*** block size is 2048
+*** inode size is 128
+*** looking at /
+***      is a directory
+***      contains 21 entries
+***      has 5 links
+*** looking at goat_link16/goats.txt
+***      is a file
+***      contains 3552 bytes
+***      has 1 links
+*** Uzair and Ishan.
+*** You didn't timeout!
+*** looking at goats/goats.txt
+***      is a file
+***      contains 3552 bytes
+***      has 1 links
+*** Uzair and Ishan.
+*** passed 54004 checks

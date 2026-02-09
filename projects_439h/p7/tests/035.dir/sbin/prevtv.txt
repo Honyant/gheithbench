@@ -1,0 +1,56 @@
+#include "libc.h"
+
+void testEdgeCases() {
+
+    // Edge case for open: file does not exist
+    int fd = open("/etc/non_existent_file.txt", 0);
+    printf("*** Open non-existent file: %s\n", fd < 0 ? "Failed as expected" : "Unexpected Success");
+
+    // Edge case for read: invalid file descriptor
+    char buffer[20];
+    int read_result = read(-1, buffer, 20);
+    printf("*** Read from invalid fd: %s\n", read_result < 0 ? "Failed as expected" : "Unexpected Success");
+
+    // Edge case for len: invalid file descriptor
+    int len_result = len(-1);
+    printf("*** Length of invalid fd: %s\n", len_result < 0 ? "Failed as expected" : "Unexpected Success");
+
+    // Edge case for write: invalid file descriptor
+    int write_result = write(-1, "Test", 4);
+    printf("*** Write to invalid fd: %s\n", write_result < 0 ? "Failed as expected" : "Unexpected Success");
+
+    // Edge case for close: invalid file descriptor
+    int close_result = close(-1);
+    printf("*** Close invalid fd: %s\n", close_result < 0 ? "Failed as expected" : "Unexpected Success");
+
+    // Edge case for seek: negative offset
+    int seek_result = seek(1, -10);
+    printf("*** Seek with negative offset: %s\n", seek_result < 0 ? "Failed as expected" : "Unexpected Success");
+
+    // // Edge case for semaphore: creating with negative initial value
+    // int sem_id = sem(-1);
+    // printf("*** Create semaphore with negative initial value: %s\n", sem_id < 0 ? "Failed as expected" : "Unexpected Success");
+
+    // // Edge case for down: invalid semaphore id
+    // int down_result = down(-1);
+    // printf("*** Down on invalid semaphore: %s\n", down_result < 0 ? "Failed as expected" : "Unexpected Success");
+
+    // // Edge case for up: invalid semaphore id
+    // int up_result = up(-1);
+    // printf("*** Up on invalid semaphore: %s\n", up_result < 0 ? "Failed as expected" : "Unexpected Success");
+
+    // Edge case for execl: executing a non-existent program
+    int execl_result = execl("/sbin/non_existent_program", "non_existent_program");
+    printf("*** Execl non-existent program: %s\n", execl_result < 0 ? "Failed as expected" : "Unexpected Success");
+
+
+}
+
+int main(int argc, char** argv) {
+    printf("*** Starting edge case tests ***\n");
+    testEdgeCases();
+    printf("*** All edge case tests complete ***\n");
+
+    shutdown();
+    return 0;
+}

@@ -1,0 +1,36 @@
+*** block size is 4096
+*** inode size is 128
+*** looking at /
+***      is a directory
+***      contains 8 entries
+***      has 5 links
+*** looking for our bouquet
+*** looking at /lavender/rose/peony/tulip/iris/daisy/sunflower/lily/hyacinth/orchid/bouquet.txt
+***      is a file
+***      contains 545 bytes
+***      has 1 links
+***                    _
+***                  _(_)_                          wWWWw   _
+***      @@@@       (_)@(_)   vVVVv     _     @@@@  (___) _(_)_
+***     @@()@@ wWWWw  (_)\    (___)   _(_)_  @@()@@   Y  (_)@(_)
+***      @@@@  (___)     `|/    Y    (_)@(_)  @@@@   \|/   (_)\
+***       /      Y       \|    \|/    /(_)    \|      |/      |
+***    \ |     \ |/       | / \ | /  \|/       |/    \|      \|/
+***hi! \\|//   \\|///  \\\|//\\\|/// \|///  \\\|//  \\|//  \\\|// 
+***^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+*** found one! do we have the time to find another?
+*** looking at /lavender/rose/peony/tulip/iris/daisy/sunflower/lily/hyacinth/orchid/bouquet.txt
+***      is a file
+***      contains 545 bytes
+***      has 1 links
+***                    _
+***                  _(_)_                          wWWWw   _
+***      @@@@       (_)@(_)   vVVVv     _     @@@@  (___) _(_)_
+***     @@()@@ wWWWw  (_)\    (___)   _(_)_  @@()@@   Y  (_)@(_)
+***      @@@@  (___)     `|/    Y    (_)@(_)  @@@@   \|/   (_)\
+***       /      Y       \|    \|/    /(_)    \|      |/      |
+***    \ |     \ |/       | / \ | /  \|/       |/    \|      \|/
+***hi! \\|//   \\|///  \\\|//\\\|/// \|///  \\\|//  \\|//  \\\|// 
+***^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+*** Yay we found it! Isn't it pretty?
+*** passed 4 checks

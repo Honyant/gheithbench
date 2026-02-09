@@ -1,0 +1,21 @@
+*** looking at /f1/flavor
+***      is a file
+***      contains 25 bytes
+***      has 1 links
+*** bagel-flavored ice cream
+*** looking at /root_to_f1
+***      is a symbolic link
+***      link size is 2
+***       => f1
+*** looking at /root_to_f1/flavor
+***      is a file
+***      contains 25 bytes
+***      has 1 links
+*** bagel-flavored ice cream
+*** Basic Tests Passed!
+*** looking at /bee.txt
+***      is a file
+***      contains 86090 bytes
+***      has 1 links
+*** Mr. Sting is sitting at home until he is taken out of his house by the men
+*** passed 8 checks

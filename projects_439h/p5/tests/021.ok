@@ -1,0 +1,10 @@
+*** looking at /sym_dir/link_1/ans.txt
+***      is a file
+***      contains 21 bytes
+***      has 1 links
+*** Symlink success!
+*** looking at /sym_dir/link_16/
+***      is a directory
+***      contains 3 entries
+***      has 2 links
+*** passed 2 checks

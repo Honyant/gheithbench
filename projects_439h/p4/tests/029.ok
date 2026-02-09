@@ -1,0 +1,1 @@
+*** Test passed! You avoid race conditions when trying to promote two weak pointers at once.

@@ -1,0 +1,17 @@
+*** Sanity Checking find()
+*** root number is 2 = 2
+*** nested number is 14 = 14
+*** circular number is 12 = 12
+*** looking at /circular/file.txt
+***      is a file
+***      contains 22 bytes
+***      has 1 links
+*** File inside circular/
+*** looking at /circular/nested/deeper/deep_file.txt
+***      is a file
+***      contains 30 bytes
+***      has 1 links
+*** Deep in the nested structure.
+*** Validating checksums...
+*** Checksums validated
+*** passed 4 checks

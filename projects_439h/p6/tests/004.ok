@@ -1,0 +1,65 @@
+*** Virtual memory should be on now.
+*** Lower region of shared memory: f0000000.
+*** Middle region of shared memory: fec01000.
+*** High region of shared memory: fee01000.
+*** Last page of shared memory: fffff000.
+*** 
+*** Iteration #0.
+*** 
+*** Wrote to lower region of shared memory.
+*** Wrote to middle region of shared memory.
+*** Wrote to upper region of shared memory.
+*** Wrote to the very last page of shared memory.
+*** Read from lower region of shared memory.
+*** Read from middle region of shared memory.
+*** Read from upper region of shared memory.
+*** Read from the very last page of shared memory.
+*** "Unmapped" low region of shared memory.
+*** "Unmapped" middle region of shared memory.
+*** "Unmapped" high region of shared memory.
+*** "Unmapped" last page of shared memory.
+*** 
+*** Iteration #1.
+*** 
+*** Wrote to lower region of shared memory.
+*** Wrote to middle region of shared memory.
+*** Wrote to upper region of shared memory.
+*** Wrote to the very last page of shared memory.
+*** Read from lower region of shared memory.
+*** Read from middle region of shared memory.
+*** Read from upper region of shared memory.
+*** Read from the very last page of shared memory.
+*** "Unmapped" low region of shared memory.
+*** "Unmapped" middle region of shared memory.
+*** "Unmapped" high region of shared memory.
+*** "Unmapped" last page of shared memory.
+*** 
+*** Iteration #2.
+*** 
+*** Wrote to lower region of shared memory.
+*** Wrote to middle region of shared memory.
+*** Wrote to upper region of shared memory.
+*** Wrote to the very last page of shared memory.
+*** Read from lower region of shared memory.
+*** Read from middle region of shared memory.
+*** Read from upper region of shared memory.
+*** Read from the very last page of shared memory.
+*** "Unmapped" low region of shared memory.
+*** "Unmapped" middle region of shared memory.
+*** "Unmapped" high region of shared memory.
+*** "Unmapped" last page of shared memory.
+*** 
+*** Iteration #3.
+*** 
+*** Wrote to lower region of shared memory.
+*** Wrote to middle region of shared memory.
+*** Wrote to upper region of shared memory.
+*** Wrote to the very last page of shared memory.
+*** Read from lower region of shared memory.
+*** Read from middle region of shared memory.
+*** Read from upper region of shared memory.
+*** Read from the very last page of shared memory.
+*** "Unmapped" low region of shared memory.
+*** "Unmapped" middle region of shared memory.
+*** "Unmapped" high region of shared memory.
+*** "Unmapped" last page of shared memory.

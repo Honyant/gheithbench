@@ -1,0 +1,15 @@
+*** ABCDEFGHIJKLMNOPQRSTUVWXYZ
+*** Assigned File Descriptor: 3
+*** A
+*** Response before close: 1
+*** Response after close is correct: 1
+*** Assigned File Descriptor: 2
+*** File 2 Found
+*** File has been found
+*** !
+*** 
+*** Process inside a process!
+*** Response from inner process: 110
+*** 55
+*** Correctly handled invalid read of closed file
+*** Correctly handled closing already closed file.

@@ -1,0 +1,8 @@
+*** Test 1: yielding while threads are sleeping
+*** Yielding
+*** Done yielding
+*** Started counting
+*** Done counting
+*** Count: 400/400
+*** Test 2: allocating more threads than there is room for
+*** You passed :D

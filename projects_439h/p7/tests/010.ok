@@ -1,0 +1,18 @@
+*** Welcome to the bad executable test case!
+*** This is a fairly straight forward test case.
+*** All of them can be found to be invalid via the data you can see in elf load.
+*** Every one of them should fail, and you should be able to continue executing this program.
+*** after a failed execl (don't free all the memory before you know if the execl will succeed!)
+*** Part 0: attempting to execl a nonexistent file
+*** You can tell this is invalid because the file does not exist
+*** did execl return -1? 1
+*** Part 1: attempting to execl a tiny text file
+*** You can tell this is invalid because it is too small to contian an elf header
+*** did execl return -1? 1
+*** Part 2: attempting to execl a BIG text file
+*** You can tell this is invalid because the elf header does not contain the correct magic bytes (explained in elf.h)
+*** did execl return -1? 1
+*** Part 3: attempting to execl an invalid load address (trying to load the program into kernel memory)
+*** You can tell this is invalid because it asks to be loaded at a kernel address
+*** did execl return -1? 1
+*** Great Job! You did it!

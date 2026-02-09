@@ -1,0 +1,13 @@
+*** Welcome to my test case!
+*** Testing unmapping iopic and localapic if there is nothing in the vme list
+*** Testing a regular mmap, read, then unmap with a file passed in
+*** You are reading from file1!
+*** Testing mmapping multiple pages without loading anything in if you lazy load
+*** Testing unmapping then remapping
+*** Unmapping an unaligned pointer that is within one page
+*** Unmapping an unaligned pointer that is not on the first page
+*** Unmapping an unaligned pointer that is within one page when we actually load something in
+*** You are reading from file1!
+*** Unmapping an unaligned pointer that is not on the first page when we actually load something in
+*** You are reading from file1!
+*** passed 129 checks

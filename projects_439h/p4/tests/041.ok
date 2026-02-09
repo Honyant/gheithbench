@@ -1,0 +1,25 @@
+*** TEST 1 begin.
+*** creating struct with value 0
+*** created strong pointer with value 0
+*** promoted with value 0
+*** deleting struct with value 0
+*** strong pointer reset to nullptr.
+*** weak pointer promotion after reset: failed
+*** TEST 1 completed.
+*** TEST 2 begin.
+*** running thread
+*** running thread
+*** running thread
+*** running thread
+*** running thread
+*** running thread
+*** running thread
+*** running thread
+*** running thread
+*** running thread
+*** barrier is not null
+*** TEST 2 completed.
+*** TEST 3 begin.
+*** promise is not null.
+*** promise value: 10000
+*** TEST 3 completed.

@@ -1,0 +1,61 @@
+* How would you implement the "real" shared mappings?
+
+      - multiple threads (processes) can map the same file in shared mode
+      - changes made by any thread are immediately observed by all other
+        sharing threads
+      - changes made by any thread are immediately observed by threads
+        doing read from the file
+      - changes made by writing threads are immediately observed by
+        threads that mapped the file in shared mode
+
+You would first of all, want to ensure that all shared processes share the same physical addresses for the same file. This would require a shared page table that is shared between all processes that have the file mapped in shared mode. This shared page table would be updated by all processes that have the file mapped in shared mode. This would ensure that changes made by any process are immediately observed by all other sharing processes.
+The file itself will be mapped into the same physical address when any thread/process mmaps the file in shared mode. Whenever something writes to the shared memory area, the changes need to be written to disk.
+
+- multiple threads (processes) can map the same file in shared mode
+The file is mapped into the same physical address when any thread/process mmaps the file in shared mode, a table is updated to keep track of which physical pages are allocated for each file.
+- changes made by any thread are immediately observed by all other sharing threads
+There should be a hashmap that points to the physical pages of the file, stored in each VME. This hashmap should be shared between all threads that have the file mapped in shared mode. This hashmap should be updated whenever a thread writes to the file.
+- changes made by any thread are immediately observed by threads doing read from the file
+Because they are all sharing the same physical pages, any changes made by any thread will be immediately observed by threads doing read from the file.
+- changes made by writing threads are immediately observed by threads that mapped the file in shared mode
+If the file is open in a global table, then you immediately write to both the shared physical memory as well as the file on disk. You maintain this invariant, that the file on disk and the shared physical memory are always in sync. You'd also need to make sure that you dont have race conditions by locking access (however you do that in your system) to the file.
+
+when you read and write from a file it does a shared mmap, so like all file systems are like reverse paging
+* Can you guess why the assignment makes naive_unmap of shared mapping a
+  noop?
+
+The assignment makes naive_munmap a no-op because actually handling it is very complex.
+
+You'd need to:
+- keep track of which pages are shared between different threads/processes with a reference count that is updated when mappings are created or destroyed
+- only deallocate the shared pages when the last thread/process unmaps the shared region
+- invalidate the TLB entries for all threads/processes that have the shared region mapped when the shared region is unmapped, this would require interprocessor interrupts invalidate the other cores' TLB entries
+
+* Why is it dangerous to call Debug::printf in the page fault handler?
+
+It's dangerous because:
+- The printf function might try to access unmapped memory, causing another page fault
+- This could create an infinite loop of page faults, with each printf attempt triggering another fault
+This would likely lead to a system crash or stack overflow.
+
+It could also be dangerous (for the original version of printf) because:
+- printf has a lock, which could cause a deadlock if the page fault handler is called (faulting while trying to print unallocated but mapped memory) while the lock is already held by printf.
+
+* Read about the use of copy-on-write in virtual memory systems. Why is it a
+  good idea? How would you implement it?
+
+COW is an optimization method where multiple processes share the same physical pages until one tries to write to them. It's beneficial because:
+
+Saves memory
+- Makes process creation (fork) much faster since the entire address space doesn't need to be duplicated immediately on fork, which would be extremely wasteful especially for large programs that only modify a small portion of their memory
+- Only copies when needed
+
+Implementation would require:
+
+Just marking shared pages as read-only at first
+- Having a sophisticated page fault handler that needs to carefully check if the fault was actually due to a write to a copy-on-write page - and not some other type of fault
+- Making a new physical page copy
+- Updating the relevant page tables
+- Keeping track of reference counts in a thread-safe way that won't break under concurrent access
+
+You could also do copy on write for this assignment by using shared physical pages for identical mmaped files, and marking them as read only, so we could mmap one file across a bunch of different thread and use the same physical memory. When one of the threads tries to write to the memory, you would then COW.

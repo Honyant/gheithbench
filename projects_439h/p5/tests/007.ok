@@ -1,0 +1,37 @@
+*** Hello!
+*** IDE object constructed.
+*** EXT2 filesystem view object constructed.
+*** 	block size is 2048
+*** 	inode size is 128
+*** Large memory region allocated.
+*** Path generated.
+*** looking at XXX...
+*** 	is a directory
+*** 	contains 19 entries
+*** 	has 3 links
+*** looking at p
+*** 	is a symbolic link
+*** 	link size is 1
+*** 	=> Q
+*** looking at Q
+*** 	is a directory
+*** 	contains 28 entries
+*** 	has 2 links
+*** looking at a
+*** 	is a symbolic link
+*** 	link size is 255
+*** 	=> ../XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/b/../Q
+*** Symbol confirmed.
+*** looking at Q
+*** 	is a directory
+*** 	contains 28 entries
+*** 	has 2 links
+*** Files found.
+*** Intensive finds completed.
+*** looking at message.txt
+*** 	is a file
+*** 	contains 62 bytes
+*** 	has 1 links
+*** Congratulations on passing (almost all of) this test case!
+*** So long, and thanks for all the fish!
+*** passed 2 checks

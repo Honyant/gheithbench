@@ -1,0 +1,37 @@
+*** test 1 result = :D
+*** test 2 result = :D
+*** test 3 result = :D
+*** test 3 result = :D
+*** test 4 result = :D
+*** test 4 result = :D
+*** test 4 result = :D
+*** test 5 result = :D
+*** test 5 result = :D
+*** test 5 result = :D
+*** test 5 result = :D
+*** test 5 result = :D
+*** test 5 result = :D
+*** test 6 result = :D
+*** test 7 result = :D
+*** test 7 result = :D
+*** test 7 result = :D
+*** test 8 result = :D
+*** test 9 result = :D
+*** test 9 result = :D
+*** test 10 result = :D
+*** test 11 result = :D
+*** test 12 result = :D
+*** test 13 result = :D
+*** test 13 result = :D
+*** test 13 result = :D
+*** test 13 result = :D
+*** deleted dummy
+*** test 13 result = :D
+*** test 14 result = :D
+*** attempting to promote weakptr
+*** successfully promoted weakptr
+*** test 14 result = :D
+*** attempting to promote weakptr
+*** weakptr was already deleted, so no promotion
+*** test 14 result = :D
+*** test 14 result = :D

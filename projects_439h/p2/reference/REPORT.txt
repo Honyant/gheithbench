@@ -1,0 +1,35 @@
+# Adding an 'isEmpty' method to the Queue class is dangerous. Explain.
+
+if you have code like 
+(q.ifempty()){
+    // do something assuming the queue is empty
+}
+
+and some other thread adds to the queue between checking if the queue is empty and doing the task, it could result in unexpected behavior, and it would have to be carefully used to avoid dangerous behavior.
+
+--------------------------------------------
+
+# How do you keep track of the active thread(s)?
+
+I keep track of the active threads with an array of TCB pointers, that can be indexed into using the cpu id, SMP::me()
+
+--------------------------------------------
+
+# When is it safe to delete a thread control block / stack?
+
+When you call stop, you still need the TCB alive to call context switch, and then you need to delete the TCB after you context switch.
+
+--------------------------------------------
+
+# Why is blocking preferred to spinning? Can you think of a scenario in which
+a spinning implementation of a Promise would be more efficient what a blocking
+one?
+
+Blocking is genrally preferred to spinning because it switches the core into another thread so the other thread can do work, while spinning keeps that core occupied. 
+A scenario when spinning Promises are faster than blocking ones would be where the promises are returned very quickly (i.e. low wait time), because in this scenario, context switching when blocking would be more expensive than just spinning.
+
+--------------------------------------------
+
+# When will it be safe to delete the barrier in t3?
+
+It will only be safe to delete the barrier after all the threads that sync with it have passed it.

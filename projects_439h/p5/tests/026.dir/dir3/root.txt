@@ -1,0 +1,1 @@
+Congrats! You are able to follow a symlink to the root.

@@ -1,0 +1,23 @@
+Due:
+    test 10/1/2024 @ 11:59pm
+    code 10/3/2024 @ 11:59pm
+
+Assignment:
+~~~~~~~~~~~
+
+    - Improve your preemptive multi-threading implementation:
+           The O(1) requirement for critical sections implemented using spinning and/or disabling
+           interrupts will be more strict
+    - Implement ARC (atomic reference counting) as discussed in class
+    - contribute a test case
+
+Files you can change (without changing the API)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+kernel/threads.{h,cc}
+kernel/threads.{h,cc}
+kernel/pit.{h,cc}
+kernel/promise.{h,c}
+kernel/bb.{h,cc}
+kernel/blocking_lock.{h,cc}
+kernel/shared.{h,cc}

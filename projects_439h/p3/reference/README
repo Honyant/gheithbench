@@ -1,0 +1,86 @@
+Due:
+    test 9/18/2024 @ 11:59pm
+    code 9/20/2024 @ 11:59pm
+
+Assignment:
+~~~~~~~~~~~
+
+    - Implement preemptive multi-threading
+    - Implement more synchronization primitives:
+        * bounded buffers
+        * blocking locks
+        * timers
+    - contribute a test case
+
+Preemptive multi-threading:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The programmable interval time (PIT) is programmed to interrupt each core once every 1ms. This
+should be used to do 2 things:
+
+    - advance the running time (jiffies)
+    - force the currently running thread to yield
+
+Keep in mind that the pit_handler runs with interrupts disabled. This places limitations on
+what you could do in pit_handler:
+
+    - has to run on O(1) with a small constant
+    - can't compete for spin locks
+    - can't block -> can't use the heap which is protected by a blocking lock
+    - can lead to re-entry issues (e.g. yielding while yielding)
+
+Blocking lock:
+~~~~~~~~~~~~~~
+
+Implements mutual exclusion using blocking. Notice that the heap is now protected
+by a BlockingLock.
+
+
+Bounded buffer:
+~~~~~~~~~~~~~~~
+
+Implements a typed, blocking, multi-producer-multi-consumer (MPMC),
+first-in-first-out (FIFO) communication channel with a finite size buffer.
+
+Rules:
+
+- the buffer size is given to the BB constructor, required to be >= 1.
+- the channel is reliable: values are never lost, never corrupted and never
+  duplicated.
+- a producer (caller of put) blocks until there is room in the buffer
+- a consumer (caller of get) blocks until there is a value in the buffer
+- a value is consumed at most once
+- if producing 'y' depends on prodcing 'x' (e.g. same thread produces 'x' then
+'y') then consuming 'y' depends on consuming 'x' (the same same will never
+see 'y' before 'x')
+
+Timer:
+~~~~~~
+
+A thread can "sleep" (block) for at least 'n' seconds.
+
+Rules:
+
+- a second is defined as Pit::secondsToJjiffies pit interrupts.
+- sleep is guranteed to never return earlier than 'n' second from the time
+  it is called.
+- sleep is expected to make the calling thread eligible to resume (added to the
+  ready queue in a state that returns from sleep) as soon as 'n' seconds expires
+  but never sooner.
+
+
+Scheduling:
+~~~~~~~~~~~
+
+- Can't make any assumptions about the exact execution order
+- All threads must get a chance to run (no thread starvation)
+- All cores must participate in running ready threads
+
+Files you can change (without changing the API)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+kernel/threads.{h,cc}
+kernel/threads.{h,cc}
+kernel/pit.{h,cc}
+kernel/bb.{h,cc}
+kernel/blocking_lock.{h,cc}

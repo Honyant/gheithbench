@@ -1,0 +1,24 @@
+*** Starting strong and weak pointer tests
+*** Constructing TestObject 1
+*** sp1 points to TestObject 1
+*** Created wp1 from sp1
+*** sp2 promotion succeeded, points to TestObject 1
+*** sp1 reset to nullptr
+*** sp3 promotion succeeded, points to TestObject 1
+*** sp2 reset to nullptr
+*** Destructing TestObject 1
+*** sp2 and sp3 reset to nullptr
+*** sp4 promotion failed as expected, object is deleted
+*** Constructing TestObject 2
+*** sp5 points to TestObject 2
+*** sp6 copied from sp5, points to TestObject 2
+*** sp5 reset to nullptr
+*** sp6 still points to TestObject 2
+*** sp7 promotion succeeded, points to TestObject 2
+*** Destructing TestObject 2
+*** sp6 and sp7 reset to nullptr
+*** sp8 promotion failed as expected, object is deleted
+*** Constructing Node 1
+*** Constructing Node 2
+*** node1 and node2 reset to nullptr
+*** Finished strong and weak pointer tests

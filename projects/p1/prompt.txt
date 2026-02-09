@@ -78,14 +78,12 @@ To run by hand
 
     ./p1 < t0.fun
 
-
 ## Workspace Files
 The following files are in your workspace:
 ```
+main.cxx
 Makefile
 README
-REPORT.txt
-main.cxx
 slice.cxx
 slice.h
 ```

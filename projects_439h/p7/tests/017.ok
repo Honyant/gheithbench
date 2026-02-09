@@ -1,0 +1,23 @@
+*** Beginning chdir test
+*** First Test, Basic Open and Read
+*** RAIN
+*** Second Test, chdir to /dir, absolute path
+*** REIN
+*** Third Test, chdir to /dir1/dir2, absolute path
+*** REIGN
+*** Fourth Test, chdir back to root (/), absolute path
+*** RAIN
+*** Fifth Test, chdir to /dir1, relative path from root
+*** REIN
+*** Sixth Test, chdir to (dir1/)/dir2, relative path from dir1
+*** REIGN
+*** Seventh Test, chdir back to root (/) (../../), relative path from dir2
+*** RAIN
+*** Eighth Test, chdir to /dir1, complex absolute path of and ., ..'s
+*** REIN
+*** Ninth Test, chidir to symDir2 (points to dir2)
+*** REIGN
+*** Tenth Test, chdir to invalidDir
+*** PASS!
+*** Last Test, closing all fds
+*** CHDIR TESTS PASSED

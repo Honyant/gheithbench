@@ -1,0 +1,43 @@
+*** Initial Value: 2
+*** Changed Value: 102
+*** Initial Value Again: 2, Next initial value will be that value squared minus one (3) 
+*** Initial Value: 3
+*** Changed Value: 103
+*** Initial Value Again: 3, Next initial value will be that value squared minus one (8) 
+*** Initial Value: 8
+*** Changed Value: 108
+*** Initial Value Again: 8, Next initial value will be that value squared minus one (63) 
+*** Initial Value: 63
+*** Changed Value: 163
+*** Initial Value Again: 63, Next initial value will be that value squared minus one (3968) 
+*** Initial Value: 3968
+*** Changed Value: 4068
+*** Initial Value Again: 3968, Next initial value will be that value squared minus one (15745023) 
+*** Initial Value: 15745023
+*** Changed Value: 15745123
+*** Initial Value Again: 15745023, Next initial value will be that value squared minus one (236945408) 
+*** Initial Value: 236945408
+*** Changed Value: 236945508
+*** Initial Value Again: 236945408, Next initial value will be that value squared minus one (1073741823) 
+*** Initial Value: 1073741823
+*** Changed Value: 1073741923
+*** Initial Value Again: 1073741823, Next initial value will be that value squared minus one (-2147483648) 
+*** Initial Value: -2147483648
+*** Changed Value: -2147483548
+*** Initial Value Again: -2147483648, Next initial value will be that value squared minus one (-1) 
+*** Initial Value: -1
+*** Changed Value: 99
+*** Initial Value Again: -1, Next initial value will be that value squared minus one (0) 
+*** Final Value: 0. Great Job!
+*** RecursiveValue: 2
+*** RecursiveValue: 4
+*** RecursiveValue: 8
+*** RecursiveValue: 16
+*** RecursiveValue: 32
+*** RecursiveValue: 64
+*** RecursiveValue: 128
+*** RecursiveValue: 256
+*** RecursiveValue: 512
+*** RecursiveValue: 1024
+*** RecursiveValue: 2048
+*** RecursiveValue: 4096

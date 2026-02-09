@@ -1,0 +1,167 @@
+# CS439H Project 3
+
+## Task
+Add preemptive scheduling to the threading system using PIT (Programmable Interval Timer) interrupts every 1ms. Implement blocking locks (BlockingLock), bounded buffers (BoundedBuffer<T>), and timer/sleep support. The PIT handler must be O(1) and run with interrupts disabled.
+
+## Assignment Specification
+
+Assignment:
+~~~~~~~~~~~
+
+    - Implement preemptive multi-threading
+    - Implement more synchronization primitives:
+        * bounded buffers
+        * blocking locks
+        * timers
+
+Preemptive multi-threading:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The programmable interval time (PIT) is programmed to interrupt each core once every 1ms. This
+should be used to do 2 things:
+
+    - advance the running time (jiffies)
+    - force the currently running thread to yield
+
+Keep in mind that the pit_handler runs with interrupts disabled. This places limitations on
+what you could do in pit_handler:
+
+    - has to run on O(1) with a small constant
+    - can't compete for spin locks
+    - can't block -> can't use the heap which is protected by a blocking lock
+    - can lead to re-entry issues (e.g. yielding while yielding)
+
+Blocking lock:
+~~~~~~~~~~~~~~
+
+Implements mutual exclusion using blocking. Notice that the heap is now protected
+by a BlockingLock.
+Bounded buffer:
+~~~~~~~~~~~~~~~
+
+Implements a typed, blocking, multi-producer-multi-consumer (MPMC),
+first-in-first-out (FIFO) communication channel with a finite size buffer.
+
+Rules:
+
+- the buffer size is given to the BB constructor, required to be >= 1.
+- the channel is reliable: values are never lost, never corrupted and never
+  duplicated.
+- a producer (caller of put) blocks until there is room in the buffer
+- a consumer (caller of get) blocks until there is a value in the buffer
+- a value is consumed at most once
+- if producing 'y' depends on prodcing 'x' (e.g. same thread produces 'x' then
+'y') then consuming 'y' depends on consuming 'x' (the same same will never
+see 'y' before 'x')
+
+Timer:
+~~~~~~
+
+A thread can "sleep" (block) for at least 'n' seconds.
+
+Rules:
+
+- a second is defined as Pit::secondsToJjiffies pit interrupts.
+- sleep is guranteed to never return earlier than 'n' second from the time
+  it is called.
+- sleep is expected to make the calling thread eligible to resume (added to the
+  ready queue in a state that returns from sleep) as soon as 'n' seconds expires
+  but never sooner.
+Scheduling:
+~~~~~~~~~~~
+
+- Can't make any assumptions about the exact execution order
+- All threads must get a chance to run (no thread starvation)
+- All cores must participate in running ready threads
+
+Files you can change (without changing the API)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+kernel/threads.{h,cc}
+kernel/threads.{h,cc}
+kernel/pit.{h,cc}
+kernel/bb.{h,cc}
+kernel/blocking_lock.{h,cc}
+
+## Workspace Files
+The following files are in your workspace:
+```
+attach_qemu
+debug_qemu
+.gitignore
+kernel/atomic.cc
+kernel/atomic.h
+kernel/barrier.cc
+kernel/barrier.h
+kernel/bb.h
+kernel/blocking_lock.h
+kernel/config.cc
+kernel/config.h
+kernel/context.S
+kernel/crt.h
+kernel/crti.cc
+kernel/crtn.cc
+kernel/debug.cc
+kernel/debug.h
+kernel/.gitignore
+kernel/heap.cc
+kernel/heap.h
+kernel/idt.cc
+kernel/idt.h
+kernel/init.cc
+kernel/init.h
+kernel/io.h
+kernel/kernel.h
+kernel/libk.cc
+kernel/libk.h
+kernel/loop.h
+kernel/machine.h
+kernel/machine.S
+kernel/Makefile
+kernel/mbr.S
+kernel/pit.cc
+kernel/pit.h
+kernel/promise.cc
+kernel/promise.h
+kernel/queue.h
+kernel/random.h
+kernel/script.ld
+kernel/smp.cc
+kernel/smp.h
+kernel/snprintf.cc
+kernel/threads.cc
+kernel/threads.h
+kernel/u8250.cc
+kernel/u8250.h
+Makefile
+monitor_qemu
+README
+run_qemu
+tools/summarize.py
+```
+
+There are 62 tests available. Tests are located in the `tests/` directory.
+
+## Instructions
+1. Read and understand all provided source files in your workspace.
+2. Implement the required functionality by modifying the kernel source files.
+3. To compile and test, use the `./exec` wrapper which runs commands in a Linux
+   environment with all necessary tools:
+   - `./exec 'make'` — compile
+   - `./exec 'make -s test'` — run all tests
+4. You can edit files directly — they are shared with the build environment.
+5. The kernel runs in QEMU (i386, 4 cores, 128MB RAM). Tests timeout after 10 seconds.
+6. This is a freestanding kernel — no libc. Use only what's provided.
+7. Focus on correctness first. Concurrency bugs and race conditions are the main challenge.
+8. Your primary goal is to pass ALL test cases. Partial solutions are not acceptable — strive to make every single test pass.
+9. You may create your own test files (`.cc` and `.ok`) in the `tests/` directory to help debug your implementation.
+10. A grading tool is available at `./grade`. After building, run `./exec './grade -n 10'` to run each test 10 times and check for flaky concurrency bugs. Your final grade depends on test reliability — tests must pass consistently, not just once.
+
+## Constraints
+- Do NOT modify the Makefile or kernel/Makefile.
+- Do NOT modify the README.
+- Do NOT modify test files (.ok files, .dir directories).
+- Do NOT modify kernel infrastructure files unless the README says you can:
+  - Leave alone: kernel/machine.h, kernel/machine.S, kernel/script.ld
+- You may create new source files in the kernel/ directory if needed.
+- The code must compile without warnings (`-Wall -Werror` is enabled).

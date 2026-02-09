@@ -1,0 +1,16 @@
+*** Test 1
+*** Bagel Not Null | Friends 9 | (You don't share with your mom :o ...) 
+*** Bagel Destructed | (Bagel was shared with 9 friends!) 
+*** Divide By 0 | (You already ate this bagel...) 
+*** Test 2
+*** Bagel Not Null | Friends 5 | (You don't share with your mom :o ...) 
+*** Bagel Destructed | (Bagel was shared with 5 friends!) 
+*** Bagel Null | (Such a sweetie! Sharing bagels with your mom!) 
+*** Test 3
+*** Bagel Null | (Such a sweetie! Sharing bagels with your mom!) 
+*** Bagel Not Null | Friends 9 | (You don't share with your mom :o ...) 
+*** Bagel Not Null | Friends 9 | (You don't share with your mom :o ...) 
+*** Bagel Not Null | Friends 9 | (You don't share with your mom :o ...) 
+*** Bagel Not Null | Friends 9 | (You don't share with your mom :o ...) 
+*** Bagel Destructed | (Bagel was shared with 9 friends!) 
+*** Shut Down 

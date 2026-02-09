@@ -1,0 +1,86 @@
+
+- List every file in the kernel directory and describe what
+  it does in one sentence
+
+atomic.cc/.h - Contains templates for concurrency classes/wrappers around atomic primitives like SpinLock, Barrier, and LockGuard for us to use to help manage concurrency and prevent race conditions, as well as a function to pause in loops to conserve power and to indicate shutdowns.
+
+config.cc/.h - reads, processes, and stores info about apic tables that contain info about the processor, the hardware and system info.
+
+critical.cc/.h - the class we work in to define the critical function, a function that guarentees everything that runs in it will only run on one core at a time, to avoid data races
+
+crt.h - a .h file that defines the the CRT struct for the c++ runtime
+
+crti.cc - contains the start of the initialization and finalization arrays for the c runtime as well as the functions to run them
+
+crtn.cc - contains the end of the initialization and finalization arrays for the c runtime as well as the functions to run them 
+
+debug.cc/.h - contains code, the class, functions, and macros, to handle printing, assertations, and handling errors cleanly by halting
+
+heap.cc/.h -  has a first fit heap allocator for memory management
+
+idt.cc/.h - code to manage the interrupt descriptor table, which helps the processor access the interrupt handler functions
+
+init.cc/.h - one of the first things to run, initializes debugging console, gets system config, inits heap, and starts other processors.
+
+io.h - templates for input and output classes for any datatype
+
+kernel.h - .h file that defines the kernelMain function
+
+libk.cc/.h - provides string manip functions and a standard library
+
+loop.h - provides the iAmStuckInALoop function, which helps looping spinlocks conserve energy by pausing
+
+machine.h/.S - very low level code to work with the cpu and other hardware, including interrupt flags, io, virtual memory, and cpu info
+
+Makefile - defines the make configuration and commands to compile and link the entire system to make the images
+
+mbr.S - mbr means master boot record, and this code is the first sector to load in, it loads the kernel and jumps to it
+
+random.h - provides a prng for random numbers
+
+script.ld - linker script that defines the layout of the memory of the image when compiling
+
+smp.cc/.h - helper functions for symmetric multiprocessing- has inter-processor interrupts and and per-cpu data structures
+
+snprintf.cc- provides a standard printf function
+
+u8250.cc/.h - driver code for the ns8250 uart, which is a port controller (this can be used for debugging output)
+
+- What is the difference between concurrency and parallelism?
+Concurrency is about dealing with multiple tasks at the same time, but not necessarily executing them at the same time
+Parallelism is about executing tasks simultaneously, usually with multiple processors or cores.
+
+- What are race conditions and how do they relate to concurrency and/or
+  parallelism?
+Race conditions are when a number of threads try to access or modify data at the same time, which results in undefined/erroneous behavior.
+They relate to concurrency because concurrency is about multiple threads executing concurrently which can lead to race conditions. As for parallelism, due to the simultaneous execution of programs, race conditions are prone to happening.
+
+- What is a critical section?
+A critical section is part of program where resources are being shared, and it's important in these cases for only one thread to process the critical section at the same time to prevent race conditions.
+
+- What is a barrier?
+A mechanism that blocks groups of threads from proceeding until a certain number of threads have all reached the barrier. They are subsequently released to proceed onwards.
+
+- What is a spinlock?
+A lock where the thread trying to aquire the lock checks in a loop if the lock is available until it is.
+
+- Read about the following x86 instructions and compare them:
+     halt
+     pause
+     monitor/mwait
+
+     halt stops the cpu until an interrupt happens, which helps improve power efficiency
+
+     pause is helpful for spinlock loops by allowing other hyperthreads to use the cpu's resources, and improves power efficiency
+
+     monitor/mwait, are two commands used together that are also helpful for power efficiency, monitor creates a range of memory addresses to watch, and mwait puts the cpu into a low power state until something in that memory range is written to.
+
+- What is QEMU? Why is it useful?
+ QEMU stands for quick emulator. it emulates a processor, capable of executing several different types of ISAs, and it also serves as a virtualizer.
+ It's useful for running other OSs made for one machine on another machine.
+
+- What is the MBR?
+It is the Master Boot Record. It is the first sector on a bootable disk, and has info on the partitions of the disk and code to bootstrap and load in the OS.
+
+- What resources did you use while working on the assignment?
+I asked TAs, googled stuff, and used chatgpt to ask about basic concepts.

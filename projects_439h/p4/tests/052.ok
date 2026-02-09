@@ -1,0 +1,24 @@
+*** Testing weak pointer promotion logic
+*** Constructing TestObject 1
+*** A points to TestObject 1
+*** B created from A
+*** B promotion to C succeeded, C points to TestObject 1
+*** A reset to nullptr
+*** B promotion to D succeeded, D points to TestObject 1
+*** D is not nullptr, object is still alive as expected
+*** Destructing TestObject 1
+*** C and D reset to nullptr, all strong pointers should be gone now
+*** B promotion to E failed as expected, object has been deleted
+*** Test 1 completed
+*** Testing self-assignment edge cases
+*** Constructing TestObject 2
+*** strongA points to TestObject 2
+*** strongA self-assignment did not delete the object, still points to TestObject 2
+*** weakA created from strongA
+*** weakA promotion still works, points to TestObject 2
+*** strongA reset to nullptr
+*** Object is still alive after strongA reset, promotedWeakA points to TestObject 2
+*** Destructing TestObject 2
+*** promotedWeakA reset to nullptr, object should be deleted now
+*** weakA promotion failed as expected after promotedWeakA reset, object is deleted
+*** Self-assignment test completed

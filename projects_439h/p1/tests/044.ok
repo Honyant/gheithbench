@@ -1,0 +1,28 @@
+*** hello 0
+*** Queue: 0 1 
+*** Dequeued: 0
+*** Queue: 1 
+*** Dequeued: 1
+*** Queue: 
+*** goodbye 0
+*** hello 1
+*** Queue: 1 2 
+*** Dequeued: 1
+*** Queue: 2 
+*** Dequeued: 2
+*** Queue: 
+*** goodbye 1
+*** hello 2
+*** Queue: 2 5 
+*** Dequeued: 2
+*** Queue: 5 
+*** Dequeued: 5
+*** Queue: 
+*** goodbye 2
+*** hello 3
+*** Queue: 3 10 
+*** Dequeued: 3
+*** Queue: 10 
+*** Dequeued: 10
+*** Queue: 
+*** goodbye 3

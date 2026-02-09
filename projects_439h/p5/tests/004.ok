@@ -1,0 +1,12 @@
+*** block size is 4096
+*** inode size is 128
+*** looking at /
+***      is a directory
+***      contains 5 entries
+***      has 4 links
+*** looking at /symlink1/symlink2/symlink3/symlink4/symlink5/symlink6/symlink7/symlink8/symlink9/symlink10/symlink11/symlink12/symlink13/symlink14/symlink15/treasure.txt
+***      is a file
+***      contains 21 bytes
+***      has 1 links
+*** yay you found me
+*** passed 2 checks

@@ -1,0 +1,26 @@
+*** fd = 3
+*** len = 72
+*** WELCOME TO SANRIO WORLD
+*** hello again
+*** guess who's my fav char
+*** close = 0
+*** cinnamoroll is lost
+*** kuromi is lost
+*** pochaco is lost
+*** my melody is lost
+*** in child
+*** 1234
+*** seek 13
+*** fd = 3
+*** len = 87
+*** kuromi, hellokitty, pochaco, mymelody, pompompurin, keroppi, gudetama
+*** back from wait 1
+*** chdir: 0
+*** fd = 4
+*** len = 27
+*** cinnamoroll says hello
+*** chdir: 0
+*** fd = 4
+*** len = 27
+*** cinnamoroll says hello
+*** chdir: -1

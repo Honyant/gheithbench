@@ -1,0 +1,138 @@
+*** TEST 1
+*** looking at /
+***      is a directory
+***      contains 8 entries
+***      has 4 links
+*** looking at /file
+***      is a file
+***      contains 14 bytes
+***      has 1 links
+*** looking at /directory
+***      is a directory
+***      contains 4 entries
+***      has 2 links
+*** looking at /directory/
+***      is a directory
+***      contains 4 entries
+***      has 2 links
+*** looking at /nonexistent
+***      does not exist
+*** looking at /directory/nested_file
+***      is a file
+***      contains 21 bytes
+***      has 1 links
+*** looking at /directory/nonexistent
+***      does not exist
+*** looking at /directory/nested_file
+***      is a file
+***      contains 21 bytes
+***      has 1 links
+***
+*** TEST 2
+*** looking at /.
+***      is a directory
+***      contains 8 entries
+***      has 4 links
+*** looking at /./
+***      is a directory
+***      contains 8 entries
+***      has 4 links
+*** looking at /./.
+***      is a directory
+***      contains 8 entries
+***      has 4 links
+*** looking at /directory/..
+***      is a directory
+***      contains 8 entries
+***      has 4 links
+*** looking at /directory/../file
+***      is a file
+***      contains 14 bytes
+***      has 1 links
+*** looking at /directory/./../file
+***      is a file
+***      contains 14 bytes
+***      has 1 links
+*** looking at /directory/../directory/nested_file
+***      is a file
+***      contains 21 bytes
+***      has 1 links
+***
+*** TEST 3
+*** looking at /
+***      is a directory
+***      contains 8 entries
+***      has 4 links
+*** looking at /file
+***      is a file
+***      contains 14 bytes
+***      has 1 links
+*** looking at /directory
+***      is a directory
+***      contains 4 entries
+***      has 2 links
+*** looking at /directory/nested_file
+***      is a file
+***      contains 21 bytes
+***      has 1 links
+***
+*** TEST 4
+*** looking at /file_link
+***      is a symbolic link
+***      link size is 4
+***       => file
+*** looking at /directory_link
+***      is a symbolic link
+***      link size is 9
+***       => directory
+*** looking at /directory_link/
+***      is a directory
+***      contains 4 entries
+***      has 2 links
+*** looking at /nested_file_link
+***      is a symbolic link
+***      link size is 21
+***       => directory/nested_file
+*** looking at /directory/root_link
+***      is a symbolic link
+***      link size is 2
+***       => ..
+*** looking at /directory_link/nested_file
+***      is a file
+***      contains 21 bytes
+***      has 1 links
+*** looking at /directory_link/root_link/file
+***      is a file
+***      contains 14 bytes
+***      has 1 links
+*** looking at /directory_link/root_link/directory_link/nested_file
+***      is a file
+***      contains 21 bytes
+***      has 1 links
+***
+*** TEST 5
+*** looking at /file_link
+***      is a symbolic link
+***      link size is 4
+***       => file
+*** looking at /directory_link
+***      is a symbolic link
+***      link size is 9
+***       => directory
+*** looking at /directory_link/
+***      is a directory
+***      contains 4 entries
+***      has 2 links
+*** looking at /directory/root_link/./
+***      is a directory
+***      contains 8 entries
+***      has 4 links
+*** looking at /directory_link/../directory_link/root_link/file
+***      is a file
+***      contains 14 bytes
+***      has 1 links
+*** looking at /directory_link/root_link/directory_link/../../../file
+***      is a file
+***      contains 14 bytes
+***      has 1 links
+*** passed 26 checks

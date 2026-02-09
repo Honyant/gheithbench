@@ -1,0 +1,7 @@
+*** Created barrier for 20 threads
+*** sync() has been called 21 times
+*** Created barrier for 40 threads
+*** sync() has been called 62 times
+*** Created barrier for 60 threads
+*** sync() has been called 123 times
+*** all done :)

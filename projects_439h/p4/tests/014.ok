@@ -1,0 +1,7 @@
+*** X(10) constructed
+*** StrongPtr created with value 10
+*** WeakPtr created from StrongPtr
+*** WeakPtr successfully promoted to StrongPtr with value 10
+*** Original StrongPtr reset
+*** sp2 still holds value 10
+*** sp2 reset

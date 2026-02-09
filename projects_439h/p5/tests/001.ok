@@ -1,0 +1,102 @@
+*** block size is 2048
+*** inode size is 128
+*** TESTING BASIC PATH TRAVERSAL
+*** Test: Find Root
+*** looking at /
+***      is a directory
+***      contains 25 entries
+***      has 5 links
+*** Test: Find Child of Root
+*** looking at /root_child
+***      is a directory
+***      contains 3 entries
+***      has 3 links
+*** Test: Find Nested Child from Root and from Child of Root
+*** looking at /root_child/nested_child
+***      is a directory
+***      contains 3 entries
+***      has 2 links
+*** looking at /root_child/nested_child
+***      is a directory
+***      contains 3 entries
+***      has 2 links
+*** TESTING SYMBOLIC LINKS
+*** Test: Symbolic Link - Relative Path
+*** looking at /relative
+***      is a symbolic link
+***      link size is 23
+***       => root_child/nested_child
+*** Test: Symbolic Link - Absolute Path
+*** looking at /link_dir/absolute
+***      is a symbolic link
+***      link size is 24
+***       => /root_child/nested_child
+*** Test: Resolving Symbolic Link Ending With Slash - Relative Path
+*** looking at /relative/
+***      is a directory
+***      contains 3 entries
+***      has 2 links
+*** Test: Resolving Symbolic Link Ending With Slash - Absolute Path
+*** looking at /link_dir/absolute/
+***      is a directory
+***      contains 3 entries
+***      has 2 links
+*** Test: Symbolic Link to Root
+*** looking at /link_to_root
+***      is a symbolic link
+***      link size is 1
+***       => /
+*** looking at /link_to_root/
+***      is a directory
+***      contains 25 entries
+***      has 5 links
+*** Test: Symbolic Link to Non-Existent Path
+*** looking at /link_to_invalid
+***      does not exist
+*** Test: Following At Least 16 Symbolic Links 
+*** looking at /link1
+***      is a symbolic link
+***      link size is 5
+***       => link2
+*** looking at /link1/
+***      is a directory
+***      contains 4 entries
+***      has 2 links
+*** looking at /link_dir/end_of_link_traversal.txt
+***      is a file
+***      contains 43 bytes
+***      has 1 links
+*** you have completed traversing 16 links
+*** Test: Path with . 
+*** looking at /././././././././././link1
+***      is a symbolic link
+***      link size is 5
+***       => link2
+*** looking at /././././././././././link1/
+***      is a directory
+***      contains 4 entries
+***      has 2 links
+*** Test: Path with .. 
+*** looking at /root_child/../root_child/../root_child/nested_child
+***      is a directory
+***      contains 3 entries
+***      has 2 links
+*** looking at /root_child/../root_child/../root_child/nested_child/
+***      is a directory
+***      contains 3 entries
+***      has 2 links
+*** looking at /root_child/nested_child/file
+***      is a file
+***      contains 14 bytes
+***      has 1 links
+*** meow meow
+*** Test: Symbolic Link with .. 
+*** looking at /dotlink
+***      is a symbolic link
+***      link size is 39
+***       => root_child/nested_child/../nested_child
+*** looking at /dotlink/
+***      is a directory
+***      contains 3 entries
+***      has 2 links
+*** passed 12 checks

@@ -1,0 +1,7 @@
+*** Write check: passed
+*** Len test: passed
+*** Read test: passed
+*** Seek test: passed
+*** Chdir test: passed
+*** Mmapping test: passed
+*** Wait test: passed

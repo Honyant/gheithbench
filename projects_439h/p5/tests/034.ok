@@ -1,0 +1,49 @@
+*** block size is 4096
+*** inode size is 128
+*** looking at /
+***      is a directory
+***      contains 10 entries
+***      has 4 links
+*** Testing ./ and ../ finds
+*** looking at /.
+***      is a directory
+***      contains 10 entries
+***      has 4 links
+*** looking at /./.
+***      is a directory
+***      contains 10 entries
+***      has 4 links
+*** looking at /././.
+***      is a directory
+***      contains 10 entries
+***      has 4 links
+*** looking at /./././.
+***      is a directory
+***      contains 10 entries
+***      has 4 links
+*** looking at /././././.
+***      is a directory
+***      contains 10 entries
+***      has 4 links
+*** looking at /./././././.
+***      is a directory
+***      contains 10 entries
+***      has 4 links
+*** looking at /./../.././.././..
+***      is a directory
+***      contains 10 entries
+***      has 4 links
+*** Done with part 1!
+*** Testing file path parsing (Specifically for paths that are subsets)
+*** Done with part 2!
+*** Testing find in directories
+*** looking at /data/hello
+***      is a file
+***      contains 11 bytes
+***      has 1 links
+*** looking at /data/data1/data2/data3/data4/hi
+***      is a file
+***      contains 34 bytes
+***      has 1 links
+*** Done with part 3!
+*** passed 17 checks

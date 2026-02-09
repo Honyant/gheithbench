@@ -1,0 +1,24 @@
+*** started kernel main
+*** started instruction thread 1.
+*** ended instruction thread 1.
+*** started instruction thread 2.
+*** ended instruction thread 2.
+*** started instruction thread 3.
+*** ended instruction thread 3.
+*** started instruction thread 4.
+*** ended instruction thread 4.
+*** started instruction thread 5.
+*** ended instruction thread 5.
+*** started instruction thread 6.
+*** ended instruction thread 6.
+*** started instruction thread 7.
+*** ended instruction thread 7.
+*** started instruction thread 8.
+*** ended instruction thread 8.
+*** started instruction thread 9.
+*** ended instruction thread 9.
+*** started instruction thread 10.
+*** register 1: 0
+*** register 2: 1
+*** register 3: 7
+*** ended instruction thread 10.

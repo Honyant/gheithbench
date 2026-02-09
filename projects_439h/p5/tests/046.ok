@@ -1,0 +1,19 @@
+*** block size is 1024
+*** inode size is 128
+*** Test 1: retrieve symlink
+*** looking at /helloSym
+***      is a symbolic link
+***      link size is 5
+***       => hello
+*** Test 2: go through symlink to directory
+*** looking at /dataDirSym/
+***      is a directory
+***      contains 5 entries
+***      has 3 links
+*** Test 3: go through 2 symlinks to data
+*** looking at /dataDirSym/data1DirSym/data1.txt
+***      is a file
+***      contains 17 bytes
+***      has 1 links
+*** This is data1
+*** passed 5 checks

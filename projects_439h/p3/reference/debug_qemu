@@ -1,0 +1,34 @@
+#!/bin/bash
+
+set -m
+
+make $1
+
+# Stop processes if the script is stopping
+cleanup() {
+    echo "Stopping QEMU..."
+    kill -SIGINT "$qemu_pid" 2>/dev/null && echo "QEMU stopped" || echo "QEMU already stopped"
+    wait "$qemu_pid"
+}
+
+tmpsocket=$(mktemp /tmp/gdb_socket.XXXXXX)
+
+trap cleanup SIGINT SIGTERM
+
+`make qemu_cmd` `make qemu_config_flags` \
+             -chardev socket,path="$tmpsocket",server=on,wait=off,id=gdb0 -gdb chardev:gdb0 -S \
+             -no-reboot \
+             -nographic \
+             --monitor none \
+             -drive file=kernel/build/$1.img,index=0,media=disk,format=file,locking=off \
+             --serial file:$1.raw \
+             -device isa-debug-exit,iobase=0xf4,iosize=0x04 &
+qemu_pid=$!
+
+sleep 0.1
+
+~elies/public/bin/gdb kernel/build/$1.kernel -ex "target remote $tmpsocket"
+
+trap SIGINT
+
+cleanup

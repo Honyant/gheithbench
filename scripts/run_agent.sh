@@ -4,7 +4,7 @@
 # Usage: ./run_agent.sh <project_number>
 #
 # Environment variables:
-#   AGENT           — Agent to use: codex (default), claude
+#   AGENT           — Agent to use: codex (default), claude, gemini
 #   AGENT_MODEL     — Model override (agent-specific)
 #   AGENT_REASONING — Reasoning effort for codex (default: medium)
 #   GHEITHBENCH_PLATFORM — Docker platform flag (default: --platform linux/amd64)
@@ -50,6 +50,12 @@ run_agent_cmd() {
       (cd "$workspace" && codex "${codex_args[@]}" "$prompt" 2>&1 | grep -v "state db missing rollout path") ;;
     claude)
       (cd "$workspace" && echo "$prompt" | claude -p --dangerously-skip-permissions) ;;
+    gemini)
+      local gemini_args=(-p "$prompt" --approval-mode yolo)
+      if [ -n "$AGENT_MODEL" ]; then
+        gemini_args+=(-m "$AGENT_MODEL")
+      fi
+      (cd "$workspace" && gemini "${gemini_args[@]}" 2>&1 | grep -v "^\[WARN\]" | grep -v "^Warning:") ;;
     *)
       echo "Unknown agent: $AGENT" >&2; return 1 ;;
   esac

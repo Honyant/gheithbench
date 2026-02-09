@@ -27,6 +27,12 @@ docker build $PLATFORM \
   -f "$DOCKER_DIR/verilog.Dockerfile" \
   "$DOCKER_DIR"
 
+echo "=== Building gheithbench-os ==="
+docker build $PLATFORM \
+  -t gheithbench-os:latest \
+  -f "$DOCKER_DIR/os.Dockerfile" \
+  "$DOCKER_DIR"
+
 echo ""
 echo "=== Smoke tests ==="
 echo -n "base: "
@@ -40,6 +46,10 @@ docker run --rm $PLATFORM gheithbench-p4:latest \
 echo -n "verilog: "
 docker run --rm $PLATFORM gheithbench-verilog:latest \
   bash -c 'iverilog -V 2>&1 | head -1'
+
+echo -n "os: "
+docker run --rm $PLATFORM gheithbench-os:latest \
+  bash -c 'gcc -m32 -dumpversion && qemu-system-i386 --version | head -1 && mkfs.ext2 -V 2>&1 | head -1'
 
 echo ""
 echo "All images built and verified successfully."

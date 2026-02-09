@@ -1,0 +1,9 @@
+*** TEST 1: Testing Large File mmap/unmmap
+*** Passed test 1!
+*** TEST 2: Testing many small file mmap/unmmap
+*** Passed test 2!
+*** TEST 3: Testing null file mmap/unmmap
+*** Passed test 3!
+*** TEST 4: Testing private memory, multithreaded test
+*** Passed test 4!
+*** passed 1174 checks

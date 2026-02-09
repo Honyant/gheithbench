@@ -1,0 +1,28 @@
+*** block size is 4096
+*** inode size is 128
+*** files have been successfully created
+*** about to look at root
+*** looking at /
+***      is a directory
+***      contains 7 entries
+***      has 4 links
+*** looking at /under_root.txt
+***      is a file
+***      contains 11 bytes
+***      has 1 links
+*** looking at /under_root2.txt
+***      is a file
+***      contains 90591 bytes
+***      has 1 links
+*** looking at /under_root3.txt
+***      is a file
+***      contains 85692 bytes
+***      has 1 links
+*** looking at /subdir/under_subdir.txt
+***      is a file
+***      contains 15 bytes
+***      has 1 links
+*** looking at /subdir/under_subdir2.txt
+***      is a file
+***      contains 21 bytes
+***      has 1 links

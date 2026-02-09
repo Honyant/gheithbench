@@ -1,6 +1,13 @@
+# Results (generated at runtime)
 results/
+results2/
+results_439h/
+
+# Source repos (not distributed — extracted into projects/)
 429h/
 439h/
+
+# Build artifacts
 *.o
 *.d
 *.out
@@ -13,6 +20,10 @@ results/
 *.cycles
 *.vcd
 *.sig
+*.data
+*.failure
+*.kernel
+*.img
 build/
 
 # Python
@@ -22,6 +33,7 @@ __pycache__/
 
 # OS files
 .DS_Store
+Thumbs.db
 
 # Editor/IDE
 *.swp
@@ -29,3 +41,6 @@ __pycache__/
 *~
 .vscode/
 .idea/
+
+# Scratch
+plan.md

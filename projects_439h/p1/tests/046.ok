@@ -1,0 +1,600 @@
+*** Calculating collatz length of 1
+*** Took 0 iterations
+*** Collatz length is 1
+*** Calculating collatz length of 2
+*** Took 1 iterations
+*** Collatz length is 2
+*** Calculating collatz length of 3
+*** Took 6 iterations
+*** Collatz length is 8
+*** Calculating collatz length of 4
+*** Took 1 iterations
+*** Collatz length is 3
+*** Calculating collatz length of 5
+*** Took 3 iterations
+*** Collatz length is 6
+*** Calculating collatz length of 6
+*** Took 1 iterations
+*** Collatz length is 9
+*** Calculating collatz length of 7
+*** Took 11 iterations
+*** Collatz length is 17
+*** Calculating collatz length of 8
+*** Took 1 iterations
+*** Collatz length is 4
+*** Calculating collatz length of 9
+*** Took 3 iterations
+*** Collatz length is 20
+*** Calculating collatz length of 10
+*** Took 1 iterations
+*** Collatz length is 7
+*** Calculating collatz length of 11
+*** Took 8 iterations
+*** Collatz length is 15
+*** Calculating collatz length of 12
+*** Took 1 iterations
+*** Collatz length is 10
+*** Calculating collatz length of 13
+*** Took 3 iterations
+*** Collatz length is 10
+*** Calculating collatz length of 14
+*** Took 1 iterations
+*** Collatz length is 18
+*** Calculating collatz length of 15
+*** Took 11 iterations
+*** Collatz length is 18
+*** Calculating collatz length of 16
+*** Took 1 iterations
+*** Collatz length is 5
+*** Calculating collatz length of 17
+*** Took 3 iterations
+*** Collatz length is 13
+*** Calculating collatz length of 18
+*** Took 1 iterations
+*** Collatz length is 21
+*** Calculating collatz length of 19
+*** Took 6 iterations
+*** Collatz length is 21
+*** Calculating collatz length of 20
+*** Took 1 iterations
+*** Collatz length is 8
+*** Calculating collatz length of 21
+*** Took 3 iterations
+*** Collatz length is 8
+*** Calculating collatz length of 22
+*** Took 1 iterations
+*** Collatz length is 16
+*** Calculating collatz length of 23
+*** Took 8 iterations
+*** Collatz length is 16
+*** Calculating collatz length of 24
+*** Took 1 iterations
+*** Collatz length is 11
+*** Calculating collatz length of 25
+*** Took 3 iterations
+*** Collatz length is 24
+*** Calculating collatz length of 26
+*** Took 10 iterations
+*** Collatz length is 11
+*** Calculating collatz length of 27
+*** Took 111 iterations
+*** Collatz length is 112
+*** Calculating collatz length of 28
+*** Took 8 iterations
+*** Collatz length is 19
+*** Calculating collatz length of 29
+*** Took 8 iterations
+*** Collatz length is 19
+*** Calculating collatz length of 30
+*** Took 18 iterations
+*** Collatz length is 19
+*** Calculating collatz length of 31
+*** Took 106 iterations
+*** Collatz length is 107
+*** Calculating collatz length of 32
+*** Took 5 iterations
+*** Collatz length is 6
+*** Calculating collatz length of 33
+*** Took 8 iterations
+*** Collatz length is 27
+*** Calculating collatz length of 34
+*** Took 3 iterations
+*** Collatz length is 14
+*** Calculating collatz length of 35
+*** Took 13 iterations
+*** Collatz length is 14
+*** Calculating collatz length of 36
+*** Took 3 iterations
+*** Collatz length is 22
+*** Calculating collatz length of 37
+*** Took 3 iterations
+*** Collatz length is 22
+*** Calculating collatz length of 38
+*** Took 3 iterations
+*** Collatz length is 22
+*** Calculating collatz length of 39
+*** Took 13 iterations
+*** Collatz length is 35
+*** Calculating collatz length of 40
+*** Took 8 iterations
+*** Collatz length is 9
+*** Calculating collatz length of 41
+*** Took 3 iterations
+*** Collatz length is 110
+*** Calculating collatz length of 42
+*** Took 3 iterations
+*** Collatz length is 9
+*** Calculating collatz length of 43
+*** Took 8 iterations
+*** Collatz length is 30
+*** Calculating collatz length of 44
+*** Took 3 iterations
+*** Collatz length is 17
+*** Calculating collatz length of 45
+*** Took 3 iterations
+*** Collatz length is 17
+*** Calculating collatz length of 46
+*** Took 3 iterations
+*** Collatz length is 17
+*** Calculating collatz length of 47
+*** Took 88 iterations
+*** Collatz length is 105
+*** Calculating collatz length of 48
+*** Took 11 iterations
+*** Collatz length is 12
+*** Calculating collatz length of 49
+*** Took 3 iterations
+*** Collatz length is 25
+*** Calculating collatz length of 50
+*** Took 3 iterations
+*** Collatz length is 25
+*** Calculating collatz length of 51
+*** Took 24 iterations
+*** Collatz length is 25
+*** Calculating collatz length of 52
+*** Took 11 iterations
+*** Collatz length is 12
+*** Calculating collatz length of 53
+*** Took 11 iterations
+*** Collatz length is 12
+*** Calculating collatz length of 54
+*** Took 101 iterations
+*** Collatz length is 113
+*** Calculating collatz length of 55
+*** Took 101 iterations
+*** Collatz length is 113
+*** Calculating collatz length of 56
+*** Took 8 iterations
+*** Collatz length is 20
+*** Calculating collatz length of 57
+*** Took 13 iterations
+*** Collatz length is 33
+*** Calculating collatz length of 58
+*** Took 8 iterations
+*** Collatz length is 20
+*** Calculating collatz length of 59
+*** Took 13 iterations
+*** Collatz length is 33
+*** Calculating collatz length of 60
+*** Took 8 iterations
+*** Collatz length is 20
+*** Calculating collatz length of 61
+*** Took 8 iterations
+*** Collatz length is 20
+*** Calculating collatz length of 62
+*** Took 88 iterations
+*** Collatz length is 108
+*** Calculating collatz length of 63
+*** Took 88 iterations
+*** Collatz length is 108
+*** Calculating collatz length of 64
+*** Took 6 iterations
+*** Collatz length is 7
+*** Calculating collatz length of 65
+*** Took 8 iterations
+*** Collatz length is 28
+*** Calculating collatz length of 66
+*** Took 8 iterations
+*** Collatz length is 28
+*** Calculating collatz length of 67
+*** Took 8 iterations
+*** Collatz length is 28
+*** Calculating collatz length of 68
+*** Took 3 iterations
+*** Collatz length is 15
+*** Calculating collatz length of 69
+*** Took 3 iterations
+*** Collatz length is 15
+*** Calculating collatz length of 70
+*** Took 3 iterations
+*** Collatz length is 15
+*** Calculating collatz length of 71
+*** Took 83 iterations
+*** Collatz length is 103
+*** Calculating collatz length of 72
+*** Took 11 iterations
+*** Collatz length is 23
+*** Calculating collatz length of 73
+*** Took 3 iterations
+*** Collatz length is 116
+*** Calculating collatz length of 74
+*** Took 3 iterations
+*** Collatz length is 23
+*** Calculating collatz length of 75
+*** Took 8 iterations
+*** Collatz length is 15
+*** Calculating collatz length of 76
+*** Took 22 iterations
+*** Collatz length is 23
+*** Calculating collatz length of 77
+*** Took 22 iterations
+*** Collatz length is 23
+*** Calculating collatz length of 78
+*** Took 13 iterations
+*** Collatz length is 36
+*** Calculating collatz length of 79
+*** Took 13 iterations
+*** Collatz length is 36
+*** Calculating collatz length of 80
+*** Took 9 iterations
+*** Collatz length is 10
+*** Calculating collatz length of 81
+*** Took 13 iterations
+*** Collatz length is 23
+*** Calculating collatz length of 82
+*** Took 101 iterations
+*** Collatz length is 111
+*** Calculating collatz length of 83
+*** Took 101 iterations
+*** Collatz length is 111
+*** Calculating collatz length of 84
+*** Took 9 iterations
+*** Collatz length is 10
+*** Calculating collatz length of 85
+*** Took 9 iterations
+*** Collatz length is 10
+*** Calculating collatz length of 86
+*** Took 30 iterations
+*** Collatz length is 31
+*** Calculating collatz length of 87
+*** Took 30 iterations
+*** Collatz length is 31
+*** Calculating collatz length of 88
+*** Took 17 iterations
+*** Collatz length is 18
+*** Calculating collatz length of 89
+*** Took 8 iterations
+*** Collatz length is 31
+*** Calculating collatz length of 90
+*** Took 17 iterations
+*** Collatz length is 18
+*** Calculating collatz length of 91
+*** Took 83 iterations
+*** Collatz length is 93
+*** Calculating collatz length of 92
+*** Took 8 iterations
+*** Collatz length is 18
+*** Calculating collatz length of 93
+*** Took 8 iterations
+*** Collatz length is 18
+*** Calculating collatz length of 94
+*** Took 13 iterations
+*** Collatz length is 106
+*** Calculating collatz length of 95
+*** Took 13 iterations
+*** Collatz length is 106
+*** Calculating collatz length of 96
+*** Took 12 iterations
+*** Collatz length is 13
+*** Calculating collatz length of 97
+*** Took 8 iterations
+*** Collatz length is 119
+*** Calculating collatz length of 98
+*** Took 25 iterations
+*** Collatz length is 26
+*** Calculating collatz length of 99
+*** Took 25 iterations
+*** Collatz length is 26
+*** Calculating collatz length of 100
+*** Took 3 iterations
+*** Collatz length is 26
+*** Calculating collatz length of 101
+*** Took 25 iterations
+*** Collatz length is 26
+*** Calculating collatz length of 102
+*** Took 25 iterations
+*** Collatz length is 26
+*** Calculating collatz length of 103
+*** Took 87 iterations
+*** Collatz length is 88
+*** Calculating collatz length of 104
+*** Took 12 iterations
+*** Collatz length is 13
+*** Calculating collatz length of 105
+*** Took 13 iterations
+*** Collatz length is 39
+*** Calculating collatz length of 106
+*** Took 12 iterations
+*** Collatz length is 13
+*** Calculating collatz length of 107
+*** Took 13 iterations
+*** Collatz length is 101
+*** Calculating collatz length of 108
+*** Took 13 iterations
+*** Collatz length is 114
+*** Calculating collatz length of 109
+*** Took 13 iterations
+*** Collatz length is 114
+*** Calculating collatz length of 110
+*** Took 13 iterations
+*** Collatz length is 114
+*** Calculating collatz length of 111
+*** Took 57 iterations
+*** Collatz length is 70
+*** Calculating collatz length of 112
+*** Took 20 iterations
+*** Collatz length is 21
+*** Calculating collatz length of 113
+*** Took 12 iterations
+*** Collatz length is 13
+*** Calculating collatz length of 114
+*** Took 13 iterations
+*** Collatz length is 34
+*** Calculating collatz length of 115
+*** Took 13 iterations
+*** Collatz length is 34
+*** Calculating collatz length of 116
+*** Took 20 iterations
+*** Collatz length is 21
+*** Calculating collatz length of 117
+*** Took 20 iterations
+*** Collatz length is 21
+*** Calculating collatz length of 118
+*** Took 8 iterations
+*** Collatz length is 34
+*** Calculating collatz length of 119
+*** Took 8 iterations
+*** Collatz length is 34
+*** Calculating collatz length of 120
+*** Took 8 iterations
+*** Collatz length is 21
+*** Calculating collatz length of 121
+*** Took 8 iterations
+*** Collatz length is 96
+*** Calculating collatz length of 122
+*** Took 8 iterations
+*** Collatz length is 21
+*** Calculating collatz length of 123
+*** Took 13 iterations
+*** Collatz length is 47
+*** Calculating collatz length of 124
+*** Took 8 iterations
+*** Collatz length is 109
+*** Calculating collatz length of 125
+*** Took 8 iterations
+*** Collatz length is 109
+*** Calculating collatz length of 126
+*** Took 108 iterations
+*** Collatz length is 109
+*** Calculating collatz length of 127
+*** Took 46 iterations
+*** Collatz length is 47
+*** Calculating collatz length of 128
+*** Took 7 iterations
+*** Collatz length is 8
+*** Calculating collatz length of 129
+*** Took 121 iterations
+*** Collatz length is 122
+*** Calculating collatz length of 130
+*** Took 28 iterations
+*** Collatz length is 29
+*** Calculating collatz length of 131
+*** Took 28 iterations
+*** Collatz length is 29
+*** Calculating collatz length of 132
+*** Took 28 iterations
+*** Collatz length is 29
+*** Calculating collatz length of 133
+*** Took 28 iterations
+*** Collatz length is 29
+*** Calculating collatz length of 134
+*** Took 28 iterations
+*** Collatz length is 29
+*** Calculating collatz length of 135
+*** Took 13 iterations
+*** Collatz length is 42
+*** Calculating collatz length of 136
+*** Took 15 iterations
+*** Collatz length is 16
+*** Calculating collatz length of 137
+*** Took 90 iterations
+*** Collatz length is 91
+*** Calculating collatz length of 138
+*** Took 15 iterations
+*** Collatz length is 16
+*** Calculating collatz length of 139
+*** Took 13 iterations
+*** Collatz length is 42
+*** Calculating collatz length of 140
+*** Took 15 iterations
+*** Collatz length is 16
+*** Calculating collatz length of 141
+*** Took 15 iterations
+*** Collatz length is 16
+*** Calculating collatz length of 142
+*** Took 13 iterations
+*** Collatz length is 104
+*** Calculating collatz length of 143
+*** Took 13 iterations
+*** Collatz length is 104
+*** Calculating collatz length of 144
+*** Took 23 iterations
+*** Collatz length is 24
+*** Calculating collatz length of 145
+*** Took 13 iterations
+*** Collatz length is 117
+*** Calculating collatz length of 146
+*** Took 13 iterations
+*** Collatz length is 117
+*** Calculating collatz length of 147
+*** Took 13 iterations
+*** Collatz length is 117
+*** Calculating collatz length of 148
+*** Took 23 iterations
+*** Collatz length is 24
+*** Calculating collatz length of 149
+*** Took 23 iterations
+*** Collatz length is 24
+*** Calculating collatz length of 150
+*** Took 8 iterations
+*** Collatz length is 16
+*** Calculating collatz length of 151
+*** Took 15 iterations
+*** Collatz length is 16
+*** Calculating collatz length of 152
+*** Took 23 iterations
+*** Collatz length is 24
+*** Calculating collatz length of 153
+*** Took 36 iterations
+*** Collatz length is 37
+*** Calculating collatz length of 154
+*** Took 23 iterations
+*** Collatz length is 24
+*** Calculating collatz length of 155
+*** Took 85 iterations
+*** Collatz length is 86
+*** Calculating collatz length of 156
+*** Took 13 iterations
+*** Collatz length is 37
+*** Calculating collatz length of 157
+*** Took 13 iterations
+*** Collatz length is 37
+*** Calculating collatz length of 158
+*** Took 13 iterations
+*** Collatz length is 37
+*** Calculating collatz length of 159
+*** Took 54 iterations
+*** Collatz length is 55
+*** Calculating collatz length of 160
+*** Took 10 iterations
+*** Collatz length is 11
+*** Calculating collatz length of 161
+*** Took 13 iterations
+*** Collatz length is 99
+*** Calculating collatz length of 162
+*** Took 13 iterations
+*** Collatz length is 24
+*** Calculating collatz length of 163
+*** Took 13 iterations
+*** Collatz length is 24
+*** Calculating collatz length of 164
+*** Took 13 iterations
+*** Collatz length is 112
+*** Calculating collatz length of 165
+*** Took 13 iterations
+*** Collatz length is 112
+*** Calculating collatz length of 166
+*** Took 13 iterations
+*** Collatz length is 112
+*** Calculating collatz length of 167
+*** Took 57 iterations
+*** Collatz length is 68
+*** Calculating collatz length of 168
+*** Took 10 iterations
+*** Collatz length is 11
+*** Calculating collatz length of 169
+*** Took 26 iterations
+*** Collatz length is 50
+*** Calculating collatz length of 170
+*** Took 10 iterations
+*** Collatz length is 11
+*** Calculating collatz length of 171
+*** Took 13 iterations
+*** Collatz length is 125
+*** Calculating collatz length of 172
+*** Took 31 iterations
+*** Collatz length is 32
+*** Calculating collatz length of 173
+*** Took 31 iterations
+*** Collatz length is 32
+*** Calculating collatz length of 174
+*** Took 31 iterations
+*** Collatz length is 32
+*** Calculating collatz length of 175
+*** Took 13 iterations
+*** Collatz length is 81
+*** Calculating collatz length of 176
+*** Took 18 iterations
+*** Collatz length is 19
+*** Calculating collatz length of 177
+*** Took 31 iterations
+*** Collatz length is 32
+*** Calculating collatz length of 178
+*** Took 31 iterations
+*** Collatz length is 32
+*** Calculating collatz length of 179
+*** Took 31 iterations
+*** Collatz length is 32
+*** Calculating collatz length of 180
+*** Took 18 iterations
+*** Collatz length is 19
+*** Calculating collatz length of 181
+*** Took 18 iterations
+*** Collatz length is 19
+*** Calculating collatz length of 182
+*** Took 93 iterations
+*** Collatz length is 94
+*** Calculating collatz length of 183
+*** Took 93 iterations
+*** Collatz length is 94
+*** Calculating collatz length of 184
+*** Took 18 iterations
+*** Collatz length is 19
+*** Calculating collatz length of 185
+*** Took 13 iterations
+*** Collatz length is 45
+*** Calculating collatz length of 186
+*** Took 18 iterations
+*** Collatz length is 19
+*** Calculating collatz length of 187
+*** Took 13 iterations
+*** Collatz length is 45
+*** Calculating collatz length of 188
+*** Took 13 iterations
+*** Collatz length is 107
+*** Calculating collatz length of 189
+*** Took 13 iterations
+*** Collatz length is 107
+*** Calculating collatz length of 190
+*** Took 13 iterations
+*** Collatz length is 107
+*** Calculating collatz length of 191
+*** Took 44 iterations
+*** Collatz length is 45
+*** Calculating collatz length of 192
+*** Took 13 iterations
+*** Collatz length is 14
+*** Calculating collatz length of 193
+*** Took 26 iterations
+*** Collatz length is 120
+*** Calculating collatz length of 194
+*** Took 13 iterations
+*** Collatz length is 120
+*** Calculating collatz length of 195
+*** Took 13 iterations
+*** Collatz length is 120
+*** Calculating collatz length of 196
+*** Took 26 iterations
+*** Collatz length is 27
+*** Calculating collatz length of 197
+*** Took 26 iterations
+*** Collatz length is 27
+*** Calculating collatz length of 198
+*** Took 26 iterations
+*** Collatz length is 27
+*** Calculating collatz length of 199
+*** Took 13 iterations
+*** Collatz length is 120
+*** Calculating collatz length of 200
+*** Took 26 iterations
+*** Collatz length is 27

@@ -1,0 +1,19 @@
+*** Starting Part 1
+*** Dog created with value 10
+*** Dog destroyed with value 10
+*** StrongPtr destroyed
+*** WeakPtr promotion failed as expected after StrongPtr destruction
+*** Starting Part 2
+*** Dog created with value 20
+*** WeakPtr promotion succeeded as expected
+*** Dog destroyed with value 20
+*** Starting Part 3
+*** Dog created with value 30
+*** Thread: WeakPtr promotion succeeded
+*** Thread: WeakPtr promotion succeeded
+*** Thread: WeakPtr promotion succeeded
+*** Thread: WeakPtr promotion succeeded
+*** Thread: WeakPtr promotion succeeded
+*** Dog destroyed with value 30
+*** StrongPtr destroyed in Part 3
+*** Test completed

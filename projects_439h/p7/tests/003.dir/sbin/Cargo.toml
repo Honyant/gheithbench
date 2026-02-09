@@ -1,0 +1,15 @@
+[package]
+name = "user"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+linked_list_allocator = "0.10"
+
+[profile.release]
+panic = "abort"
+strip = false
+debug = 0         # For debugging, set this to 2
+lto = true
+codegen-units = 1
+opt-level = "s"

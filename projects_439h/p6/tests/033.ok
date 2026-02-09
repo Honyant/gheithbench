@@ -1,0 +1,7 @@
+*** Mapped large file
+*** Stress test completed without loading memory
+*** Dereferencing to trigger lazy load
+*** Lazy load successful, first byte: L
+*** Lazy load of another chunk: a
+*** Passed lazy load test
+*** passed 15003 checks

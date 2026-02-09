@@ -1,0 +1,78 @@
+*** block size is 4096
+*** inode size is 128
+*** you found test_file, is it correct? 
+*** looking at /test_file
+***      is a file
+***      contains 49 bytes
+***      has 1 links
+*** test_file2 is a symlink pointing to test_file
+*** you found a cached value (maybe), is it correct? 
+*** looking at /test_file
+***      is a file
+***      contains 49 bytes
+***      has 1 links
+*** test_file2 is a symlink pointing to test_file
+*** final check of the cached value, is it correct? 
+*** looking at /test_file
+***      is a file
+***      contains 49 bytes
+***      has 1 links
+*** test_file2 is a symlink pointing to test_file
+*** congratulations, your cache does something! Let's test it some more 
+*** looking at /test_file
+***      is a file
+***      contains 49 bytes
+***      has 1 links
+*** test_file2 is a symlink pointing to test_file
+*** looking at /test_file2
+***      is a symbolic link
+***      link size is 9
+***       => test_file
+*** looking at /test_file
+***      is a file
+***      contains 49 bytes
+***      has 1 links
+*** test_file2 is a symlink pointing to test_file
+*** You use something more sophisticated than last stored!
+*** looking at /test_file
+***      is a file
+***      contains 49 bytes
+***      has 1 links
+*** test_file2 is a symlink pointing to test_file
+*** looking at /test_file2
+***      is a symbolic link
+***      link size is 9
+***       => test_file
+*** looking at /test_file
+***      is a file
+***      contains 49 bytes
+***      has 1 links
+*** test_file2 is a symlink pointing to test_file
+*** You use something more sophisticated than last stored!
+*** looking at /
+***      is a directory
+***      contains 10 entries
+***      has 4 links
+*** looking at .
+***      is a directory
+***      contains 10 entries
+***      has 4 links
+*** looking at data/..
+***      is a directory
+***      contains 10 entries
+***      has 4 links
+*** looking at /data/..
+***      is a directory
+***      contains 10 entries
+***      has 4 links
+*** looking at data/data1/hidden.txt
+***      is a file
+***      contains 20 bytes
+***      has 1 links
+*** i love football!
+*** looking at data/data1/hidden.txt
+***      is a file
+***      contains 20 bytes
+***      has 1 links
+*** i love football!
+*** passed 18 checks

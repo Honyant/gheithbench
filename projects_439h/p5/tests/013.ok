@@ -1,0 +1,9 @@
+*** Block size: 4096
+*** Inode size: 128
+*** simulating execution of shell script...
+*** check the contents:
+*** The scripts/ directory contains 5 files.
+*** cat a.txt: hello, this is a.txt.
+*** b.txt is a regular file.
+*** entry count in empty_dir: 3
+*** empty_dir is 'empty' as expected (. and .. exist)

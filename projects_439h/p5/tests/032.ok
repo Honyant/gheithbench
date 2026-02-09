@@ -1,0 +1,66 @@
+*** block size is 2048
+*** inode size is 128
+*** 
+*** test 1 - getting root dir
+*** looking at /
+***      is a directory
+***      contains 8 entries
+***      has 5 links
+*** 
+*** test 2 - basic file find
+*** looking at hello
+***      is a file
+***      contains 131 bytes
+***      has 1 links
+*** Lorem ipsum dolor sit amet, 
+*** 
+*** test 3 - nested file find
+*** looking at everything/is/more/beautiful/because/we/are/doomed
+***      is a file
+***      contains 84 bytes
+***      has 1 links
+*** you will never be lovelier than you are now. we will never be here again.
+*** :D
+*** 
+*** test 4 - symlink at end of path
+*** looking at /test4/symlink/at/end
+***      is a symbolic link
+***      link size is 9
+***       => endTarget
+*** 
+*** test 5 - symlink + slash at end of path
+*** looking at target of middleRelative
+***      is a directory
+***      contains 3 entries
+***      has 3 links
+*** 
+*** test 6 - relative symlink in middle of path
+*** looking at middleRelative
+***      is a symbolic link
+***      link size is 28
+***       => everything/is/more/beautiful
+*** looking at everything/is/more/beautiful/because/we/are/doomed
+***      is a file
+***      contains 84 bytes
+***      has 1 links
+*** you will never be lovelier than you are now. we will never be here again.
+*** :D
+*** 
+*** test 7 - absolute symlink in middle of path
+*** looking at /test4/symlink/at/middleAbsolute
+***      is a symbolic link
+***      link size is 29
+***       => /everything/is/more/beautiful
+*** looking at everything/is/more/beautiful/because/we/are/doomed
+***      is a file
+***      contains 84 bytes
+***      has 1 links
+*** you will never be lovelier than you are now. we will never be here again.
+*** :D
+*** 
+*** test 8 - dangling symlink
+*** looking at /invalid_symlink
+***      is a symbolic link
+***      link size is 11
+***       => nonexistent
+*** passed 22 checks

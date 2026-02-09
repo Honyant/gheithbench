@@ -120,14 +120,15 @@ To run by hand
 
     ./build/main t0.fun
 
-
 ## Workspace Files
 The following files are in your workspace:
 ```
+main.c
+main.cxx
 Makefile
 README
-REPORT.txt
-main.c
+slice.cxx
+slice.h
 ```
 
 There are 57 tests available. Tests are located in the `tests/` directory (or flat in the workspace for P5).

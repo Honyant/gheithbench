@@ -1,0 +1,17 @@
+*** Checking interrupt status during regular preemption...
+*** Synced 120 threads!
+*** SUCCESS!
+
+
+*** Checking interrupt status when calling yield...
+*** Synced 120 threads!
+*** SUCCESS!
+
+
+*** Checking interrupt status when using a blocking lock...
+*** Synced 120 threads!
+*** SUCCESS!
+
+
+*** Checking interrupt status when using a bounded buffer...
+*** SUCCESS!

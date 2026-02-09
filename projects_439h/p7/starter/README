@@ -1,0 +1,140 @@
+Due date:
+    test: 11/5/2024 @ 11:59pm
+    code: 11/7/2024 @ 11:59pm
+
+Assignment:
+~~~~~~~~~~~
+
+- Go to user mode
+- Implement the required system calls
+- Donate a test case (<csid>.dir, <csid>.ok)
+
+What can you change:
+~~~~~~~~~~~~~~~~~~~~
+
+- The kernel is yours, you can do anything with it as long as:
+
+     * you leave the Makefile's alone
+     * you leave the kernel link script alone
+     * it continues to implement preemptive multi-threading with
+       the informal liveness semantics:
+            o All cores get to participate
+            o All threads get a fair share of resources
+     * it adheres to the user contract:
+            o The virtual address space structure
+            o Protects the kernel from user processes
+            o Protects user processes from each other
+            o Implements the system call semantics
+            o Bootstraps the process tree from /sbin/init
+
+The given code:
+~~~~~~~~~~~~~~~
+
+There is enough code in kernel/ to bootstrap the first user process but:
+
+     o The file system and virtual memory implementations are incomplete
+        and in some places incorrect (e.g. look for prints tagged with
+        FIXME). You are responsible for making them work.
+
+     o You can use any parts of the code you want for this (and future)
+       assignments but you can't copy it in late submissions for previous
+       assignments.
+
+     o You need to understand everything you submit.
+
+Virtual Address Space:
+~~~~~~~~~~~~~~~~~~~~~~
+
+0x00000000 - 0x00001000       (invalid)
+0x00001000 - 0x80000000       (shared kernel RWX)
+0x80000000 - 0xF0000000       (process private, user RWX)
+0xF0000000 - 0xFFFFFFFF+1     (shared, user RWX except for the PICS, kernel RW)
+
+User code should not be able to access anything outside loaded or mmaped regions in
+the user range. All other memory references should the process to exit with exit code (-1)
+
+Details:
+~~~~~~~~
+
+(1) kernelMain mounts the ext2 file system in drive #1
+
+(2) it looks for a file named /sbin/init
+
+(3) it loads it in user memory (0x80000000 - 0xf0000000) according to what
+    the ELF file asks for.
+
+    It should reject any non-ELF files or an ELF file that tries to load
+    a program outside the user range
+
+(4) it switches to user mode and starts running the user process at the
+    program entry point
+
+(5) the kernel should protect all its resources from the user program
+
+(6) Look in t0.dir/bin/sys.h and t0.dir/bin/sys.S for details about most
+    of the required system calls
+
+(7) 3 system calls are required but not included in t0:
+
+    // Syscall#100
+    int chdir(const char* path); // changes the current working directory
+                                 // to the given path.
+                                 // returns 0 on success, -1 on error.
+
+    // Syscall#101
+    // maps to the in-kernel implementation of naive_mmap as defined in p6
+    void* naive_mmap(uint32_t size,
+             int is_shared,
+             int file,
+             uint32_t offset);
+
+    // Syscall#102
+    // maps to the in-kernel implementation of naive_unmap as defined in p6
+    void naive_unmap(void* p); 
+    
+                                   
+
+files:
+~~~~~~
+
+- kernel/          contains the kernel files
+
+- <test>.dir/      the contents of the root disk
+
+- <test>.dir/sbin
+    init.c         ... init source
+    libc.c/libc.h  ... minimal libc implementation
+    sys.s/sys.h    ... user-side system calls
+    init           ... the elf init file packaged in t0.img
+
+for makefile help:
+~~~~~~~~~~~~~~~~~~
+
+    make help
+
+to run test:
+~~~~~~~~~~~~
+
+    make -s clean test
+
+to run one test:
+~~~~~~~~~~~~~~~~
+
+    make -s t0.test
+
+To make the output more noisy:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    make clean test
+
+To run by hand
+~~~~~~~~~~~~~~
+
+    ./run_qemu t0
+
+To attach with gdb
+~~~~~~~~~~~~~~~~~~
+
+    ./debug_qemu t0
+
+

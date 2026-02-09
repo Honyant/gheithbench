@@ -1,0 +1,16 @@
+*** test one - simple synch iterations: 0
+*** CONGRATS ON MAKING IT THROUGH THE FIRST WEEK OF  439H, FALL 2024!!
+*** critical section layer 2! 'critical depth' (but not from critical.cc!): 0
+*** test one - simple synch iterations: 1
+*** CONGRATS ON MAKING IT THROUGH THE FIRST WEEK OF  439H, FALL 2024!!
+*** critical section layer 2! 'critical depth' (but not from critical.cc!): 1
+*** test one - simple synch iterations: 2
+*** CONGRATS ON MAKING IT THROUGH THE FIRST WEEK OF  439H, FALL 2024!!
+*** critical section layer 2! 'critical depth' (but not from critical.cc!): 2
+*** test one - simple synch iterations: 3
+*** CONGRATS ON MAKING IT THROUGH THE FIRST WEEK OF  439H, FALL 2024!!
+*** critical section layer 2! 'critical depth' (but not from critical.cc!): 3
+*** since we went into and out of the critical section, this count should be 1, and this message will print at the end x4 due to the barrier. Your count: 1
+*** since we went into and out of the critical section, this count should be 1, and this message will print at the end x4 due to the barrier. Your count: 1
+*** since we went into and out of the critical section, this count should be 1, and this message will print at the end x4 due to the barrier. Your count: 1
+*** since we went into and out of the critical section, this count should be 1, and this message will print at the end x4 due to the barrier. Your count: 1

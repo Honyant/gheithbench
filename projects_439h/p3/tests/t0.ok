@@ -1,0 +1,11 @@
+*** hello
+*** in thread, i=0
+*** in main, i=1
+*** in thread, i=1
+*** in main, i=2
+*** in thread, i=2
+*** in main, i=3
+*** in thread, i=3
+*** in main, i=4
+*** in thread, i=4
+*** in main, i=5

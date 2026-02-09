@@ -1,0 +1,13 @@
+*** Starting thread safety tests
+*** Starting thread safety test
+*** Final counter value: 4000
+*** Weak pointer 0 promotion successful
+*** Weak pointer 1 promotion successful
+*** Weak pointer 2 promotion successful
+*** Weak pointer 3 promotion successful
+*** Counter destroyed at value: 4000
+*** Post-cleanup weak pointer 0 promotion failed
+*** Post-cleanup weak pointer 1 promotion failed
+*** Post-cleanup weak pointer 2 promotion failed
+*** Post-cleanup weak pointer 3 promotion failed
+*** Thread safety tests completed

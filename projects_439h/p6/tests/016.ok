@@ -1,0 +1,3 @@
+*** Yay we can read/write to shared pages!
+*** Successfully accessed shared memory that was mapped after thread creation!
+*** We didn't overwrite our localAPIC and ioAPIC!

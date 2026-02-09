@@ -1,0 +1,22 @@
+*** fd = 3
+*** len = 27
+*** will bolduc is my goat
+*** len = 27
+*** fd = 4
+*** len = 31
+*** michael goppert is my goat
+*** libc.c:27 read error, fd = 100
+*** libc.c:27 read error, fd = -1
+*** Open, read and len basic test finished!
+*** __________________________________
+*** Spicing it up with close 
+*** fd = 3
+*** len = -1
+*** libc.c:27 read error, fd = 3
+*** Basic close test finished! 
+*** __________________________________ 
+*** Let's do something more interesting now
+*** you read the right file fork1!
+*** absolute chdir test passed! 
+*** you read the right file fork2!
+*** relative chdir test passed! 

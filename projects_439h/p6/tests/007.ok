@@ -1,0 +1,29 @@
+*** Part 0: initialize IDE and file system
+*** Part 0 complete
+***
+*** Part 1: simple mmap of shared memory
+*** a
+*** Part 1 complete
+***
+*** Part 2: two mmaps of shared memory, to make sure that we are not overwriting old memory
+*** b
+*** c
+*** Part 2 complete
+***
+*** Part 3: confirm that munmap is a noop on shared memory
+*** d
+*** e
+*** Part 3 complete
+***
+*** Part 4: confirm shared memory is actually shared between threads!
+*** f
+*** Part 4 complete
+***
+*** Part 5: confirm synchronization of reads!
+*** g
+*** Part 5 complete
+***
+*** Part 6: confirm synchronization of reads!
+*** h
+*** i
+*** Part 6 complete

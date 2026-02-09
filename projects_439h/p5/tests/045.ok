@@ -1,0 +1,55 @@
+*** SYMLINK TESTS, TESTS MANY EDGE CASES
+*** TEST 0: basic find, if you past t0, you should pass this
+*** looking at /
+***      is a directory
+***      contains 7 entries
+***      has 7 links
+*** looking at /dir1
+***      is a directory
+***      contains 6 entries
+***      has 3 links
+*** looking at /dir2
+***      is a directory
+***      contains 3 entries
+***      has 3 links
+*** ----------------------------------------------------------------------------------
+*** TEST 1: find + symlink, test both finding and resolving a relative symlink
+*** looking at /dir1/relativeSym
+***      is a symbolic link
+***      link size is 15
+***       => ../symlink_test
+*** looking at symlink_test/
+***      is a directory
+***      contains 3 entries
+***      has 2 links
+*** ----------------------------------------------------------------------------------
+*** TEST 2: test 1 for absolute symlinks
+*** looking at /dir1/absoluteSym
+***      is a symbolic link
+***      link size is 13
+***       => /symlink_test
+*** looking at /symlink_test/
+***      is a directory
+***      contains 3 entries
+***      has 2 links
+*** ----------------------------------------------------------------------------------
+*** TEST 3: resolving root symlinks
+*** looking at /dir1/rootSym
+***      is a symbolic link
+***      link size is 1
+***       => /
+*** looking at /
+***      is a directory
+***      contains 7 entries
+***      has 7 links
+*** ----------------------------------------------------------------------------------
+*** TEST 4: looped relative path symlink
+*** looking at dir1/dir2
+***      is a directory
+***      contains 3 entries
+***      has 3 links
+*** ----------------------------------------------------------------------------------
+*** TEST 5: assert symlink node is equal to actual node in a trie
+*** passed test 5!
+*** ----------------------------------------------------------------------------------
+*** passed 10 checks

@@ -1,0 +1,38 @@
+*** block size is 1024
+*** inode size is 128
+*** looking at /
+***      is a directory
+***      contains 12 entries
+***      has 5 links
+*** looking at /chonky.txt
+***      is a file
+***      contains 27675 bytes
+***      has 1 links
+***      end: abcdefghijklmnopqrstuvwxyz
+*** looking at /symlink1
+***      is a symbolic link
+***      link size is 60
+***       => thisIsAVeryLongFileNameThatWillTestYourSymlinkImplementation
+*** looking at /symlink2
+***      is a symbolic link
+***      link size is 59
+***       => thisIsAnotherLongFileNameToMakeSureThatYourSymlinksWorkGood
+*** looking at /symlink3
+***      is a symbolic link
+***      link size is 61
+***       => hereIsYetAnotherFileWithAnAbsurdlyLongTitleToTestYourSymlinks
+*** looking at /spam
+***      is a directory
+***      contains 678 entries
+***      has 2 links
+***      takes up 8192 bytes
+*** Checking files in spam folder
+*** looking at /linkies
+***      is a directory
+***      contains 3 entries
+***      has 2 links
+*** looking at /linkies/root
+***      is a symbolic link
+***      link size is 1
+***       => /
+*** Done! :)

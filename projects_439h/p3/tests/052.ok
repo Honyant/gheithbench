@@ -1,0 +1,9 @@
+*** Bounded Buffer Test Start ***
+*** Finished Producers (1)
+*** First Round of Put/Get Completed ***
+*** Total sum produced: 6 (expected 6)
+*** Total sum consumed: 6 (expected 6)
+*** Reuse Round Completed ***
+*** Reused sum produced: 15 (expected 15)
+*** Reused sum consumed: 15 (expected 15)
+*** Bounded Buffer Test Completed Successfully ***

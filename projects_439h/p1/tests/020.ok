@@ -1,0 +1,41 @@
+*** entering recursion depth 0
+*** func call 0
+*** entering recursion depth 1
+*** func call 1
+*** entering recursion depth 2
+*** func call 2
+*** exiting recursion depth 2
+*** exiting recursion depth 1
+*** exiting recursion depth 0
+*** core 0 end
+*** entering recursion depth 0
+*** func call 3
+*** entering recursion depth 1
+*** func call 4
+*** entering recursion depth 2
+*** func call 5
+*** exiting recursion depth 2
+*** exiting recursion depth 1
+*** exiting recursion depth 0
+*** core 1 end
+*** entering recursion depth 0
+*** func call 6
+*** entering recursion depth 1
+*** func call 7
+*** entering recursion depth 2
+*** func call 8
+*** exiting recursion depth 2
+*** exiting recursion depth 1
+*** exiting recursion depth 0
+*** core 2 end
+*** entering recursion depth 0
+*** func call 9
+*** entering recursion depth 1
+*** func call 10
+*** entering recursion depth 2
+*** func call 11
+*** exiting recursion depth 2
+*** exiting recursion depth 1
+*** exiting recursion depth 0
+*** core 3 end
+*** array sum = 50005000

@@ -1,0 +1,12 @@
+*** Testing Circular References
+*** Node 1 created
+*** happy
+*** Node 2 created
+*** happy
+*** Node 1's next ID: 2
+*** happy
+*** Node 2's previous ID: 1
+*** sad
+*** Node 1 deleted
+*** Node 2 deleted
+*** Yay! Finished Circular Reference Test

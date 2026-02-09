@@ -1,0 +1,6 @@
+*** abcdefghijklmnopqrstuvwxyz 
+*** zyxwvutsrqponmlkjihgfedcba 
+*** ABCDEFGHIJKLMNOPQRSTUVWXYZ 
+*** ZYXWVUTSRQPMONLKJIHGFEDCBA 
+*** hi hello how are you today 
+*** bye good bye so long adieu 

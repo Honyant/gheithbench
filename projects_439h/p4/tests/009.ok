@@ -1,0 +1,71 @@
+*** Test 1
+*** Tester constructor (1)
+*** Value: 1
+*** Tester destructor (1)
+*** ----------
+***
+*** Test 2
+*** Tester constructor (2)
+*** Value: 2
+*** Value: 2
+*** Value: 2
+*** Tester destructor (2)
+*** ----------
+***
+*** Test 3
+*** Tester constructor (3)
+*** w is not null (good)
+*** Tester destructor (3)
+*** w is null (good)
+*** ----------
+***
+*** Test 4
+*** Tester constructor (4)
+*** Value: 4
+*** Value: 4
+*** Tester destructor (4)
+*** w is null (good)
+*** w is null (good)
+*** ----------
+***
+*** Test 5
+*** Tester constructor (-1)
+*** TreeNode constructor (1)
+*** TreeNode constructor (2)
+*** TreeNode constructor (3)
+*** TreeNode constructor (4)
+*** TreeNode constructor (5)
+*** TreeNode constructor (6)
+*** TreeNode constructor (7)
+*** TreeNode constructor (8)
+*** TreeNode constructor (9)
+*** TreeNode constructor (10)
+*** TreeNode constructor (11)
+*** TreeNode constructor (12)
+*** TreeNode constructor (13)
+*** TreeNode constructor (14)
+*** TreeNode constructor (15)
+***
+*** tree built!
+***
+*** TreeNode destructor (1)
+*** TreeNode destructor (2)
+*** TreeNode destructor (3)
+*** TreeNode destructor (4)
+*** TreeNode destructor (5)
+*** TreeNode destructor (6)
+*** TreeNode destructor (7)
+*** TreeNode destructor (8)
+*** TreeNode destructor (9)
+*** TreeNode destructor (10)
+*** TreeNode destructor (11)
+*** TreeNode destructor (12)
+*** TreeNode destructor (13)
+*** TreeNode destructor (14)
+*** TreeNode destructor (15)
+*** Tester destructor (-1)
+***
+*** tree destroyed!
+*** ----------
+***
+*** Done! Good job! :D

@@ -1,0 +1,8 @@
+* discuss how your design/implementation handles all constraints
+     - critical sections using spinning are O(1)
+     - critical sections using interrupts are O(1)
+     - interrupts are always disabled when an interrupt frame is on the active stack
+
+* why do we need both strong and weak references?
+
+

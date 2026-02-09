@@ -125,10 +125,9 @@ To run by hand
 ## Workspace Files
 The following files are in your workspace:
 ```
+main.cxx
 Makefile
 README
-REPORT.txt
-main.cxx
 ```
 
 There are 63 tests available. Tests are located in the `tests/` directory (or flat in the workspace for P5).

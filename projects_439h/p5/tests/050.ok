@@ -1,0 +1,39 @@
+*** block size is 1024
+*** inode size is 128
+*** looking at /
+***      is a directory
+***      contains 6 entries
+***      has 4 links
+*** looking at /file1
+***      is a file
+***      contains 22 bytes
+***      has 1 links
+*** looking at /lorem_ispum
+***      is a file
+***      contains 22 bytes
+***      has 1 links
+*** the first block and second block of lorem ispum:
+*** Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pharetra, enim nec feugiat euismod, velit nisl sollicitudin nunc, eget posuere mi lorem ac massa. Aliquam maximus pharetra mollis. Nunc faucibus purus ipsum, sit amet lacinia nunc ornare et. Nam malesuada nunc odio, ac lacinia ex euismod ac. Mauris ornare consequat magna ut porttitor. Ut rhoncus turpis ligula, sed lobortis nibh molestie placerat. Nunc condimentum mollis semper. Integer vel libero vel tortor consectetur pulvinar.
+*** Quisque blandit justo vestibulum felis pharetra tempor. Mauris tempor ut magna non rhoncus. Aenean varius nisi mi, a eleifend risus sollicitudin venenatis. Ut pretium efficitur nunc, ac consequat est dictum sit amet. Phasellus vulputate urna ut risus semper, eu sodales velit auctor. Donec tempus nisi sed maximus luctus. Pellentesque at pretium nibh, sed ornare orci. Cras facilisis cursus quam, sit amet posuere quam faucibus non. Aliquam elementum nunc non auctor laoreet. Cras a luctus elit. Quisque feugiat lectus in porta bibendum. Sed dignissim placerat dapibus. Nullam sodales massa quis purus consequat pellentesque. Suspendisse mattis placerat metus, in pretium nunc molestie nec. In tincidunt, purus et rutrum fermentum, odio tellus euismod quam, ac bibendum odio nunc et nisi. Integer at feugiat nisl, eget pretium justo.
+*** Nunc faucibus ante eu ante consectetur egestas commodo eget nisi. Nam vitae ultricies leo. Mauris lobortis dui at porttitor pharetra. Donec quis lorem ultricies, semper quam a, vestibulum dui. Nam eu leo suscipit, hendrerit nisi in, ultricies tortor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis luctus bibendum pellentesque. Nunc eu enim odio. Quisque orci leo, efficitur eu scelerisque sit amet, ornare non metus. Proin non vulputate nibh. Praesent arcu nisi, condimentum a eleifend sit amet, ornare ut tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce vitae tellus libero. Etiam auctor tincidunt pharetra.
+*** Aliquam posu
+*** looking at ....long structure..../nodes
+***      is a file
+***      contains 470 bytes
+***      has 1 links
+***         _nnnn_                      
+***        dGGGGMMb     ,"""""""""""""".
+***       @p~qp~~qMb    | Linux Rules! |
+***       M|@||@) M|   _;..............'
+***       @,----.JM| -'
+***      JS^\__/  qKL
+***     dZP        qKRb
+***    dZP          qKKb
+***   fZP            SMMb
+***   HZM            MMMM
+***   FqM            MMMM
+*** __| ".        |\dS"qML
+*** |    `.       | `' \Zq
+***_)      \.___.,|     .'
+***\____   )MMMMMM|   .'
+***     `-'       `--' hjm

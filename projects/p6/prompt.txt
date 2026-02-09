@@ -211,7 +211,6 @@ The following files are in your workspace:
 ```
 Makefile
 README
-REPORT.txt
 src/go.c
 src/go.h
 ```

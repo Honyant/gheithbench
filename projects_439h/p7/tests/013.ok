@@ -1,0 +1,62 @@
+*** TEST 1
+*** open("file.txt") = 3
+*** open("nested_file.txt") = 4
+*** open("nonexistent") = error
+***
+*** TEST 2
+*** len(3) = 14
+*** len(4) = 21
+*** len(stdin) = error
+*** len(stdout) = error
+*** len(stderr) = error
+*** len(unopened) = error
+*** len(out_of_range) = error
+*** len(negative) = error
+***
+*** TEST 3
+*** read(3) = 14
+*** read(4) = 21
+*** read(stdin) = error
+*** read(stdout) = error
+*** read(stderr) = error
+*** read(unopened) = error
+*** read(out_of_range) = error
+*** read(negative) = error
+***
+*** TEST 4
+*** write file.txt to stdout: file contents
+*** write(1) = 14
+*** write nested_file.txt to stderr: nested file contents
+*** write(2) = 21
+*** write 4 bytes of file.txt: file
+*** write(1) = 4
+*** write(stdin) = error
+*** write(3) = error
+*** write(4) = error
+*** write(unopened) = error
+*** write(out_of_range) = error
+*** write(negative) = error
+***
+*** TEST 5
+*** seek(3, 0) = 0
+*** read file.txt: file 
+*** read file.txt: contents
+*** seek(3, 5) = 5
+*** read file.txt: contents
+*** seek(3, 15) = 15
+*** seek(stdin) = error
+*** seek(stdout) = error
+*** seek(stderr) = error
+*** seek(unopened) = error
+*** seek(out_of_range) = error
+*** seek(negative) = error
+***
+*** TEST 6
+*** close(3) = 0
+*** open("file.txt") = 3
+*** close(stdin) = 0
+*** close(4) = 0
+*** open("nested_file.txt") = 0
+*** close(unopened) = error
+*** close(out_of_range) = error
+*** close(negative) = error

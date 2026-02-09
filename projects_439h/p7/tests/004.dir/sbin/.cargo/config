@@ -1,0 +1,7 @@
+[unstable]
+build-std = ["core", "compiler_builtins", "alloc"]
+build-std-features = ["compiler-builtins-mem"]
+
+[build]
+target = "i686-unknown-none.json"
+rustflags = ["-C", "link-args=-N", "-C", "link-args=-Ttext=0x80000000", "-C", "relocation-model=static", "-C", "force-frame-pointers"]

@@ -1,0 +1,52 @@
+*** block size is 1024
+*** inode size is 128
+*** looking at /cinnamoroll.txt
+***      is a file
+***      contains 23 bytes
+***      has 1 links
+*** cinnamoroll says hello
+*** looking at /kuromi
+***      does not exist
+*** looking at /character_list
+***      is a symbolic link
+***      link size is 84
+***       => data/cinnamoroll_kuromi_hellokitty_pochaco_mymelody_pompompurin_keroppi_gudetama.txt
+*** looking at /sanrio_article.txt
+***      is a file
+***      contains 133267 bytes
+***      has 1 links
+*** theme identifiable by the colors black and pink. My Melody has a “light” theme, as opposed to Hello Kitty and Keroppi, who have more “bright” themes. 
+*** 
+*** With the rise of other East Asian cultural trends like K-Pop and anime in the U.S. over the past few years, it is perhaps not surprising that Sanrio would be a part of this wave as well. Tahmassian, for example, mentioned that her preference for a particular Sanrio character — Little Twin Stars — led her to watch an anime called “Sanrio Danshi,” which centers on a group of boys all obsessed with different Sanrio characters. 
+*** 
+*** Sanrio may be a children’s brand on the surface, but it is clear that the brand has maintained a strong following and fan base of adults. Sanrio, and Hello Kitty, have curated their image to such a degree that it lacks a specific, target age. 
+*** 
+*** “I know of many older adults who have and love Sanrio things, like people my parents’ age,” Newcomb said in a direct message. 
+*** 
+*** Lindstrom has become such a fan of the brand,
+*** looking at sanrio_world/character1
+***      is a file
+***      contains 11 bytes
+***      has 1 links
+*** cinnamoroll
+*** looking at sanrio_world/character2
+***      is a file
+***      contains 6 bytes
+***      has 1 links
+*** kuromi
+*** looking at sanrio_world/character3
+***      is a file
+***      contains 11 bytes
+***      has 1 links
+*** hello kitty
+*** looking at sanrio_world/character4
+***      is a file
+***      contains 7 bytes
+***      has 1 links
+*** pochaco
+*** looking at sanrio_world/character5
+***      is a file
+***      contains 9 bytes
+***      has 1 links
+*** my melody
+*** passed 13 checks

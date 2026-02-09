@@ -1,0 +1,41 @@
+*** looking at root
+***      is a directory
+***      contains 6 entries
+***      has 6 links
+*** looking at /root/dir1
+***      is a directory
+***      contains 5 entries
+***      has 2 links
+*** looking at /dir1/first.txt
+***      is a file
+***      contains 51 bytes
+***      has 1 links
+*** Congrats! You are able to read a basic text file.
+*** looking at /dir2/symlinkToDir1
+***      is a symbolic link
+***      link size is 7
+***       => ../dir1
+*** looking at /dir2/symlinkToDir1/
+***      is a directory
+***      contains 5 entries
+***      has 2 links
+*** looking at /dir2/symlinkToDir1/relative.txt
+***      is a file
+***      contains 63 bytes
+***      has 1 links
+*** Congrats! You are able to find a relative path from a symlink.
+*** looking at /dir3/chainedSymlink/
+***      is a directory
+***      contains 5 entries
+***      has 2 links
+*** looking at /dir3/chainedSymlink/chain.txt
+***      is a file
+***      contains 53 bytes
+***      has 1 links
+*** Congrats! You were able to follow a chained symlink.
+*** looking at /dir3/rootSymlink/dir3/rootSymlink/dir3/root.txt
+***      is a file
+***      contains 56 bytes
+***      has 1 links
+*** Congrats! You are able to follow a symlink to the root.
+*** passed 8 checks

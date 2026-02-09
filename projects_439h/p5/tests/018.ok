@@ -1,0 +1,102 @@
+*** My system's block size is 2048
+*** The inode size is 128
+*** You are currently at / :D
+***      I'm a directory!!
+***      I have 13 entries and 8 links
+*** You are currently at /mermaid.txt :D
+***      I'm a file!! 
+***      I contain 605 bytes and have 1 link(s)
+***              .---.
+***             (_,/\ \
+***            (`^ ^(  )
+***            ) \=  ) (
+***       |\_  (.-' '--.)
+***        \(  /(_)-(_) \
+***         \\/ /\   /`\ \
+***          \_/ / . \  //
+***             /'---'\`/_
+***           _/ ^   ^ ;--;
+***       .--`| ^  ^ /`    `),
+***      /`  . \  ^ /`  ) .   ').
+*** ~^~`/  (    \^ / (       '  \^-~`-~
+***-  ^ ~^-    . )/   .    )  '-.;~^-~^~-
+***   ~^~-      / `\ - .  ~^~ ,-.`~~^~^~^
+*** ~- `^_~-~^-| \^ \~_~^ -~^~- ~^`~^ ^~
+***  ~_~^- .-./__/\__`\-. ~^_-~^- ~^- 
+***     ^~ `-^~=~-`=~-~=-'    ~
+***Credit to Joan G. Stark on www.asciiart.eu!
+*** You are currently at /h2o :D
+***      I'm a directory!!
+***      I have 4 entries and 2 links
+*** You are currently at /welcome.txt :D
+***      I'm a file!! 
+***      I contain 172 bytes and have 1 link(s)
+***  _      _____       
+*** | |    / __  \      
+*** | |__  `' / /' ___  
+*** | '_ \   / /  / _ \ 
+*** | | | |./ /__| (_) |
+*** |_| |_|\_____/\___/ 
+***   Just add water!
+*** You are currently at /charlotte.txt :D
+***      I do not exist D:
+*** You are currently at /cryokenesis :D
+***      I'm a symbolic link and my link size is 4
+***       => emma
+*** You are currently at /cryokenesis/quotes.txt :D
+***      I'm a file!! 
+***      I contain 378 bytes and have 1 link(s)
+***      Emma Gilbert: Heroes aren't always pumped up superfreaks, who fly through the air, Rikki. 
+*** You are currently at /relationships/quotes.txt, which is what Rikki used to think of Zane :D
+***      I'm a file!! 
+***      I contain 99 bytes and have 1 link(s)
+***Rikki Chadwick: Zane Bennett is a pig. I take a chance to get under his skin any time I get one.
+*** You are currently at relationships/akward/lore.txt, which is the lore between Rikki and Zane :D
+***      I'm a file!! 
+***      I contain 35 bytes and have 1 link(s)
+*** *Rikki ends up dating Zane lol*
+*** You are currently at a symbolic link to another symlink of Cleo's folder, /hydrokenesis! :D
+***      I'm a symbolic link and my link size is 15
+***       => ../hydrokenesis
+*** You are currently at hydrokenesis/quotes.txt :D
+***      I'm a file!! 
+***      I contain 748 bytes and have 1 link(s)
+***Cleo Sertori: [on phone] Lewis, is there something you want to ask me?
+***Lewis McCartney: [on phone] Yeah. I was a bit embarrased to ask you in front of the other girls but...
+***Cleo Sertori: [hangs up phone] He wants a sample of my earwax.
+***
+*** Cleo Sertori: Naurrrr!! The test case is over! Good job for passing it tho :D 
+*** Cleo Sertori: The moon spell...
+*** You are currently at sea, under the moon spell :D
+***      I'm a file!! 
+***      I contain 1336 bytes and have 1 link(s)
+***              __...----...__
+***           .-' -=;::;::`;:::`-.
+***        .-'"; `-;:"";`-;   ,;;'`-.
+***      .''";;:     ,..   `.;;. .';;'.
+***     /  ,;;::,     `--'  ,.;: ::  .;:\
+***    ..- .; ;:,;,,.,   ,  ;;: ::;;:..;:.
+***   ;   ;    .;::,    ;:.;:::::::::;., ;
+***   |;. :      ;:;       `-;:::::-'""  |
+***   | ;,'  ,;::     ;.     `-;::  `;:::|
+***   ;`-;.   ,;:  ,;; `.  ."";,     ;;, ;
+***   '. ."".,        "".    ,;:;  '.,;::.
+***    `.                              .'
+***      `.                          .'
+***        `-.                    .-'
+***           ""--...______...--""
+***
+***            ______.._      _..________    _____
+***__.._.-.'""".: ::::  `-._.',;::::::.;:`--' ,..;`-.--...___
+***;:::,.  ,;::::  ::    `-. ,.;::::... .; ,;::::::. ,;:::;.,
+***;::::::::::::::  :::  ::. ,;:::::. ,:: .,;:::... ,;::::.,;
+*** ,.;:::::., .;::. :::: ::. ,;::: ,:::   .;:::::::., ,.;:::
+***  :::::::.., ,;:: ,;:::. ,.;":::.:::  ,.;:::::::;.,..,;:::
+***:::::.., .;:::::.,.:; ______.......___ ,.;::::::::;.., .,:
+***____.....------"""""""""---.,;:::::::,""--......__________
+***:::::'                                     `,;;::::. ,;:::
+***     ,;:.         .:,                ,.;            ,__,;.
+***                           -.                 .-..
+***  .-..      ._.         ._.    ,;'       __   `--'   jro
+***  `--'
+*** passed 11 checks

@@ -1,0 +1,32 @@
+*** test 1 - basic mmap with size aligned to page_size
+*** p1 = 80000000
+*** 
+*** test 2 - basic mmap with size not aligned to page_size
+*** p2 = 80001000
+*** p3 = 80003000
+*** 
+*** test 3 - basic munmap
+*** unmapped p2
+*** 
+*** test 4 - make sure earliest free region that fits size is mapped first
+*** p4 = 80004000
+*** p5 = 80001000
+*** p6 = 80002000
+*** 
+*** test 5 - munmap first entry and then insert back at the start of free memory
+*** unmapped p1
+*** p9 = 80000000
+*** 
+*** test 6 - munmap on an address in the middle of a vme
+*** unmapped p5
+*** p7 = 80001000
+*** 
+*** test 7 - munmap on a region spanning multiple pages
+*** unmapped p4
+*** p8 = 80004000
+*** 
+*** test 8 - shared vs priv memory
+*** shared1 = f0000000
+*** priv1 = 80000000
+*** 
+*** passed 14 checks

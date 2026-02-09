@@ -1,0 +1,21 @@
+*** Test 1 - Simple mmap
+*** i am a treasure
+*** Test 2 - Result of ummap
+*** i am a treasure
+*** Test 3 - Shared memory mmap
+*** i am a lost treasure
+*** Test 4 - Shared memory access
+*** Printing *** i am a lost treasure
+*** Printing *** i am a lost treasure
+*** Printing *** i am a lost treasure
+*** Printing *** i am a lost treasure
+*** Printing *** i am a lost treasure
+*** Printing *** i am a lost treasure
+*** Printing *** i am a lost treasure
+*** Printing *** i am a lost treasure
+*** Printing *** i am a lost treasure
+*** Printing *** i am a lost treasure
+*** Test 5 - Efficient mmap/unmap/page faults
+*** Finished mapping
+*** Good job!
+*** passed 3 checks

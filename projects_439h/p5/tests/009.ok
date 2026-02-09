@@ -1,0 +1,101 @@
+*** block size is 1024
+*** inode size is 128
+*** looking at /
+***      is a directory
+***      contains 11 entries
+***      has 4 links
+*** looking at /hello
+***      is a file
+***      contains 23 bytes
+***      has 1 links
+*** you can read files
+*** looking at /goodbye
+***      is a symbolic link
+***      link size is 5
+***       => hello
+*** looking at /not_there
+***      does not exist
+*** looking at /shortname
+***      is a symbolic link
+***      link size is 148
+***       => reallllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllylongname
+*** looking at /empty
+***      is a file
+***      contains 0 bytes
+***      has 1 links
+*** Zero file test: file that is all zeros. takes up zero sectors. tests that you handle sparse blocks
+*** looking at /zerofile
+***      is a file
+***      contains 3072 bytes
+***      has 1 links
+*** Double indirection test + mass caching test
+*** looking at /fortunes_tripled
+***      is a file
+***      contains 292574 bytes
+***      has 1 links
+***      Q hvWAmN At eporW cyhpaigaetnnuhaNsc  A
+*** looking at /.
+***      is a directory
+***      contains 11 entries
+***      has 4 links
+*** looking at /..
+***      is a directory
+***      contains 11 entries
+***      has 4 links
+*** looking at /data
+***      is a directory
+***      contains 4 entries
+***      has 2 links
+*** looking at /data/data.txt
+***      is a file
+***      contains 33 bytes
+***      has 1 links
+*** this is nice
+*** we can read
+*** 
+*** w
+*** we
+*** we 
+*** we c
+*** we ca
+*** we can
+*** we can 
+*** we can r
+*** we can re
+*** we can rea
+*** we can read
+*** looking at /data/panic.txt
+***      is a file
+***      contains 1736 bytes
+***      has 1 links
+*** Don't panic
+*** 
+*** 
+***                          oooo$$$$$$$$$$$$oooo
+***                       oo$$$$$$$$$$$$$$$$$$$$$$$$o
+***                    oo$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$o         o$   $$ o$
+***    o $ oo        o$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$o       $$ $$ $$o$
+*** oo $ $ "$      o$$$$$$$$$    $$$$$$$$$$$$$    $$$$$$$$$o       $$$o$$o$
+*** "$$$$$$o$     o$$$$$$$$$      $$$$$$$$$$$      $$$$$$$$$$o    $$$$$$$$
+***   $$$$$$$    $$$$$$$$$$$      $$$$$$$$$$$      $$$$$$$$$$$$$$$$$$$$$$$
+***   $$$$$$$$$$$$$$$$$$$$$$$    $$$$$$$$$$$$$    $$$$$$$$$$$$$$  """$$$
+***    "$$$""""$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$     "$$$
+***     $$$   o$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$     "$$$o
+***    o$$"   $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$       $$$o
+***    $$$    $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$" "$$$$$$ooooo$$$$o
+***   o$$$oooo$$$$$  $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$   o$$$$$$$$$$$$$$$$$
+***   $$$$$$$$"$$$$   $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$     $$$$""""""""
+***  """"       $$$$    "$$$$$$$$$$$$$$$$$$$$$$$$$$$$"      o$$$
+***             "$$$o     """$$$$$$$$$$$$$$$$$$"$$"         $$$
+***               $$$o          "$$""$$$$$$""""           o$$$
+***                $$$$o                                o$$$"
+***                 "$$$$o      o$$$$$$o"$$$$o        o$$$$
+***                   "$$$$$oo     ""$$$$o$$$$$o   o$$$$""
+***                      ""$$$$$oooo  "$$$o$$$$$$$$$"""
+***                         ""$$$$$$$oo $$$$$$$$$$
+***                                 """"$$$$$$$$$$$
+***                                     $$$$$$$$$$$$
+***                                      $$$$$$$$$$"
+***                                       "$$$""  
+*** 
+*** passed 26 checks

@@ -1,0 +1,36 @@
+*** TEST 1
+*** p1 address: 0x80000000
+*** p1 data: file contents
+*** p2 address: 0x80001000
+*** p2 data: nested file contents
+***
+*** TEST 2
+*** p3 address: 0x80002000
+*** p3 data: contents
+*** p4 address: 0x80003000
+*** p4 data: s
+*** p4 + 2 data: 0
+***
+*** TEST 3
+*** p5 address: 0x80003000
+*** p6 address: 0x80001000
+*** p6 data: 0
+***
+*** TEST 4
+*** p0 address: 0x80000000
+*** p0 data: 0
+*** p1 address: 0x80000000
+*** p1 data: 0
+*** p2 address: 0x80000000
+*** p2 data: 0
+*** p0 address: 0x80000000
+*** p0 data: 0
+*** p1 address: 0x80000000
+*** p1 data: 0
+*** p2 address: 0x80000000
+*** p2 data: 0
+***
+*** TEST 5
+*** p7 address: 0xf0000000
+*** p7 data: file contents
+*** p7 altered data: file changed!

@@ -1,0 +1,54 @@
+*** block size is 1024
+*** inode size is 128
+*** looking at /
+***      is a directory
+***      contains 7 entries
+***      has 4 links
+*** Test one: basic find of single file
+*** looking at /funFile
+***      is a file
+***      contains 40 bytes
+***      has 1 links
+*** you can do a basic find! Great Job!
+*** Test two: two level find
+*** looking at /data/data.txt
+***      is a file
+***      contains 57 bytes
+***      has 1 links
+*** Congradulations, you can perform a basic pathed find
+*** Test three: three level find
+*** looking at /data/subData/subData.txt
+***      is a file
+***      contains 63 bytes
+***      has 1 links
+*** Congradulations, you can perform a multi level pathed find
+*** Test four: find ending with a /
+*** looking at /data/subData/
+***      is a directory
+***      contains 3 entries
+***      has 2 links
+*** Test five: find starting with a /
+*** looking at /funFile
+***      is a file
+***      contains 40 bytes
+***      has 1 links
+*** you can do a basic find! Great Job!
+*** Test six: find following a symLink
+*** looking at /linkToSubData/subData.txt
+***      is a file
+***      contains 63 bytes
+***      has 1 links
+*** Congradulations, you can perform a multi level pathed find
+*** Test seven: find following a symLink, with a / at the end
+*** looking at /linkToSubData/
+***      is a directory
+***      contains 3 entries
+***      has 2 links
+*** Test eight: find following a symlink whose path contains a symlink
+*** looking at /linkToLinkToSubData/subData.txt
+***      is a file
+***      contains 63 bytes
+***      has 1 links
+*** Congradulations, you can perform a multi level pathed find
+*** Test Complete! Great Job!
+*** passed 20 checks

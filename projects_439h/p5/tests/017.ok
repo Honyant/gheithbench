@@ -1,0 +1,23 @@
+*** looking at /directory/link1
+***      is a symbolic link
+***      link size is 22
+***       => subdirectory/first.txt
+*** looking at /directory/subdirectory/first.txt
+***      is a file
+***      contains 31 bytes
+***      has 1 links
+*** looking at /directory/subdirectory/subsubdirectory/second.txt
+***      is a file
+***      contains 55 bytes
+***      has 1 links
+*** looking at /third.txt
+***      is a file
+***      contains 57 bytes
+***      has 1 links
+***
+***        .
+***       ":"
+***     ___:____     |"\/"|
+***   ,'        `.    \  /
+***   |  O        \___/  |
+*** ~^~^~^~^~^~^~^~^~^~^~^~^~

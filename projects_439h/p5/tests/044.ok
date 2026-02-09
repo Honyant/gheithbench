@@ -1,0 +1,55 @@
+*** File System Block Size: 2048
+*** Inode Size: 128
+*** looking at /
+***      is a directory
+***      contains 9 entries
+***      has 7 links
+*** looking at /simple/simple_file.txt
+***      is a file
+***      contains 35 bytes
+***      has 1 links
+*** looking at /does_not_exist.txt
+***      does not exist
+*** looking at /complex_symlink/
+***      is a directory
+***      contains 3 entries
+***      has 2 links
+*** looking at /large_dir
+***      is a directory
+***      contains 28 entries
+***      has 2 links
+*** File a is correctly empty.
+*** File b is correctly empty.
+*** File c is correctly empty.
+*** File d is correctly empty.
+*** File e is correctly empty.
+*** File f is correctly empty.
+*** File g is correctly empty.
+*** File h is correctly empty.
+*** File i is correctly empty.
+*** File j is correctly empty.
+*** File k is correctly empty.
+*** File l is correctly empty.
+*** File m is correctly empty.
+*** File n is correctly empty.
+*** File o is correctly empty.
+*** File p is correctly empty.
+*** File q is correctly empty.
+*** File r is correctly empty.
+*** File s is correctly empty.
+*** File t is correctly empty.
+*** File u is correctly empty.
+*** File v is correctly empty.
+*** File w is correctly empty.
+*** File x is correctly empty.
+*** File y is correctly empty.
+*** File z is correctly empty.
+*** looking at /relative_link/
+***      is a directory
+***      contains 3 entries
+***      has 2 links
+*** looking at /nested/link_to_file/
+***      is a directory
+***      contains 3 entries
+***      has 2 links
+*** passed 2 checks

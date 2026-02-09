@@ -1,0 +1,32 @@
+*** start
+*** SharedObject 1 constructor called
+*** sp1 points to new SharedObject 1
+*** sp11 points to same SharedObject 1
+*** SharedObject 2 constructor called
+*** sp2 points to new SharedObject 2
+*** sp21 points to same SharedObject 2
+*** SharedObject 3 constructor called
+*** sp3 points to new SharedObject 3
+*** sp1 == sp11 is true
+*** sp1 == sp2 is false
+*** sp2 == sp21 is true
+*** sp3 == sp1 is false
+*** sp1 == sp1 is true
+*** sp1 == nullptr is false
+*** sp1 reset to nullptr
+*** SharedObject 1 destructor called
+*** sp11 reset to nullptr
+*** sp2 reset to nullptr
+*** SharedObject 2 destructor called
+*** sp21 reset to nullptr
+*** SharedObject 3 destructor called
+*** sp3 reset to nullptr
+*** CycleObject 1 constructor called
+*** CycleObject 2 constructor called
+*** cycle2->isNextThere() is true
+*** CycleObject 1 destructor called
+*** cycle1 reset to nullptr
+*** cycle2->isNextThere() is false
+*** CycleObject 2 destructor called
+*** cycle2 reset to nullptr
+*** done

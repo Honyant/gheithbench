@@ -1,0 +1,38 @@
+*** Welcome to my test case!
+*** Basic file tests start
+*** fd = 3
+*** len = 16
+*** From file1!
+*** fd = 3
+*** len = -1
+*** libc.c:27 read error, fd = 3
+*** fd = -1
+*** len = -1
+*** libc.c:27 read error, fd = -1
+*** fd = 3
+*** len = 29
+*** Inside innermost folder!
+*** Basic file tests end
+*** Chdir tests start
+*** fd = 3
+*** len = 27
+*** In second level folder
+*** fd = 3
+*** len = 29
+*** Inside innermost folder!
+*** fd = 3
+*** len = 27
+*** In second level folder
+*** Correctly failed on changing to a nonexistent directory
+*** Chdir tests end
+*** Fork test starts
+*** In child!
+*** Back in parent
+*** Fork test ends
+*** Starting writing tests
+*** fd = 3
+*** len = 56
+*** This is a read only file (like all the other files)
+*** Yay successfully didn't write
+*** hello
+*** This should be the last thing that prints normally!

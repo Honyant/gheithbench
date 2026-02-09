@@ -1,0 +1,10 @@
+*** wowie this file is here! 
+*** what is in our file now:  
+*** End of Part 1 reached! 
+*** Now, let's stress out your mmap implementation a bit 
+*** You allocate stressfully in a straight line! Let's test some unmapping now
+*** Binary search performs better here but a linear scan still passes. Congrats on having a working unmap and mmap and not timing out! 
+*** Let's move on to the next  part, where we perform searches in the later half of the array, which will likely be much slower for linear scans 
+*** This last part should take roughly the same amount of time as the previous section so you can judge your optimizations based on that.
+*** Now we just force load memory. This is where binary search really shines!
+*** That's all for my tc!

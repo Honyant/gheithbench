@@ -1,0 +1,10 @@
+*** Virtual Memory is now on!
+*** On iteration: 0; You wrote: h to replace: h
+*** On iteration: 200; You wrote: i to replace: h
+*** On iteration: 400; You wrote: j to replace: h
+*** On iteration: 600; You wrote: k to replace: h
+*** On iteration: 800; You wrote: l to replace: h
+*** Done with mmap/unmap stress test!
+*** new value of the f2_va character should be 'x': x
+*** Done with shared memory test!
+*** passed 1000 checks

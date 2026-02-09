@@ -1,0 +1,8 @@
+{
+  "project": "p2",
+  "docker_image": "gheithbench-os:latest",
+  "starter_commit": "ac0044c",
+  "repo": "cs439t_f24_p2_anthonyw",
+  "qemu_timeout": 10,
+  "qemu_cmd": "qemu-system-i386"
+}

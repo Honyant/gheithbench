@@ -1,0 +1,26 @@
+*** 1
+*** ღゝ◡╹)ノ♡
+*** Check 1: you can mmap and print file
+*** 2
+*** ღゝ◡╹)ノ♡
+*** Check 2: you can mmap and print file
+*** 3
+*** ღゝ◡╹)ノ♡
+*** Check 3: you can mmap and print a really large file
+*** 4
+*** Check 4: you returned nullptr when virtual address space is full
+*** 5
+*** Check 5: you can unmap
+*** 6.0
+*** ღゝ◡╹)ノ♡
+*** 6.1
+*** ღゝ◡╹)ノ♡
+*** ღゝ◡╹)ノ♡
+*** Check 6: you can mmap in space you just unmapped
+*** 7
+*** Check 7: you can unmap in the middle of a page
+*** 8
+*** ღゝ◡╹)ノ♡
+*** Check 8: when unmapping in the middle of a page, you unmapped
+*** the whole page and you can mmap again at the beginning of the page
+*** passed 8 checks

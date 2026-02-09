@@ -1,0 +1,24 @@
+*** promise = 25
+*** promise = 36
+*** a
+*** b
+*** c
+*** d
+*** one
+*** two
+*** three
+*** preemption
+*** preemption
+*** preemption
+*** preemption
+*** preemption
+*** buffer = 49
+*** buffer = 64
+*** buffer = 81
+*** adding to buffer
+*** got 100 from buffer
+*** removing from buffer
+*** got 121 from buffer
+*** bounded buffer stress test check done
+*** honk shoo mimimimimi
+*** all done

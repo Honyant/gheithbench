@@ -1,0 +1,23 @@
+*** 1
+*** init
+*** Test 1: Basic file open, read, close
+*** assigned fd to 3
+*** fd = 3
+*** len = 128
+*** Mr. and Mrs. Dursley, of number four, Privet Drive, were proud to say that they were perfectly normal, thank you very much. 
+*** close = 0
+*** Test 2: Closing std::in, putting a file, reading from that file
+*** assigned fd to 0
+*** fd = 0
+*** len = 128
+*** Mr. and Mrs. Dursley, of number four, Privet Drive, were proud to say that they were perfectly normal, thank you very much. 
+*** close = 0
+*** Test 3: When fork child shouldn't have std::in
+*** Child
+*** assigned fd to 0
+*** fd = 0
+*** len = 128
+*** Mr. and Mrs. Dursley, of number four, Privet Drive, were proud to say that they were perfectly normal, thank you very much. 
+*** Parent
+*** assigned fd to 0
+*** close = 0

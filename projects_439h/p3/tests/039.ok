@@ -1,0 +1,6 @@
+*** Test 1: many threads all trying to access heap
+*** Test 1 passed
+*** Test 2: sleep helper thread for O(1)
+*** Test 2 passed
+*** Test 3: Quick test of Blocking Lock one more time
+*** Test 3 passed

@@ -1,0 +1,10 @@
+*** 1
+*** init
+*** Correct FD returned: 3
+*** Correct FD returned: 4
+*** Correct FD returned: 7
+*** Correct FD returned: 9
+*** Bytes read in fd5: 24
+*** Bytes read in fd7: 37
+*** You correctly set new opened file's FD to replace stderr: 2
+*** You correctly set new opened file's FD to: 3

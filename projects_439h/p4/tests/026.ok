@@ -1,0 +1,12 @@
+*** Welcome to this test
+*** Promotion of pointer correctly resulted in non-null pointer
+*** Promotion of pointer correctly resulted in nullptr
+*** 20
+*** Promotion of pointer correctly resulted in nullptr
+*** 100
+*** Promotion of pointer correctly resulted in non-null pointer
+*** 100
+*** 100
+*** 100
+*** Promotion of pointer correctly resulted in nullptr
+*** Promotion of pointer correctly resulted in nullptr

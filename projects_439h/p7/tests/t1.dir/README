@@ -1,0 +1,21 @@
+This is t0, ported to Rust. Feel free to use this as a starting point if you
+want to write your own user-mode test case in Rust.
+
+I tried getting this to compile on the lab machines, but was running into issues
+so I ended up just compiling it locally. The issue is that although the lab
+machines have cargo installed, they do not have rustup which is suggested to use
+for Cargo.lock. Last year Gheith had a public rust compiler which I don't
+remember having this issue, so hopefully we can get him to share that again.
+
+I did this in Linux Mint 21 (Ubuntu 22.04). You may have to slightly adapt these
+instructions depending on your OS.
+
+1. Make sure you have Rust [cargo and rustup] installed.
+     https://www.rust-lang.org/tools/install
+2. Run `make` in the test case sbin directory.
+3. It may complain that Cargo.lock does not exist. If so, it will suggest adding
+   rust-src component, go ahead and do so. This command is what I ran, but ymmv.
+     rustup component add rust-src --toolchain stable-x86_64-unknown-linux-gnu
+4. If you get other errors, try installing build-essential.
+     sudo apt-get install build-essential
+5. Otherwise, hopefully just running `make` will compile the test.

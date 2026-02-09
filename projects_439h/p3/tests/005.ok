@@ -1,0 +1,15 @@
+*** Test started! You can print things now.
+*** Non-concurrent, non-blocking bounded buffer operations finished.
+*** Buffer at capacity, taking one off.
+*** Can produce now.
+*** Buffer empty, putting one on.
+*** Can consume now.
+*** Non-concurrent, blocking bounded buffer operations finished.
+*** Main thread woke up.
+*** Sleeping threads blocked.
+*** Blocking lock blocked.
+*** Interrupts reenabled.
+*** Sleeping threads blocked (bounded buffer).
+*** Blocking lock blocked (bounded buffer).
+*** Interrupts reenabled (bounded buffer).
+*** All tests finished!

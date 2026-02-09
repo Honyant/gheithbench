@@ -1,0 +1,26 @@
+
+- List every file in the kernel directory and describe what
+  it does in one sentence
+
+- What is the difference between concurrency and parallelism?
+
+- What are race conditions and how do they relate to concurrency and/or
+  parallelism?
+
+- What is a critical section?
+
+- What is a barrier?
+
+- What is a spinlock?
+
+- Read about the following x86 instructions and compare them:
+     halt
+     pause
+     monitor/mwait
+
+- What is QEMU? Why is it useful?
+
+- What is the MBR?
+
+- What resources did you use while working on the assignment?
+

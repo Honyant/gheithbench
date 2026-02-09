@@ -1,0 +1,5 @@
+*** Starting Bounded Buffer Stress Test
+*** Finished the producers
+*** Finished the consumers
+*** Stress Test Complete: 100000 items produced, 100000 items consumed
+*** Bounded Buffer Stress Test Passed

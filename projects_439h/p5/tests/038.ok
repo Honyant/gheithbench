@@ -1,0 +1,26 @@
+*** block size is 2048
+*** inode size is 128
+*** looking at /sunshine
+***      is a file
+***      contains 29 bytes
+***      has 1 links
+***      when all else fails, reboot.
+*** looking at /rainbow
+***      is a file
+***      contains 164 bytes
+***      has 1 links
+***      Debugging is twice as hard as writing code in the first place. So if you write the code as smartly as possible, you are by definition not smart enough to debug it.
+*** looking at /white
+***      is a file
+***      contains 179 bytes
+***      has 1 links
+***      Theory is when nothing works, and you know why.
+***      Practice is when everything works, and you don't know why.
+***      OS combines theory and practice - Nothing works and you don't know why.
+*** looking at /pony
+***      is a file
+***      contains 61 bytes
+***      has 1 links
+***      Don't listen to the song described by the names of the files
+*** bing chilling
+*** passed 8 checks

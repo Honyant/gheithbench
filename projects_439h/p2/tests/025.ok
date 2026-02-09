@@ -1,0 +1,17 @@
+*** hello
+*** iter=1200
+*** iter=1100
+*** iter=1000
+*** iter=900
+*** iter=800
+*** iter=700
+*** iter=600
+*** iter=500
+*** iter=400
+*** iter=300
+*** iter=200
+*** iter=100
+*** iter=0
+*** done counting
+*** barrier released
+*** done!

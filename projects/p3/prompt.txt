@@ -94,16 +94,15 @@ To run by hand
 ## Workspace Files
 The following files are in your workspace:
 ```
-Makefile
-README
-REPORT.txt
 arm.cxx
 debug.cxx
 debug.h
 elf.cxx
 elf.h
+Makefile
 mem.cxx
 mem.h
+README
 ```
 
 There are 56 tests available. Tests are located in the `tests/` directory (or flat in the workspace for P5).

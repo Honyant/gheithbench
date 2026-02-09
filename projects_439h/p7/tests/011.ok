@@ -1,0 +1,7 @@
+*** Test started.
+*** Stack pointer and program counter obtained.
+*** Stack segment "unmapped".
+*** Text segment "unmapped".
+*** BSS segment "unmapped".
+*** Computed value: 0x54d55800
+*** You passed!

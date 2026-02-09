@@ -1,0 +1,19 @@
+* Read about counting semaphores and condition variables and explain why
+  They're considered "universal" synchronization primitives
+Counting semaphores and condition variables are considered universal primitives because they can be used to implement all the other synchronization primitives, such as barriers, promises, blocking locks, etc.
+
+* What new race conditions are introduced by enabling interrupts
+  and preemption?
+If an interrupt handler and some other normal code run at the same time, both access shared data that could lead to a potential race condition. Also because an interrupt can interrupt during the critical section (i.e, a locked section), that could lead to race conditions that we have to guard against.
+If something is preempted while accessing shared data, the interrupt could modify the shared data while the preempted code is accessing it, leading to undefined behavior.
+It was also important for me to ensure that interrupts and premption were enabled elsewhere, as premption was needed to ensure that the program wouldn't get stuck in a deadlock.
+
+* What changes did you make to your design/implementation
+  in order to defend against the new race conditions?
+
+I disabled interrupts and/or preemption during critical sections, so that the critical section can't be interrupted by an interrupt handler. I also used spinlocks to protect shared data.
+
+* What did you have to do in order to make pit_handler run in O(1)?
+
+The first thing is ensure that interrupts are disabled throughout pit handler so that there can’t be recursive interrupts and thus will be o(1)
+To make pit handler run in o(1), offload things such as removing from the sleep queue in an offline handler function, where interrupts are enabled, but preemption disabled, because queue operations are not time critical, and have spinlocks that could run in o(n) time.

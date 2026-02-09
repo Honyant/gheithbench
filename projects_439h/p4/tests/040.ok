@@ -1,0 +1,20 @@
+*** t1 - are you properly nullptr?
+*** sp_null is a nullptr: true
+*** a created with value 439
+*** t2 - let's give you a value
+*** value: 439
+*** t3 - let's make a wkptr from the sptr
+*** t4 - how about an upgrade!! wkptr -> sptr, now we have 2 sptrs!
+*** sp2 is a nullptr: false
+*** value: 439
+*** t5 - let's give the second sptr a twin. now we have 3 sptrs!
+*** value: 439
+*** t6 - let's just make sure that your wkptr promotion works ok, and that it doesn't rely on sptrs that it shouldn't!
+*** sp2 is a nullptr: true
+*** sp4 is a nullptr: false
+*** t7 - cool, now let's get rid of all of the other sptrs and try to promote a wkptr...what is the expected outcome?
+*** trying to promote wp1 to sp5...
+*** sp5 is a nullptr: false
+*** t8 - final one! let's see if your reference counting works with circular references
+*** a created with value 1
+*** a created with value 2

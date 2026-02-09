@@ -1,0 +1,5 @@
+*** Core 0 will sum the numbers from 0 to 9999 (inclusive)
+*** Core 1 will sum the numbers from 10000 to 19999 (inclusive)
+*** Core 2 will sum the numbers from 20000 to 29999 (inclusive)
+*** Core 3 will sum the numbers from 30000 to 39999 (inclusive)
+*** Yay we added numbers in parallel! The total sum is: 799980000

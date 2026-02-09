@@ -1,0 +1,4 @@
+*** Test 1: Caching in find() successful!
+*** Test 2: Caching in node->read_block() successful!
+*** Test 3: Caching in node->get_symbol() for small links successful!
+*** Test 4: Caching in node->get_symbol() for long links (>60 char) successful!

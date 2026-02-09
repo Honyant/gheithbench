@@ -1,0 +1,22 @@
+*** Test 1: Sanity Check
+*** argc = 2
+*** this works! end
+*** Child exited with code 1
+*** Test 2: Early Arg Parsing End
+*** argc = 3
+*** this is the end
+*** Child exited with code 1
+*** Test 3: Malicious Arguments??
+*** execl failed with error code -1
+*** Child exited with code -10
+*** Test 4: Long String Overflow
+*** argc = 1
+*** this is a long string that might cause a page fault and then exit but what it should not do is overflow and start overriding things in areas that it should not originally be allowed to access. You should also not be limiting the max num of characters to 256 since this doesn't have to be a file name end
+*** Child exited with code 1
+*** Test 5: Children Handling
+*** Child exited with code -12
+*** Test 6: Failed Execl Doesn't Change Parent
+*** execl failed with error code -1
+*** execl failed with error code -1
+*** Child exited with code -10
+*** ptr: yay

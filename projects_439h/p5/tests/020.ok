@@ -1,0 +1,65 @@
+*** block size is 2048
+*** inode size is 128
+*** looking at /
+***      is a directory
+***      contains 6 entries
+***      has 5 links
+*** Accessing a file at the root level
+*** looking at basicFile
+***      is a file
+***      contains 20 bytes
+***      has 1 links
+*** Basic file read
+*** Testing find with multiple subdirectories
+*** looking at /dir1/subdir11
+***      is a directory
+***      contains 4 entries
+***      has 3 links
+*** looking at /subdir111/subdir1111
+***      is a directory
+***      contains 4 entries
+***      has 2 links
+*** looking at /dir1/subdir11/subdir111/subdir1111
+***      is a directory
+***      contains 4 entries
+***      has 2 links
+*** Testing a symlink to a folder (unresolved)
+*** looking at dir1/subdir11/subdir111/subdir1111/linkToDir1
+***      is a symbolic link
+***      link size is 17
+***       => ../../../../dir1/
+*** Testing a symlink to a folder (resolved)
+*** looking at dir1/subdir11/subdir111/subdir1111/linkToDir1/
+***      is a directory
+***      contains 3 entries
+***      has 3 links
+*** Finding a symlink in its own path
+*** looking at linkToDir1/subdir11/subdir111/subdir1111/linkToDir1
+***      is a symbolic link
+***      link size is 17
+***       => ../../../../dir1/
+*** Using a symlink in a path
+*** looking at dir1/subdir11/subdir111/subdir1111/linkToDir1/../basicFile
+***      is a file
+***      contains 20 bytes
+***      has 1 links
+*** Basic file read
+*** Symlink that points to another symlink
+*** looking at dir1/subdir11/linkToLinkToDir1/../basicFile
+***      is a file
+***      contains 20 bytes
+***      has 1 links
+*** Basic file read
+*** Symlink that points to the directory it is in (unresolved)
+*** looking at dir1/subdir11/subdir111/subdir1111/subdir1111_symlink
+***      is a symbolic link
+***      link size is 1
+***       => .
+*** Symlink that points to the directory it is in (resolved)
+*** looking at dir1/subdir11/subdir111/subdir1111/subdir1111_symlink/
+***      is a directory
+***      contains 4 entries
+***      has 2 links
+*** A few more complicated file paths!
+*** All done!
+*** passed 6 checks

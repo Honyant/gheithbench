@@ -1,0 +1,23 @@
+*** enabled single-step mode
+*** setting value to 4217
+*** value: 4217
+*** value: 4217
+*** value: 4217
+*** value: 4217
+*** value: 4217
+*** value: 4217
+*** value: 4217
+*** value: 4217
+*** done
+*** single step mode: enabled
+*** happy
+*** happy
+*** Test 1: Destructor call upon scope exit
+*** TestObject(1) constructed
+*** happy
+*** TestObject(1) destructed
+*** Test 2: Self-assignment
+*** TestObject(4) constructed
+*** happy
+*** TestObject(4) destructed
+*** happy

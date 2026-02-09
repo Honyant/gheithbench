@@ -1,7 +1,7 @@
 # CS429H Project 9
 
 ## Task
-Complete a pipelined implementation of a simple 16-bit CPU in Verilog. The ISA includes sub, movl, movh, jz, jnz, js, jns, and ld instructions. Do whatever it takes to minimize cycles per instruction. Use check_performance.py and cycles_reference.json to see how your cycle counts compare to optimized baselines, and verify that these scripts work early on. Top quartile (score 90-100) requires excellent pipelining and hazard handling. A branch predictor is necessary.
+Complete a pipelined implementation of a simple 16-bit CPU in Verilog. The ISA includes sub, movl, movh, jz, jnz, js, jns, and ld instructions. Do whatever it takes to minimize cycles per instruction. Do not finish until score maximized. DON'T GIVE UP. Use check_performance.py and cycles_reference.json to see how your cycle counts compare to optimized baselines, and verify that these scripts work early on. Top quartile (score 90-100) requires excellent pipelining and hazard handling. A branch predictor is necessary.
 
 ## Assignment Specification
 Assignment:

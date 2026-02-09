@@ -1,0 +1,28 @@
+*** block size is 1024
+*** inode size is 128
+*** looking at /
+***      is a directory
+***      contains 6 entries
+***      has 4 links
+*** looking at /verylongfiletest
+***      is a file
+***      contains 31 bytes
+***      has 1 links
+*** this file name is very long
+*** looking at /toolongfiletest
+***      does not exist
+*** looking at /s p a c e
+***      is a file
+***      contains 13 bytes
+***      has 1 links
+*** s p a c e
+*** looking at /doesnotexist
+***      does not exist
+*** looking at /1/2/3/4/5/6/nestedfile
+***      is a file
+***      contains 41 bytes
+***      has 1 links
+*** this is file nested into many folders
+*** looking at /😊😊😊😊
+***      does not exist
+*** passed 6 checks

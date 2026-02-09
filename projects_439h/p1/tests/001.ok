@@ -1,0 +1,168 @@
+*** TEST LOOP IS BEGINNING FOR ITER 1 1
+*** TEST LOOP IS BEGINNING FOR ITER 1 2
+*** TEST LOOP IS BEGINNING FOR ITER 1 3
+*** TEST LOOP IS BEGINNING FOR ITER 1 4
+*** We are before the barrier. 1
+*** We are before the barrier. 2
+*** We are before the barrier. 3
+*** We are before the barrier. 4
+*** We are past the barrier. 1
+*** We are past the barrier. 2
+*** We are past the barrier. 3
+*** We are past the barrier. 4
+*** TEST LOOP IS ENDING FOR ITER 1 1
+*** TEST LOOP IS ENDING FOR ITER 1 2
+*** TEST LOOP IS ENDING FOR ITER 1 3
+*** TEST LOOP IS ENDING FOR ITER 1 4
+*** TEST LOOP IS BEGINNING FOR ITER 2 1
+*** TEST LOOP IS BEGINNING FOR ITER 2 2
+*** TEST LOOP IS BEGINNING FOR ITER 2 3
+*** TEST LOOP IS BEGINNING FOR ITER 2 4
+*** We are before the barrier. 1
+*** We are before the barrier. 2
+*** We are before the barrier. 3
+*** We are before the barrier. 4
+*** We are past the barrier. 1
+*** We are past the barrier. 2
+*** We are past the barrier. 3
+*** We are past the barrier. 4
+*** TEST LOOP IS ENDING FOR ITER 2 1
+*** TEST LOOP IS ENDING FOR ITER 2 2
+*** TEST LOOP IS ENDING FOR ITER 2 3
+*** TEST LOOP IS ENDING FOR ITER 2 4
+*** TEST LOOP IS BEGINNING FOR ITER 3 1
+*** TEST LOOP IS BEGINNING FOR ITER 3 2
+*** TEST LOOP IS BEGINNING FOR ITER 3 3
+*** TEST LOOP IS BEGINNING FOR ITER 3 4
+*** We are before the barrier. 1
+*** We are before the barrier. 2
+*** We are before the barrier. 3
+*** We are before the barrier. 4
+*** We are past the barrier. 1
+*** We are past the barrier. 2
+*** We are past the barrier. 3
+*** We are past the barrier. 4
+*** TEST LOOP IS ENDING FOR ITER 3 1
+*** TEST LOOP IS ENDING FOR ITER 3 2
+*** TEST LOOP IS ENDING FOR ITER 3 3
+*** TEST LOOP IS ENDING FOR ITER 3 4
+*** TEST LOOP IS BEGINNING FOR ITER 4 1
+*** TEST LOOP IS BEGINNING FOR ITER 4 2
+*** TEST LOOP IS BEGINNING FOR ITER 4 3
+*** TEST LOOP IS BEGINNING FOR ITER 4 4
+*** We are before the barrier. 1
+*** We are before the barrier. 2
+*** We are before the barrier. 3
+*** We are before the barrier. 4
+*** We are past the barrier. 1
+*** We are past the barrier. 2
+*** We are past the barrier. 3
+*** We are past the barrier. 4
+*** TEST LOOP IS ENDING FOR ITER 4 1
+*** TEST LOOP IS ENDING FOR ITER 4 2
+*** TEST LOOP IS ENDING FOR ITER 4 3
+*** TEST LOOP IS ENDING FOR ITER 4 4
+*** TEST LOOP IS BEGINNING FOR ITER 5 1
+*** TEST LOOP IS BEGINNING FOR ITER 5 2
+*** TEST LOOP IS BEGINNING FOR ITER 5 3
+*** TEST LOOP IS BEGINNING FOR ITER 5 4
+*** We are before the barrier. 1
+*** We are before the barrier. 2
+*** We are before the barrier. 3
+*** We are before the barrier. 4
+*** We are past the barrier. 1
+*** We are past the barrier. 2
+*** We are past the barrier. 3
+*** We are past the barrier. 4
+*** TEST LOOP IS ENDING FOR ITER 5 1
+*** TEST LOOP IS ENDING FOR ITER 5 2
+*** TEST LOOP IS ENDING FOR ITER 5 3
+*** TEST LOOP IS ENDING FOR ITER 5 4
+*** TEST LOOP IS BEGINNING FOR ITER 6 1
+*** TEST LOOP IS BEGINNING FOR ITER 6 2
+*** TEST LOOP IS BEGINNING FOR ITER 6 3
+*** TEST LOOP IS BEGINNING FOR ITER 6 4
+*** We are before the barrier. 1
+*** We are before the barrier. 2
+*** We are before the barrier. 3
+*** We are before the barrier. 4
+*** We are past the barrier. 1
+*** We are past the barrier. 2
+*** We are past the barrier. 3
+*** We are past the barrier. 4
+*** TEST LOOP IS ENDING FOR ITER 6 1
+*** TEST LOOP IS ENDING FOR ITER 6 2
+*** TEST LOOP IS ENDING FOR ITER 6 3
+*** TEST LOOP IS ENDING FOR ITER 6 4
+*** TEST LOOP IS BEGINNING FOR ITER 7 1
+*** TEST LOOP IS BEGINNING FOR ITER 7 2
+*** TEST LOOP IS BEGINNING FOR ITER 7 3
+*** TEST LOOP IS BEGINNING FOR ITER 7 4
+*** We are before the barrier. 1
+*** We are before the barrier. 2
+*** We are before the barrier. 3
+*** We are before the barrier. 4
+*** We are past the barrier. 1
+*** We are past the barrier. 2
+*** We are past the barrier. 3
+*** We are past the barrier. 4
+*** TEST LOOP IS ENDING FOR ITER 7 1
+*** TEST LOOP IS ENDING FOR ITER 7 2
+*** TEST LOOP IS ENDING FOR ITER 7 3
+*** TEST LOOP IS ENDING FOR ITER 7 4
+*** TEST LOOP IS BEGINNING FOR ITER 8 1
+*** TEST LOOP IS BEGINNING FOR ITER 8 2
+*** TEST LOOP IS BEGINNING FOR ITER 8 3
+*** TEST LOOP IS BEGINNING FOR ITER 8 4
+*** We are before the barrier. 1
+*** We are before the barrier. 2
+*** We are before the barrier. 3
+*** We are before the barrier. 4
+*** We are past the barrier. 1
+*** We are past the barrier. 2
+*** We are past the barrier. 3
+*** We are past the barrier. 4
+*** TEST LOOP IS ENDING FOR ITER 8 1
+*** TEST LOOP IS ENDING FOR ITER 8 2
+*** TEST LOOP IS ENDING FOR ITER 8 3
+*** TEST LOOP IS ENDING FOR ITER 8 4
+*** TEST LOOP IS BEGINNING FOR ITER 9 1
+*** TEST LOOP IS BEGINNING FOR ITER 9 2
+*** TEST LOOP IS BEGINNING FOR ITER 9 3
+*** TEST LOOP IS BEGINNING FOR ITER 9 4
+*** We are before the barrier. 1
+*** We are before the barrier. 2
+*** We are before the barrier. 3
+*** We are before the barrier. 4
+*** We are past the barrier. 1
+*** We are past the barrier. 2
+*** We are past the barrier. 3
+*** We are past the barrier. 4
+*** TEST LOOP IS ENDING FOR ITER 9 1
+*** TEST LOOP IS ENDING FOR ITER 9 2
+*** TEST LOOP IS ENDING FOR ITER 9 3
+*** TEST LOOP IS ENDING FOR ITER 9 4
+*** TEST LOOP IS BEGINNING FOR ITER 10 1
+*** TEST LOOP IS BEGINNING FOR ITER 10 2
+*** TEST LOOP IS BEGINNING FOR ITER 10 3
+*** TEST LOOP IS BEGINNING FOR ITER 10 4
+*** We are before the barrier. 1
+*** We are before the barrier. 2
+*** We are before the barrier. 3
+*** We are before the barrier. 4
+*** We are past the barrier. 1
+*** We are past the barrier. 2
+*** We are past the barrier. 3
+*** We are past the barrier. 4
+*** TEST LOOP IS ENDING FOR ITER 10 1
+*** TEST LOOP IS ENDING FOR ITER 10 2
+*** TEST LOOP IS ENDING FOR ITER 10 3
+*** TEST LOOP IS ENDING FOR ITER 10 4
+***  1
+***  2
+***  3
+***  4
+*** All cores have finished summing their portion of the array. The sum is 78 1
+*** All cores have finished summing their portion of the array. The sum is 78 2
+*** All cores have finished summing their portion of the array. The sum is 78 3
+*** All cores have finished summing their portion of the array. The sum is 78 4

@@ -1,0 +1,30 @@
+The inspiration for this test case comes from Dr. Pingali's C S 377P (Programming for Performance) class.
+Specifically, the use of OpenMP for the parallel computation of pi using an integral.
+
+I chose to use a different integral to compute $\pi$ (source: Putnam 1968 A1).
+
+Specifically,
+$$\int_0^1 \frac{x^4(1 - x)^4}{1 + x^2} \, dx = \frac{22}{7} - \pi$$
+as shown below:
+
+We have
+$$x^4 = (-1 + x^2)(1 + x^2) + 1$$
+and
+$$(1 - x)^4 = 1 - 4x + 6x^2 - 4x^3 + x^4 = (5 - 4x + x^2)(1 + x^2) - 4$$
+so
+\begin{align*}
+x^4(1 - x)^4 &= (-1 + x^2)(5 - 4x + x^2)(1 + x^2)^2 + ((5 - 4x + x^2) - 4(-1 + x^2))(1 + x^2) - 4 \\
+&= (-1 + x^2)(5 - 4x + x^2)(1 + x^2) + (5 - 4x + x^2) - 4(-1 + x^2))(1 + x^2) - 4 \\
+&= (4 - 4x^2 + x^4(5 - 4x + x^2))(1 + x^2) - 4 \\
+&= (4 - 4x^2 + 5x^4 - 4x^5 + x^6)(1 + x^2) - 4.
+\end{align*}
+Hence
+\begin{align*}
+\int_0^1 \frac{x^4(1 - x^4)}{1 + x^2} \, dx &= \int_0^1 (4 - 4x^2 + 5x^4 - 4x^5 + x^6) \, dx - 4\int_0^1 \frac{1}{1 + x^2} \, dx \\
+&= 4 - \frac{4}{3} + \frac{5}{5} - \frac{4}{6} + \frac{1}{7} - 4(\arctan(1) - \arctan(0)) \\
+&= 5 - \frac{4 + 2}{3} + \frac{1}{7} - 4\left(\frac{\pi}{4} - 0\right), \\
+&= \frac{22}{7} - \pi,
+\end{align*}
+as desired.
+
+We therefore compute $$\pi = \frac{22}{7} - \int_0^1 \frac{x^4(1 - x)^4}{1 + x^2} \, dx.$$

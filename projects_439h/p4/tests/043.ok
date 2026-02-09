@@ -1,0 +1,70 @@
+*** sleep test
+*** preemption test 
+*** congrats, u preempt
+*** barrier & blocking lock test 
+*** Interrupts & Yield test 
+*** Interrupts & Yield test finished 
+*** the count is 20
+*** barrier & blocking lock test finished 
+*** bounded buffer test 
+*** 0
+*** 1
+*** 2
+*** 3
+*** 4
+*** 5
+*** 6
+*** 7
+*** 8
+*** 9
+*** 10
+*** 11
+*** 12
+*** 13
+*** 14
+*** 15
+*** 16
+*** 17
+*** 18
+*** 19
+*** 20
+*** 21
+*** 22
+*** 23
+*** 24
+*** 25
+*** 26
+*** 27
+*** 28
+*** 29
+*** 30
+*** 31
+*** 32
+*** 33
+*** 34
+*** 35
+*** 36
+*** 37
+*** 38
+*** 39
+*** 40
+*** 41
+*** 42
+*** 43
+*** 44
+*** 45
+*** 46
+*** 47
+*** 48
+*** 49
+*** bounded buffer test finished 
+*** smart pointers test 
+*** from root:
+*** root: 0, child1: 1, child2: 2
+*** from child1:
+*** root: 0, child1: 2, child2: 2
+*** from child1 after destroying strong pointer to root:
+*** promote() is null and it should be null
+*** smart pointers test end 
+*** end sleep test 
+*** ur done

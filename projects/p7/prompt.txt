@@ -78,13 +78,12 @@ The make targets/files:
 ## Workspace Files
 The following files are in your workspace:
 ```
-Makefile
-README
-REPORT.txt
 clock.v
 counter.v
 cpu.v
+Makefile
 mem.v
+README
 regs.v
 ```
 

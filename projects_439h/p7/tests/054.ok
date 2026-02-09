@@ -1,0 +1,12 @@
+*** close = 0
+*** File desc 0: 0
+*** this is nice
+*** we can read and write
+*** this is nice
+*** we can read and write
+*** close1 = 0
+*** libc.c:34 write error, fd = 1
+*** this is nice
+*** we can read and write
+*** File desc 1: 1
+*** Don't panic

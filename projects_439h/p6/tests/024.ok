@@ -1,0 +1,44 @@
+*** Starting munmap tests
+*** Test 1: Basic unmap
+*** 1.1: Initial mapping successful
+*** 1.2: Unmap completed
+*** 1.3: Remap successful
+*** Test 2: Sequential mappings
+*** 2.1: Mapped to 80000000
+*** 2.2: Mapped to 80001000
+*** 2.3: Mapped to 80002000
+*** 2.4: Mapped to 80003000
+*** 2.5: Mapped to 80004000
+*** 2.6: Unmapped from 80000000
+*** 2.7: Unmapped from 80001000
+*** 2.8: Unmapped from 80002000
+*** 2.9: Unmapped from 80003000
+*** 2.10: Unmapped from 80004000
+*** Test 3: Unmap middle of region
+*** 3.1: Large region mapped at 80000000
+*** 3.2: Middle unmap completed
+*** 3.3: New middle mapping at 80000000
+*** Test 4: Unmap non-aligned address
+*** 4.1: Mapped at 80000000
+*** 4.2: Non-aligned unmap completed
+*** Test 5: Shared memory unmap
+*** 5.1: Shared regions mapped at f0000000 and f0001000
+*** 5.2: First shared region unmapped
+*** 5.3: Second shared region unmapped
+*** Test 6: Large region handling
+*** 6.1: Large region mapped at 80000000
+*** 6.2: Pages accessed
+*** 6.3: Large region unmapped
+*** Test 7: Alternating map/unmap
+*** 7.0: Iteration complete
+*** 7.1: Iteration complete
+*** 7.2: Iteration complete
+*** 7.3: Iteration complete
+*** 7.4: Iteration complete
+*** 7.5: Iteration complete
+*** 7.6: Iteration complete
+*** 7.7: Iteration complete
+*** 7.8: Iteration complete
+*** 7.9: Iteration complete
+*** All munmap tests passed!
+*** passed 110 checks

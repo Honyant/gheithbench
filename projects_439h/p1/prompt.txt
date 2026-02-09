@@ -1,0 +1,168 @@
+# CS439H Project 1
+
+## Task
+Implement critical sections using spinlocks for multi-core synchronization in a bare-metal x86 kernel. The critical() template function must ensure mutual exclusion: only one core executes the given work at a time. Handle recursive critical sections correctly.
+
+## Assignment Specification
+
+Objectives:
+~~~~~~~~~~~
+
+    - Become familiar with the project submission system
+    - Become familiar with the kernel foundation code
+    - Become familiar with the build system
+    - Become familiar with C++
+    - Think about concurrency, parallelism, race conditions,
+      critical sections, and deadlocks
+
+Assignment
+~~~~~~~~~~
+
+    - Finish the implementation 
+
+Rules for your test case
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+     - Model it after t0 and t1
+     - You should add 2 files: <your csid>.cc and <your csid>.ok
+
+Files you're allowed to change
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+kernel/critical.h and kernel/critical.cc
+
+   You can change the implementation but not the abstractions
+For Makefile help:
+~~~~~~~~~~~~~~~~~~
+
+    make help
+
+To run tests:
+~~~~~~~~~~~~~
+
+    make test
+
+To make the output less noisy:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    make -s test
+
+To remove all generated files:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    make clean
+
+Sometimes (not very often) the working directory will get into an inconsistent
+state. Running "make clean" would be the first step in dealing with that.
+
+If "make clean" doesn't help:
+
+    rm -rf kernel/build
+
+Server view targets:
+~~~~~~~~~~~~~~~~~~~~
+
+    make get_results    # gets and displays your results
+    make get_tests      # gets tests from the server
+    make get_summary    # shows results per test
+
+To run one test
+~~~~~~~~~~~~~~~
+
+    make -s t0.test               # run the test once
+    make -s t0.loop               # run the test 10 times
+    LOOP_LIMIT=6 make -s t0.loop  # run the test 6 times
+    make -s t0.fail               # run the test until it fails
+
+To run by hand
+~~~~~~~~~~~~~~
+
+    ./run_qemu t0
+
+To run with gdb
+~~~~~~~~~~~~~~~
+
+    ./debug_qemu t0
+
+       Then follow the instructions on the screen
+
+Generated files
+~~~~~~~~~~~~~~~
+
+For each test, a set of files will be generated:
+
+    <test>.raw          the raw output from running QEMU
+    <test>.time         how long it took to run the test
+    <test>.failure      failure information in case of failure
+    <test>.out          the lines that start with *** from the raw output
+    <test>.diff         the difference between <test>.out and <test>.ok
+    <test>.result       pass or fail
+
+## Workspace Files
+The following files are in your workspace:
+```
+attach_qemu
+debug_qemu
+kernel/atomic.cc
+kernel/atomic.h
+kernel/config.cc
+kernel/config.h
+kernel/critical.cc
+kernel/critical.h
+kernel/crt.h
+kernel/crti.cc
+kernel/crtn.cc
+kernel/debug.cc
+kernel/debug.h
+kernel/.gitignore
+kernel/heap.cc
+kernel/heap.h
+kernel/idt.cc
+kernel/idt.h
+kernel/init.cc
+kernel/init.h
+kernel/io.h
+kernel/kernel.h
+kernel/libk.cc
+kernel/libk.h
+kernel/loop.h
+kernel/machine.h
+kernel/machine.S
+kernel/Makefile
+kernel/mbr.S
+kernel/random.h
+kernel/script.ld
+kernel/smp.cc
+kernel/smp.h
+kernel/snprintf.cc
+kernel/u8250.cc
+kernel/u8250.h
+Makefile
+monitor_qemu
+README
+run_qemu
+```
+
+There are 57 tests available. Tests are located in the `tests/` directory.
+
+## Instructions
+1. Read and understand all provided source files in your workspace.
+2. Implement the required functionality by modifying the kernel source files.
+3. To compile and test, use the `./exec` wrapper which runs commands in a Linux
+   environment with all necessary tools:
+   - `./exec 'make'` — compile
+   - `./exec 'make -s test'` — run all tests
+4. You can edit files directly — they are shared with the build environment.
+5. The kernel runs in QEMU (x86-64, 4 cores, 128MB RAM). Tests timeout after 1 second.
+6. Focus on correctness first. Concurrency bugs are the main challenge.
+7. Your primary goal is to pass ALL test cases. Partial solutions are not acceptable — strive to make every single test pass.
+8. You may create your own test files (`.cc` and `.ok`) in the `tests/` directory to help debug your implementation.
+
+## Constraints
+- Do NOT modify the Makefile or kernel/Makefile.
+- Do NOT modify the README.
+- Do NOT modify test files (.ok files, .dir directories).
+- Do NOT modify kernel infrastructure files unless the README says you can:
+  - Leave alone: kernel/machine.h, kernel/machine.S, kernel/script.ld
+- You may create new source files in the kernel/ directory if needed.
+- The code must compile without warnings (`-Wall -Werror` is enabled).

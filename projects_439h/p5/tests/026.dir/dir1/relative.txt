@@ -1,0 +1,1 @@
+Congrats! You are able to find a relative path from a symlink.
