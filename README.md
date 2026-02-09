@@ -51,31 +51,31 @@ gheithbench/
 └── README.md
 ```
 
-## CS 429H Projects (Computer Architecture)
+## CS 429H Projects
 
 | # | Topic | Language |
 |---|-------|----------|
-| P1 | C++ → C interpreter port | C |
-| P2 | FUN language interpreter | C |
-| P3 | Y86-64 assembler | C |
-| P4 | Y86-64 processor (sequential) | Verilog |
-| P5 | Y86-64 processor (pipelined) | Verilog |
-| P6 | Y86-64 processor (hazards) | Verilog |
-| P7 | Y86-64 processor (memory) | Verilog |
-| P8 | Y86-64 processor (I/O) | Verilog |
-| P9 | Y86-64 processor (interrupts) | Verilog |
+| P1 | Port a C++ FUN interpreter to C | C |
+| P2 | Extend FUN interpreter (if/else, while, functions) | C |
+| P3 | AArch64 (ARM64) instruction set emulator | C |
+| P4 | FUN language → AArch64 compiler | C |
+| P5 | malloc/free heap allocator | C |
+| P6 | Cooperative threading (coroutines, context switch) | C, x86-64 asm |
+| P7 | Pipelined 16-bit CPU | Verilog |
+| P8 | Pipelined 16-bit CPU (optimize CPI) | Verilog |
+| P9 | Pipelined 16-bit CPU (maximize performance) | Verilog |
 
-## CS 439H Projects (Operating Systems)
+## CS 439H Projects (x86 OS Kernel)
 
 | # | Topic | Description |
 |---|-------|-------------|
-| P1 | Bootloader | x86 boot sequence, GDT, protected mode |
-| P2 | Threads | Cooperative threading, context switching |
-| P3 | Synchronization | Locks, semaphores, barriers |
-| P4 | Preemption | Preemptive multithreading, timer interrupts |
-| P5 | File systems | ext2 filesystem implementation |
-| P6 | Virtual memory | Paging, page fault handling, mmap |
-| P7 | User processes | ELF loader, syscalls, privilege switching |
+| P1 | Spinlocks | Critical sections, multi-core synchronization |
+| P2 | Threads | Cooperative multi-threading, promises, barriers |
+| P3 | Preemption | PIT interrupts, blocking locks, bounded buffers |
+| P4 | Smart pointers | Atomic reference counting (StrongPtr/WeakPtr) |
+| P5 | File systems | IDE driver, ext2 parser, symlinks |
+| P6 | Virtual memory | Paging, page faults, mmap/munmap |
+| P7 | User processes | ELF loader, syscalls, ring 0 ↔ ring 3 |
 
 439H projects build incrementally — each project extends the kernel from the previous one.
 
