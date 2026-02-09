@@ -1,12 +1,7 @@
-Due:
-    test 10/23/2024 @ 11:59pm
-    code 10/25/2024 @ 11:59pm
-
 Assignment:
 ~~~~~~~~~~~
 
     - Enable virtual memory
-    - Donate a test case (.ok, .cc, .dir, .block_size)
 
 Starter code:
 ~~~~~~~~~~~~~

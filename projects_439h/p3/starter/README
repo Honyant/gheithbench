@@ -1,7 +1,3 @@
-Due:
-    test 9/18/2024 @ 11:59pm
-    code 9/20/2024 @ 11:59pm
-
 Assignment:
 ~~~~~~~~~~~
 
@@ -10,7 +6,6 @@ Assignment:
         * bounded buffers
         * blocking locks
         * timers
-    - contribute a test case
 
 Preemptive multi-threading:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~

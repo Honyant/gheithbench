@@ -1,7 +1,3 @@
-Due:
-    test: 8/30/2024 @ 11:59pm
-    code: 9/3/2024 @ 11:59pm
-
 Objectives:
 ~~~~~~~~~~~
 
@@ -16,15 +12,6 @@ Assignment
 ~~~~~~~~~~
 
     - Finish the implementation 
-    - Donate a test case
-    - Answer the report questions in REPORT.txt
-
-Rules for your test case
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-     - Model it after t0 and t1
-     - You should add 2 files: <your csid>.cc and <your csid>.ok
-
 Files you're allowed to change
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

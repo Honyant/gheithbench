@@ -1,7 +1,3 @@
-Due:
-    test 10/15/2024 @ 11:59pm
-    code 10/17/2024 @ 11:59pm
-
 Assignment:
 ~~~~~~~~~~~
 
@@ -9,7 +5,6 @@ Assignment:
     - Either:
         * replace the given implementation of preemptive multi-threading
         * find the minor race conditions and/or errors in it and fix them
-    - Donate a test case
     - Extra credit: identify and explain (in an Ed post) errors in
       the given preemptive multi-threading implementation
 

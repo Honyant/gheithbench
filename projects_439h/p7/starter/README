@@ -1,13 +1,8 @@
-Due date:
-    test: 11/5/2024 @ 11:59pm
-    code: 11/7/2024 @ 11:59pm
-
 Assignment:
 ~~~~~~~~~~~
 
 - Go to user mode
 - Implement the required system calls
-- Donate a test case (<csid>.dir, <csid>.ok)
 
 What can you change:
 ~~~~~~~~~~~~~~~~~~~~
